@@ -1,0 +1,91 @@
+{
+  "started_at": "2026-04-11T08:51:19+00:00",
+  "finished_at": "2026-04-11T09:32:07+00:00",
+  "total_elapsed_seconds": 2448.202,
+  "status": "SUCCESS",
+  "phases": [
+    {
+      "phase_name": "Phase 1: File Ingestion",
+      "command": [
+        "python3",
+        "injestion/discover_pcaps.py",
+        "--input-dir",
+        "input_pcaps",
+        "--db-path",
+        "evidence_registry.db"
+      ],
+      "started_at": "2026-04-11T08:51:19+00:00",
+      "finished_at": "2026-04-11T09:03:13+00:00",
+      "elapsed_seconds": 714.317,
+      "status": "SUCCESS",
+      "return_code": 0
+    },
+    {
+      "phase_name": "Phase 2: Metadata Enrichment",
+      "command": [
+        "python3",
+        "injestion/extract_metadata.py",
+        "--db-path",
+        "evidence_registry.db"
+      ],
+      "started_at": "2026-04-11T09:03:13+00:00",
+      "finished_at": "2026-04-11T09:11:17+00:00",
+      "elapsed_seconds": 483.546,
+      "status": "SUCCESS",
+      "return_code": 0
+    },
+    {
+      "phase_name": "Phase 3: Processing Plan",
+      "command": [
+        "python3",
+        "injestion/build_processing_plan.py",
+        "--db-path",
+        "evidence_registry.db"
+      ],
+      "started_at": "2026-04-11T09:11:17+00:00",
+      "finished_at": "2026-04-11T09:11:20+00:00",
+      "elapsed_seconds": 3.458,
+      "status": "SUCCESS",
+      "return_code": 0
+    },
+    {
+      "phase_name": "Phase 4: Extraction Plan",
+      "command": [
+        "python3",
+        "injestion/build_extraction_plan.py",
+        "--db-path",
+        "evidence_registry.db"
+      ],
+      "started_at": "2026-04-11T09:11:20+00:00",
+      "finished_at": "2026-04-11T09:11:23+00:00",
+      "elapsed_seconds": 2.966,
+      "status": "SUCCESS",
+      "return_code": 0
+    },
+    {
+      "phase_name": "Phase 5: Evidence Extraction",
+      "command": [
+        "python3",
+        "injestion/extraction_executor.py",
+        "--db-path",
+        "evidence_registry.db",
+        "--limit",
+        "20",
+        "--task-types",
+        "http",
+        "tls",
+        "ioc"
+      ],
+      "started_at": "2026-04-11T09:11:23+00:00",
+      "finished_at": "2026-04-11T09:32:07+00:00",
+      "elapsed_seconds": 1243.914,
+      "status": "SUCCESS",
+      "return_code": 0
+    }
+  ],
+  "cost_estimate": {
+    "model": "simple_local_cpu_estimate",
+    "cpu_hour_rate": 0.05,
+    "estimated_cpu_cost": 0.034
+  }
+}
