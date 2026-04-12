@@ -1,0 +1,178 @@
+[
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_overview",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "overview",
+    "text": "Bundle bundle_2026-01-24_nested_overlap for parse group 2026-01-24_nested_overlap in bucket 2026-01-24. PCAP count 1. Event count 73. Earliest event Jan 24, 2026 21:44:27.239569000 +08. Latest event Jan 24, 2026 21:44:28.189382000 +08."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_entities",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "entities",
+    "text": "Top event types: [('flow', 30), ('timeline', 30), ('tls', 11), ('dns', 2)]. Top application protocols: [('timeline', 30), ('TCP', 16), ('tls', 11), ('TLSv1.2', 9), ('SSL', 2), ('dns', 2), ('DNS', 2), ('0x4502', 1)]. Top source IPs: [('10.128.239.57', 21), ('141.98.11.114', 20), ('91.238.181.8', 10), ('141.98.11.109', 10), ('10.128.239.21', 5), ('10.128.239.166', 3), ('147.45.112.181', 2)]. Top destination IPs: [('10.128.239.57', 42), ('141.98.11.114', 10), ('141.98.11.109', 5), ('10.128.239.21', 3), ('10.128.239.166', 3), ('141.98.11.170', 2), ('91.238.181.8', 2), ('10.128.239.20', 2), ('147.45.112.181', 2)]. Top domains or names: []."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_001",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 1. Timestamp Jan 24, 2026 21:44:27.239569000 +08. Type flow. Summary flow 10.128.239.57:3389 -> 141.98.11.170:47982 proto=TCP."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_002",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 2. Timestamp Jan 24, 2026 21:44:27.239569000 +08. Type timeline. Summary timeline event 10.128.239.57:3389 -> 141.98.11.170:47982."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_003",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 3. Timestamp Jan 24, 2026 21:44:27.273632000 +08. Type flow. Summary flow 91.238.181.8:19012 -> 10.128.239.57:3389 proto=TLSv1.2."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_004",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 4. Timestamp Jan 24, 2026 21:44:27.273632000 +08. Type timeline. Summary timeline event 91.238.181.8:19012 -> 10.128.239.57:3389."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_005",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 5. Timestamp Jan 24, 2026 21:44:27.273632000 +08. Type tls. Summary tls session sni= type=."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_006",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 6. Timestamp Jan 24, 2026 21:44:27.306618000 +08. Type flow. Summary flow 91.238.181.8:19012 -> 10.128.239.57:3389 proto=TLSv1.2."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_007",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 7. Timestamp Jan 24, 2026 21:44:27.306618000 +08. Type timeline. Summary timeline event 91.238.181.8:19012 -> 10.128.239.57:3389."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_008",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 8. Timestamp Jan 24, 2026 21:44:27.306618000 +08. Type tls. Summary tls session sni= type=."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_009",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 9. Timestamp Jan 24, 2026 21:44:27.337228000 +08. Type flow. Summary flow 91.238.181.8:19012 -> 10.128.239.57:3389 proto=TCP."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_010",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 10. Timestamp Jan 24, 2026 21:44:27.337228000 +08. Type timeline. Summary timeline event 91.238.181.8:19012 -> 10.128.239.57:3389."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_011",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 11. Timestamp Jan 24, 2026 21:44:27.367770000 +08. Type flow. Summary flow 10.128.239.57:3389 -> 91.238.181.8:19012 proto=TCP."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_012",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 12. Timestamp Jan 24, 2026 21:44:27.367770000 +08. Type timeline. Summary timeline event 10.128.239.57:3389 -> 91.238.181.8:19012."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_013",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 13. Timestamp Jan 24, 2026 21:44:27.398098000 +08. Type flow. Summary flow 91.238.181.8:19012 -> 10.128.239.57:3389 proto=TCP."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_014",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 14. Timestamp Jan 24, 2026 21:44:27.398098000 +08. Type timeline. Summary timeline event 91.238.181.8:19012 -> 10.128.239.57:3389."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_015",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 15. Timestamp Jan 24, 2026 21:44:27.430668000 +08. Type flow. Summary flow 10.128.239.57:3389 -> 141.98.11.114:5725 proto=TLSv1.2."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_016",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 16. Timestamp Jan 24, 2026 21:44:27.430668000 +08. Type timeline. Summary timeline event 10.128.239.57:3389 -> 141.98.11.114:5725."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_017",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 17. Timestamp Jan 24, 2026 21:44:27.430668000 +08. Type tls. Summary tls session sni= type=."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_018",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 18. Timestamp Jan 24, 2026 21:44:27.464338000 +08. Type flow. Summary flow 141.98.11.114:5725 -> 10.128.239.57:3389 proto=TLSv1.2."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_019",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 19. Timestamp Jan 24, 2026 21:44:27.464338000 +08. Type timeline. Summary timeline event 141.98.11.114:5725 -> 10.128.239.57:3389."
+  },
+  {
+    "doc_id": "bundle_2026-01-24_nested_overlap_timeline_020",
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "parse_group": "2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "doc_type": "timeline_preview",
+    "text": "Timeline preview 20. Timestamp Jan 24, 2026 21:44:27.464338000 +08. Type tls. Summary tls session sni= type=."
+  }
+]

@@ -1,0 +1,257 @@
+{
+  "bundle_id": "bundle_2026-01-25_nested_overlap",
+  "metrics": {
+    "event_count": 66,
+    "pcap_count": 1,
+    "analysis_runtime_seconds": 0.0,
+    "hypothesis_count": 1,
+    "finding_count": 1,
+    "estimated_analysis_cost": 0.0,
+    "human_review_required_count": 1,
+    "guardrailed_hypothesis_count": 1,
+    "finding_with_false_positive_risk_count": 1,
+    "finding_with_missed_detection_risk_count": 1
+  },
+  "notes": [],
+  "safety_controls": [
+    {
+      "control": "minimum_evidence_requirement",
+      "description": "Hypotheses with fewer than 2 evidence items are downgraded below formal reporting threshold."
+    },
+    {
+      "control": "confidence_threshold_for_reporting",
+      "description": "Only hypotheses with confidence >= 0.6 are materialized as findings."
+    },
+    {
+      "control": "human_review_for_high_impact_or_thin_claims",
+      "description": "Potentially high-impact findings and thinly corroborated claims are flagged for analyst validation before operational use."
+    },
+    {
+      "control": "source_diversity_tracking",
+      "description": "Hypotheses record whether evidence came from limited or multiple analytic sources."
+    }
+  ],
+  "investigation_limitations": [
+    "This investigation uses network-derived evidence only and has no host-level telemetry.",
+    "Some detections rely on protocol metadata and heuristics rather than full semantic reconstruction.",
+    "Encrypted traffic may reduce visibility into true intent or content.",
+    "Threshold-based logic can reduce false positives but may also reduce recall."
+  ],
+  "timeline": [
+    {
+      "timestamp": "2026-04-12T14:54:41.224915Z",
+      "step": "review_summary",
+      "summary": "Started summary-first investigation"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225073Z",
+      "step": "analyze_beaconing",
+      "summary": "Completed beaconing analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225193Z",
+      "step": "analyze_dns",
+      "summary": "Completed DNS analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225196Z",
+      "step": "analyze_http",
+      "summary": "Completed HTTP analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225215Z",
+      "step": "analyze_tls",
+      "summary": "Completed TLS analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225224Z",
+      "step": "analyze_bad_ip_reputation",
+      "summary": "Completed IP reputation analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225229Z",
+      "step": "cross_signal_correlation",
+      "summary": "Completed cross-signal correlation"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.225248Z",
+      "step": "materialize_findings",
+      "summary": "Generated 1 final findings"
+    }
+  ],
+  "executed_steps": [
+    "review_summary",
+    "analyze_beaconing",
+    "analyze_dns",
+    "analyze_http",
+    "analyze_tls",
+    "analyze_bad_ip_reputation",
+    "cross_signal_correlation",
+    "materialize_findings"
+  ],
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-001",
+      "title": "Suspicious DNS Activity",
+      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
+      "severity": "MEDIUM",
+      "confidence": 0.78,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "entities": [
+        "10.128.239.36:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity",
+        "reportable_but_thin_evidence"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
+        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
+      ],
+      "missed_detection_risks": [
+        "Low-volume DNS covert channels may stay below threshold.",
+        "Benign-looking domains used by attackers may evade entropy-based heuristics."
+      ],
+      "limitations": [
+        "DNS classification relies on metadata and naming patterns rather than payload semantics."
+      ],
+      "evidence": [
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.data.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.36:us-v20.events.data.microsoft.com",
+            "src_ip": "10.128.239.36",
+            "query": "us-v20.events.data.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.941,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 25, 2026 05:25:41.986857000 +08"
+          }
+        },
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.data.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.20:us-v20.events.data.microsoft.com",
+            "src_ip": "10.128.239.20",
+            "query": "us-v20.events.data.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.941,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 25, 2026 05:25:42.024531000 +08"
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "title": "Suspicious DNS Activity",
+      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
+      "severity": "MEDIUM",
+      "confidence": 0.78,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "affected_entities": [
+        "10.128.239.36:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "guardrail_flags": [
+        "limited_source_diversity",
+        "reportable_but_thin_evidence"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
+        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
+      ],
+      "missed_detection_risks": [
+        "Low-volume DNS covert channels may stay below threshold.",
+        "Benign-looking domains used by attackers may evade entropy-based heuristics."
+      ],
+      "limitations": [
+        "DNS classification relies on metadata and naming patterns rather than payload semantics."
+      ],
+      "evidence": [
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.data.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.36:us-v20.events.data.microsoft.com",
+            "src_ip": "10.128.239.36",
+            "query": "us-v20.events.data.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.941,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 25, 2026 05:25:41.986857000 +08"
+          }
+        },
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.data.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.20:us-v20.events.data.microsoft.com",
+            "src_ip": "10.128.239.20",
+            "query": "us-v20.events.data.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.941,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 25, 2026 05:25:42.024531000 +08"
+          }
+        }
+      ]
+    }
+  ]
+}

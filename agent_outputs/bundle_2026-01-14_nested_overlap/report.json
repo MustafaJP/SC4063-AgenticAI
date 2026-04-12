@@ -1,0 +1,1246 @@
+{
+  "bundle_id": "bundle_2026-01-14_nested_overlap",
+  "metrics": {
+    "event_count": 147,
+    "pcap_count": 3,
+    "analysis_runtime_seconds": 0.001,
+    "hypothesis_count": 2,
+    "finding_count": 2,
+    "estimated_analysis_cost": 0.0,
+    "human_review_required_count": 1,
+    "guardrailed_hypothesis_count": 2,
+    "finding_with_false_positive_risk_count": 2,
+    "finding_with_missed_detection_risk_count": 2
+  },
+  "notes": [],
+  "safety_controls": [
+    {
+      "control": "minimum_evidence_requirement",
+      "description": "Hypotheses with fewer than 2 evidence items are downgraded below formal reporting threshold."
+    },
+    {
+      "control": "confidence_threshold_for_reporting",
+      "description": "Only hypotheses with confidence >= 0.6 are materialized as findings."
+    },
+    {
+      "control": "human_review_for_high_impact_or_thin_claims",
+      "description": "Potentially high-impact findings and thinly corroborated claims are flagged for analyst validation before operational use."
+    },
+    {
+      "control": "source_diversity_tracking",
+      "description": "Hypotheses record whether evidence came from limited or multiple analytic sources."
+    }
+  ],
+  "investigation_limitations": [
+    "This investigation uses network-derived evidence only and has no host-level telemetry.",
+    "Some detections rely on protocol metadata and heuristics rather than full semantic reconstruction.",
+    "Encrypted traffic may reduce visibility into true intent or content.",
+    "Threshold-based logic can reduce false positives but may also reduce recall."
+  ],
+  "timeline": [
+    {
+      "timestamp": "2026-04-12T14:54:41.163776Z",
+      "step": "review_summary",
+      "summary": "Started summary-first investigation"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164111Z",
+      "step": "analyze_beaconing",
+      "summary": "Completed beaconing analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164182Z",
+      "step": "analyze_dns",
+      "summary": "Completed DNS analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164185Z",
+      "step": "analyze_http",
+      "summary": "Completed HTTP analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164277Z",
+      "step": "analyze_tls",
+      "summary": "Completed TLS analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164291Z",
+      "step": "analyze_bad_ip_reputation",
+      "summary": "Completed IP reputation analysis"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164302Z",
+      "step": "cross_signal_correlation",
+      "summary": "Completed cross-signal correlation"
+    },
+    {
+      "timestamp": "2026-04-12T14:54:41.164326Z",
+      "step": "materialize_findings",
+      "summary": "Generated 2 final findings"
+    }
+  ],
+  "executed_steps": [
+    "review_summary",
+    "analyze_beaconing",
+    "analyze_dns",
+    "analyze_http",
+    "analyze_tls",
+    "analyze_bad_ip_reputation",
+    "cross_signal_correlation",
+    "materialize_findings"
+  ],
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-001",
+      "title": "Suspicious DNS Activity",
+      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
+      "severity": "MEDIUM",
+      "confidence": 0.78,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "entities": [
+        "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity",
+        "reportable_but_thin_evidence"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
+        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
+      ],
+      "missed_detection_risks": [
+        "Low-volume DNS covert channels may stay below threshold.",
+        "Benign-looking domains used by attackers may evade entropy-based heuristics."
+      ],
+      "limitations": [
+        "DNS classification relies on metadata and naming patterns rather than payload semantics."
+      ],
+      "evidence": [
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.endpoint.security.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
+            "src_ip": "10.128.239.44",
+            "query": "us-v20.events.endpoint.security.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.965,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.728728000 +08"
+          }
+        },
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.endpoint.security.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+            "src_ip": "10.128.239.20",
+            "query": "us-v20.events.endpoint.security.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.965,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.802369000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-002",
+      "title": "Suspicious TLS Session",
+      "description": "Suspicious TLS metadata suggests encrypted malicious communication.",
+      "severity": "MEDIUM",
+      "confidence": 0.808,
+      "mitre_techniques": [
+        "T1573",
+        "T1071"
+      ],
+      "entities": [
+        "85.237.194.86->10.128.239.57:3389",
+        "10.128.239.57->85.237.194.86:2626",
+        "10.128.239.57->194.165.17.11:6784",
+        "194.165.17.11->10.128.239.57:3389",
+        "10.128.239.57->194.165.17.11:18265",
+        "10.128.239.57->88.214.25.115:19941",
+        "10.128.239.57->45.141.87.201:31139",
+        "10.128.239.57->45.141.87.46:34889",
+        "10.128.239.57->45.135.232.20:5958",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.199.163.12->10.128.239.57:3389",
+        "10.128.239.57->179.60.146.32:53769",
+        "10.128.239.57->91.199.163.12:30900",
+        "45.141.87.151->10.128.239.57:3389"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Missing SNI may occur in privacy-focused or legacy environments and is not inherently malicious.",
+        "TLS on non-standard ports is suspicious but can still be legitimate."
+      ],
+      "missed_detection_risks": [
+        "If JA3 is unavailable, TLS detections rely on weaker metadata signals.",
+        "Encrypted malicious traffic with normal TLS fingerprints may not be flagged."
+      ],
+      "limitations": [
+        "TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata."
+      ],
+      "evidence": [
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "85.237.194.86->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "85.237.194.86->10.128.239.57:3389",
+            "src_ip": "85.237.194.86",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 2,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.457764000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->85.237.194.86:2626",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->85.237.194.86:2626",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "85.237.194.86",
+            "dst_port": 2626,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.519919000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->85.237.194.86:2626",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->85.237.194.86:2626",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "85.237.194.86",
+            "dst_port": 2626,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.667441000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->194.165.17.11:6784",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->194.165.17.11:6784",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "194.165.17.11",
+            "dst_port": 6784,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.679175000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.801680000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.324687000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->194.165.17.11:18265",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->194.165.17.11:18265",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "194.165.17.11",
+            "dst_port": 18265,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.384563000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->88.214.25.115:19941",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->88.214.25.115:19941",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "88.214.25.115",
+            "dst_port": 19941,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.502307000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "1",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.568959000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.141.87.201:31139",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.141.87.201:31139",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.141.87.201",
+            "dst_port": 31139,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.666955000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.141.87.46:34889",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.141.87.46:34889",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.141.87.46",
+            "dst_port": 34889,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.850173000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.135.232.20:5958",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.135.232.20:5958",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.135.232.20",
+            "dst_port": 5958,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.214531000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 1,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "91.199.163.12->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "91.199.163.12->10.128.239.57:3389",
+            "src_ip": "91.199.163.12",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 1,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->179.60.146.32:53769",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->179.60.146.32:53769",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "179.60.146.32",
+            "dst_port": 53769,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.323087000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->91.199.163.12:30900",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->91.199.163.12:30900",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "91.199.163.12",
+            "dst_port": 30900,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.356233000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "45.141.87.151->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "45.141.87.151->10.128.239.57:3389",
+            "src_ip": "45.141.87.151",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 2,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.607050000 +08"
+          }
+        }
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "title": "Suspicious TLS Session",
+      "description": "Suspicious TLS metadata suggests encrypted malicious communication.",
+      "severity": "MEDIUM",
+      "confidence": 0.808,
+      "mitre_techniques": [
+        "T1573",
+        "T1071"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "affected_entities": [
+        "85.237.194.86->10.128.239.57:3389",
+        "10.128.239.57->85.237.194.86:2626",
+        "10.128.239.57->194.165.17.11:6784",
+        "194.165.17.11->10.128.239.57:3389",
+        "10.128.239.57->194.165.17.11:18265",
+        "10.128.239.57->88.214.25.115:19941",
+        "10.128.239.57->45.141.87.201:31139",
+        "10.128.239.57->45.141.87.46:34889",
+        "10.128.239.57->45.135.232.20:5958",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.199.163.12->10.128.239.57:3389",
+        "10.128.239.57->179.60.146.32:53769",
+        "10.128.239.57->91.199.163.12:30900",
+        "45.141.87.151->10.128.239.57:3389"
+      ],
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Missing SNI may occur in privacy-focused or legacy environments and is not inherently malicious.",
+        "TLS on non-standard ports is suspicious but can still be legitimate."
+      ],
+      "missed_detection_risks": [
+        "If JA3 is unavailable, TLS detections rely on weaker metadata signals.",
+        "Encrypted malicious traffic with normal TLS fingerprints may not be flagged."
+      ],
+      "limitations": [
+        "TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata."
+      ],
+      "evidence": [
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "85.237.194.86->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "85.237.194.86->10.128.239.57:3389",
+            "src_ip": "85.237.194.86",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 2,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.457764000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->85.237.194.86:2626",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->85.237.194.86:2626",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "85.237.194.86",
+            "dst_port": 2626,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.519919000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->85.237.194.86:2626",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->85.237.194.86:2626",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "85.237.194.86",
+            "dst_port": 2626,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.667441000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->194.165.17.11:6784",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->194.165.17.11:6784",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "194.165.17.11",
+            "dst_port": 6784,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.679175000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.801680000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.324687000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->194.165.17.11:18265",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->194.165.17.11:18265",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "194.165.17.11",
+            "dst_port": 18265,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.384563000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->88.214.25.115:19941",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->88.214.25.115:19941",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "88.214.25.115",
+            "dst_port": 19941,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.502307000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.6,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "1",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 4,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.568959000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.141.87.201:31139",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.141.87.201:31139",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.141.87.201",
+            "dst_port": 31139,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.666955000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.141.87.46:34889",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.141.87.46:34889",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.141.87.46",
+            "dst_port": 34889,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.850173000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->45.135.232.20:5958",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->45.135.232.20:5958",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "45.135.232.20",
+            "dst_port": 5958,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.214531000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 1,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "91.199.163.12->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "91.199.163.12->10.128.239.57:3389",
+            "src_ip": "91.199.163.12",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 1,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->179.60.146.32:53769",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->179.60.146.32:53769",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "179.60.146.32",
+            "dst_port": 53769,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.323087000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "10.128.239.57->91.199.163.12:30900",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->91.199.163.12:30900",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "91.199.163.12",
+            "dst_port": 30900,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 10,
+            "reasons": [
+              "missing_sni",
+              "repeated_missing_sni_from_source",
+              "tls_on_nonstandard_port",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.356233000 +08"
+          }
+        },
+        {
+          "source": "tls_analysis",
+          "indicator": "suspicious_tls",
+          "value": "45.141.87.151->10.128.239.57:3389",
+          "score": 0.5,
+          "details": {
+            "entity": "45.141.87.151->10.128.239.57:3389",
+            "src_ip": "45.141.87.151",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "ja3": "",
+            "sni": "",
+            "handshake_type": "16",
+            "handshake_version": "",
+            "record_version": "",
+            "missing_sni_count_for_src": 2,
+            "reasons": [
+              "missing_sni",
+              "tls_on_nonstandard_port",
+              "unusual_handshake_type",
+              "low_metadata_visibility"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.607050000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "title": "Suspicious DNS Activity",
+      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
+      "severity": "MEDIUM",
+      "confidence": 0.78,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "affected_entities": [
+        "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com"
+      ],
+      "guardrail_flags": [
+        "limited_source_diversity",
+        "reportable_but_thin_evidence"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
+        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
+      ],
+      "missed_detection_risks": [
+        "Low-volume DNS covert channels may stay below threshold.",
+        "Benign-looking domains used by attackers may evade entropy-based heuristics."
+      ],
+      "limitations": [
+        "DNS classification relies on metadata and naming patterns rather than payload semantics."
+      ],
+      "evidence": [
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.endpoint.security.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
+            "src_ip": "10.128.239.44",
+            "query": "us-v20.events.endpoint.security.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.965,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.728728000 +08"
+          }
+        },
+        {
+          "source": "dns_analysis",
+          "indicator": "high_entropy_dns",
+          "value": "us-v20.events.endpoint.security.microsoft.com",
+          "score": 0.7,
+          "details": {
+            "entity": "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+            "src_ip": "10.128.239.20",
+            "query": "us-v20.events.endpoint.security.microsoft.com",
+            "base_domain": "microsoft.com",
+            "qtype": "1",
+            "entropy": 3.965,
+            "query_count": 2,
+            "base_domain_count": 2,
+            "host_count_for_query": 2,
+            "host_count_for_base_domain": 2,
+            "varying_subdomain_count": 1,
+            "reasons": [
+              "high_entropy",
+              "multi_host_domain"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.802369000 +08"
+          }
+        }
+      ]
+    }
+  ]
+}

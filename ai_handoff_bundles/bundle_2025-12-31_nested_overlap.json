@@ -1,0 +1,829 @@
+{
+  "bundle_id": "bundle_2025-12-31_nested_overlap",
+  "time_bucket": "2025-12-31",
+  "parse_group": "2025-12-31_nested_overlap",
+  "stats": {
+    "pcap_summary": {
+      "pcap_count": 1,
+      "total_duration_seconds": 0,
+      "total_packets": 1356589,
+      "overlap_class_breakdown": {
+        "NESTED_OVERLAP": 1
+      },
+      "processing_priority_breakdown": {
+        "1": 1
+      }
+    },
+    "event_summary": {
+      "event_count": 28,
+      "event_type_breakdown": {
+        "flow": 13,
+        "timeline": 13,
+        "tls": 2
+      },
+      "app_proto_breakdown": {
+        "TLSv1.2": 2,
+        "timeline": 13,
+        "tls": 2,
+        "TCP": 6,
+        "DCERPC": 5
+      },
+      "top_src_ips": [
+        [
+          "10.128.239.89",
+          6
+        ],
+        [
+          "10.128.239.21",
+          6
+        ],
+        [
+          "88.214.25.115",
+          5
+        ],
+        [
+          "10.128.239.57",
+          5
+        ],
+        [
+          "45.92.229.189",
+          2
+        ],
+        [
+          "10.128.239.22",
+          2
+        ],
+        [
+          "210.19.252.30",
+          2
+        ]
+      ],
+      "top_dst_ips": [
+        [
+          "10.128.239.57",
+          9
+        ],
+        [
+          "10.128.239.21",
+          8
+        ],
+        [
+          "10.128.239.22",
+          4
+        ],
+        [
+          "88.214.25.115",
+          3
+        ],
+        [
+          "10.128.239.89",
+          2
+        ],
+        [
+          "210.19.252.30",
+          2
+        ]
+      ]
+    }
+  },
+  "pcaps": [
+    {
+      "pcap_id": "pcap_000074",
+      "filename": "31 Dec - 2 Jan.pcap",
+      "full_path": "/home/seed/Downloads/MJP/input_pcaps/31 Dec - 2 Jan.pcap",
+      "sha256": "2a19ac4e13027178de6fb20e96db6fe00e8713212a2ec20f04db7cd95fb360c2",
+      "capture_first_packet_time": "2025-12-31 13:19:05.283560",
+      "capture_last_packet_time": "2026-01-02 18:11:04.558369",
+      "capture_duration_seconds": null,
+      "capture_packet_count": 1356589,
+      "capture_data_size_bytes": null,
+      "capture_file_size_bytes": null,
+      "capture_encapsulation": null,
+      "time_bucket": "2025-12-31",
+      "overlap_class": "NESTED_OVERLAP",
+      "processing_priority": 1,
+      "parse_group": "2025-12-31_nested_overlap"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "pcap_000074_chunk_001_flow_8a6262d9072c7aeb",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+      "src_ip": "88.214.25.115",
+      "dst_ip": "10.128.239.57",
+      "src_port": 25084,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "TLSv1.2",
+      "summary": "flow 88.214.25.115:25084 -> 10.128.239.57:3389 proto=TLSv1.2",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+        "src_ip": "88.214.25.115",
+        "dst_ip": "10.128.239.57",
+        "src_port": 25084,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "TLSv1.2",
+        "summary": "flow 88.214.25.115:25084 -> 10.128.239.57:3389 proto=TLSv1.2"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_617c2b52cf251537",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+      "src_ip": "88.214.25.115",
+      "dst_ip": "10.128.239.57",
+      "src_port": 25084,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 88.214.25.115:25084 -> 10.128.239.57:3389",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+        "src_ip": "88.214.25.115",
+        "dst_ip": "10.128.239.57",
+        "src_port": 25084,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 88.214.25.115:25084 -> 10.128.239.57:3389"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_tls_d0227124c9d09853",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_tls",
+      "event_type": "tls",
+      "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+      "src_ip": "88.214.25.115",
+      "dst_ip": "10.128.239.57",
+      "src_port": 25084,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "tls",
+      "summary": "tls session sni= type=",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.283560000 +08",
+        "src_ip": "88.214.25.115",
+        "dst_ip": "10.128.239.57",
+        "src_port": 25084,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "tls",
+        "sni": null,
+        "handshake_type": null,
+        "summary": "tls session sni= type="
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_b7cefc6590d27db4",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.340656000 +08",
+      "src_ip": "45.92.229.189",
+      "dst_ip": "10.128.239.57",
+      "src_port": 4976,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 45.92.229.189:4976 -> 10.128.239.57:3389 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.340656000 +08",
+        "src_ip": "45.92.229.189",
+        "dst_ip": "10.128.239.57",
+        "src_port": 4976,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 45.92.229.189:4976 -> 10.128.239.57:3389 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_d27f09d19d575dc9",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.340656000 +08",
+      "src_ip": "45.92.229.189",
+      "dst_ip": "10.128.239.57",
+      "src_port": 4976,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 45.92.229.189:4976 -> 10.128.239.57:3389",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.340656000 +08",
+        "src_ip": "45.92.229.189",
+        "dst_ip": "10.128.239.57",
+        "src_port": 4976,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 45.92.229.189:4976 -> 10.128.239.57:3389"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_7a270e61e557264b",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+      "src_ip": "10.128.239.57",
+      "dst_ip": "88.214.25.115",
+      "src_port": 3389,
+      "dst_port": 25084,
+      "network_proto": "tcp",
+      "app_proto": "TLSv1.2",
+      "summary": "flow 10.128.239.57:3389 -> 88.214.25.115:25084 proto=TLSv1.2",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+        "src_ip": "10.128.239.57",
+        "dst_ip": "88.214.25.115",
+        "src_port": 3389,
+        "dst_port": 25084,
+        "network_proto": "tcp",
+        "app_proto": "TLSv1.2",
+        "summary": "flow 10.128.239.57:3389 -> 88.214.25.115:25084 proto=TLSv1.2"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_257dcd60a7caa6f3",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+      "src_ip": "10.128.239.57",
+      "dst_ip": "88.214.25.115",
+      "src_port": 3389,
+      "dst_port": 25084,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 88.214.25.115:25084",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+        "src_ip": "10.128.239.57",
+        "dst_ip": "88.214.25.115",
+        "src_port": 3389,
+        "dst_port": 25084,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.57:3389 -> 88.214.25.115:25084"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_tls_0ca6fa7502c61fc5",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_tls",
+      "event_type": "tls",
+      "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+      "src_ip": "10.128.239.57",
+      "dst_ip": "88.214.25.115",
+      "src_port": 3389,
+      "dst_port": 25084,
+      "network_proto": "tcp",
+      "app_proto": "tls",
+      "summary": "tls session sni= type=",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.419573000 +08",
+        "src_ip": "10.128.239.57",
+        "dst_ip": "88.214.25.115",
+        "src_port": 3389,
+        "dst_port": 25084,
+        "network_proto": "tcp",
+        "app_proto": "tls",
+        "sni": null,
+        "handshake_type": null,
+        "summary": "tls session sni= type="
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_b3041e878be8e5a6",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.532784000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "DCERPC",
+      "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=DCERPC",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.532784000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "DCERPC",
+        "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=DCERPC"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_8f6690a815d26a26",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.532784000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.532784000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_7e413bc5c6e857ca",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.646030000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.22",
+      "src_port": 56712,
+      "dst_port": 49668,
+      "network_proto": "tcp",
+      "app_proto": "DCERPC",
+      "summary": "flow 10.128.239.21:56712 -> 10.128.239.22:49668 proto=DCERPC",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.646030000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.22",
+        "src_port": 56712,
+        "dst_port": 49668,
+        "network_proto": "tcp",
+        "app_proto": "DCERPC",
+        "summary": "flow 10.128.239.21:56712 -> 10.128.239.22:49668 proto=DCERPC"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_af299233b875ebfd",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.646030000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.22",
+      "src_port": 56712,
+      "dst_port": 49668,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.21:56712 -> 10.128.239.22:49668",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.646030000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.22",
+        "src_port": 56712,
+        "dst_port": 49668,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.21:56712 -> 10.128.239.22:49668"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_755bd18f89aed212",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.711358000 +08",
+      "src_ip": "10.128.239.22",
+      "dst_ip": "10.128.239.21",
+      "src_port": 49668,
+      "dst_port": 56712,
+      "network_proto": "tcp",
+      "app_proto": "DCERPC",
+      "summary": "flow 10.128.239.22:49668 -> 10.128.239.21:56712 proto=DCERPC",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.711358000 +08",
+        "src_ip": "10.128.239.22",
+        "dst_ip": "10.128.239.21",
+        "src_port": 49668,
+        "dst_port": 56712,
+        "network_proto": "tcp",
+        "app_proto": "DCERPC",
+        "summary": "flow 10.128.239.22:49668 -> 10.128.239.21:56712 proto=DCERPC"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_22dc191cc231a3d6",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.711358000 +08",
+      "src_ip": "10.128.239.22",
+      "dst_ip": "10.128.239.21",
+      "src_port": 49668,
+      "dst_port": 56712,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.22:49668 -> 10.128.239.21:56712",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.711358000 +08",
+        "src_ip": "10.128.239.22",
+        "dst_ip": "10.128.239.21",
+        "src_port": 49668,
+        "dst_port": 56712,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.22:49668 -> 10.128.239.21:56712"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_841c89701a477764",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.776673000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.89",
+      "src_port": 49669,
+      "dst_port": 64051,
+      "network_proto": "tcp",
+      "app_proto": "DCERPC",
+      "summary": "flow 10.128.239.21:49669 -> 10.128.239.89:64051 proto=DCERPC",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.776673000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.89",
+        "src_port": 49669,
+        "dst_port": 64051,
+        "network_proto": "tcp",
+        "app_proto": "DCERPC",
+        "summary": "flow 10.128.239.21:49669 -> 10.128.239.89:64051 proto=DCERPC"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_c4d5529ca01bf346",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.776673000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.89",
+      "src_port": 49669,
+      "dst_port": 64051,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.21:49669 -> 10.128.239.89:64051",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.776673000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.89",
+        "src_port": 49669,
+        "dst_port": 64051,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.21:49669 -> 10.128.239.89:64051"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_be70d8999a34816c",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.833040000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.833040000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_dd849a27cb5d9d4b",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.833040000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.833040000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_29c6d70f679f552f",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.890848000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.22",
+      "src_port": 56712,
+      "dst_port": 49668,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 10.128.239.21:56712 -> 10.128.239.22:49668 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.890848000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.22",
+        "src_port": 56712,
+        "dst_port": 49668,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 10.128.239.21:56712 -> 10.128.239.22:49668 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_7a7b86b44078ac27",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.890848000 +08",
+      "src_ip": "10.128.239.21",
+      "dst_ip": "10.128.239.22",
+      "src_port": 56712,
+      "dst_port": 49668,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.21:56712 -> 10.128.239.22:49668",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.890848000 +08",
+        "src_ip": "10.128.239.21",
+        "dst_ip": "10.128.239.22",
+        "src_port": 56712,
+        "dst_port": 49668,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.21:56712 -> 10.128.239.22:49668"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_5743ef2cc1146f36",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:05.946977000 +08",
+      "src_ip": "88.214.25.115",
+      "dst_ip": "10.128.239.57",
+      "src_port": 25084,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 88.214.25.115:25084 -> 10.128.239.57:3389 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.946977000 +08",
+        "src_ip": "88.214.25.115",
+        "dst_ip": "10.128.239.57",
+        "src_port": 25084,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 88.214.25.115:25084 -> 10.128.239.57:3389 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_d8698986a4e73ad2",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:05.946977000 +08",
+      "src_ip": "88.214.25.115",
+      "dst_ip": "10.128.239.57",
+      "src_port": 25084,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 88.214.25.115:25084 -> 10.128.239.57:3389",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:05.946977000 +08",
+        "src_ip": "88.214.25.115",
+        "dst_ip": "10.128.239.57",
+        "src_port": 25084,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 88.214.25.115:25084 -> 10.128.239.57:3389"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_b4fe0268767f1f3e",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:06.004223000 +08",
+      "src_ip": "210.19.252.30",
+      "dst_ip": "10.128.239.57",
+      "src_port": 55387,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 210.19.252.30:55387 -> 10.128.239.57:3389 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.004223000 +08",
+        "src_ip": "210.19.252.30",
+        "dst_ip": "10.128.239.57",
+        "src_port": 55387,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 210.19.252.30:55387 -> 10.128.239.57:3389 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_61a7542e83551c56",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:06.004223000 +08",
+      "src_ip": "210.19.252.30",
+      "dst_ip": "10.128.239.57",
+      "src_port": 55387,
+      "dst_port": 3389,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 210.19.252.30:55387 -> 10.128.239.57:3389",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.004223000 +08",
+        "src_ip": "210.19.252.30",
+        "dst_ip": "10.128.239.57",
+        "src_port": 55387,
+        "dst_port": 3389,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 210.19.252.30:55387 -> 10.128.239.57:3389"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_051838f5870dbf52",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:06.061051000 +08",
+      "src_ip": "10.128.239.57",
+      "dst_ip": "210.19.252.30",
+      "src_port": 3389,
+      "dst_port": 55387,
+      "network_proto": "tcp",
+      "app_proto": "TCP",
+      "summary": "flow 10.128.239.57:3389 -> 210.19.252.30:55387 proto=TCP",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.061051000 +08",
+        "src_ip": "10.128.239.57",
+        "dst_ip": "210.19.252.30",
+        "src_port": 3389,
+        "dst_port": 55387,
+        "network_proto": "tcp",
+        "app_proto": "TCP",
+        "summary": "flow 10.128.239.57:3389 -> 210.19.252.30:55387 proto=TCP"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_c25f325e274e1055",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:06.061051000 +08",
+      "src_ip": "10.128.239.57",
+      "dst_ip": "210.19.252.30",
+      "src_port": 3389,
+      "dst_port": 55387,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 210.19.252.30:55387",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.061051000 +08",
+        "src_ip": "10.128.239.57",
+        "dst_ip": "210.19.252.30",
+        "src_port": 3389,
+        "dst_port": 55387,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.57:3389 -> 210.19.252.30:55387"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_flow_c3dc09b482da84b0",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_flow",
+      "event_type": "flow",
+      "event_timestamp": "Dec 31, 2025 13:19:06.174329000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "DCERPC",
+      "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=DCERPC",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.174329000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "DCERPC",
+        "summary": "flow 10.128.239.89:64051 -> 10.128.239.21:49669 proto=DCERPC"
+      }
+    },
+    {
+      "event_id": "pcap_000074_chunk_001_timeline_91a3e4fcf0024084",
+      "pcap_id": "pcap_000074",
+      "chunk_id": "pcap_000074_chunk_001",
+      "task_id": "pcap_000074_chunk_001_timeline",
+      "event_type": "timeline",
+      "event_timestamp": "Dec 31, 2025 13:19:06.174329000 +08",
+      "src_ip": "10.128.239.89",
+      "dst_ip": "10.128.239.21",
+      "src_port": 64051,
+      "dst_port": 49669,
+      "network_proto": "tcp",
+      "app_proto": "timeline",
+      "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669",
+      "raw_json": {
+        "event_timestamp": "Dec 31, 2025 13:19:06.174329000 +08",
+        "src_ip": "10.128.239.89",
+        "dst_ip": "10.128.239.21",
+        "src_port": 64051,
+        "dst_port": 49669,
+        "network_proto": "tcp",
+        "app_proto": "timeline",
+        "summary": "timeline event 10.128.239.89:64051 -> 10.128.239.21:49669"
+      }
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-04-12T14:54:40+00:00",
+    "source_pcap_ids": [
+      "pcap_000074"
+    ],
+    "source_paths": [
+      "/home/seed/Downloads/MJP/input_pcaps/31 Dec - 2 Jan.pcap"
+    ],
+    "event_sources": [
+      "pcap_000074_chunk_001_flow",
+      "pcap_000074_chunk_001_timeline",
+      "pcap_000074_chunk_001_tls"
+    ],
+    "note": "Bundle created from normalized ingestion-layer outputs for downstream agentic analysis."
+  }
+}

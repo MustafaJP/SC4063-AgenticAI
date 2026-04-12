@@ -1,0 +1,556 @@
+{
+  "bundle_id": "bundle_2025-12-04_nested_overlap",
+  "time_bucket": "2025-12-04",
+  "parse_group": "2025-12-04_nested_overlap",
+  "summary_generated_at": "2026-04-12T14:54:40+00:00",
+  "bundle_stats": {
+    "pcap_summary": {
+      "pcap_count": 4,
+      "total_duration_seconds": 0,
+      "total_packets": 13717535,
+      "overlap_class_breakdown": {
+        "NESTED_OVERLAP": 4
+      },
+      "processing_priority_breakdown": {
+        "1": 2,
+        "2": 2
+      }
+    },
+    "event_summary": {
+      "event_count": 147,
+      "event_type_breakdown": {
+        "flow": 63,
+        "timeline": 63,
+        "tls": 15,
+        "dns": 6
+      },
+      "app_proto_breakdown": {
+        "TCP": 43,
+        "timeline": 63,
+        "TLSv1.2": 6,
+        "tls": 15,
+        "TLSv1": 5,
+        "dns": 6,
+        "DNS": 6,
+        "0x4502": 1,
+        "SSL": 2
+      },
+      "top_src_ips": [
+        [
+          "10.128.239.23",
+          27
+        ],
+        [
+          "10.128.239.57",
+          23
+        ],
+        [
+          "10.128.239.221",
+          18
+        ],
+        [
+          "10.128.239.39",
+          11
+        ],
+        [
+          "45.135.232.37",
+          8
+        ],
+        [
+          "147.45.112.186",
+          7
+        ],
+        [
+          "10.128.239.21",
+          6
+        ],
+        [
+          "10.128.239.155",
+          6
+        ],
+        [
+          "52.182.143.215",
+          5
+        ],
+        [
+          "88.214.25.115",
+          3
+        ]
+      ],
+      "top_dst_ips": [
+        [
+          "10.128.239.57",
+          35
+        ],
+        [
+          "10.128.239.23",
+          26
+        ],
+        [
+          "10.128.239.221",
+          18
+        ],
+        [
+          "52.182.143.215",
+          11
+        ],
+        [
+          "10.128.239.21",
+          6
+        ],
+        [
+          "10.128.239.155",
+          6
+        ],
+        [
+          "10.128.239.39",
+          5
+        ],
+        [
+          "147.45.112.186",
+          5
+        ],
+        [
+          "98.159.33.51",
+          3
+        ],
+        [
+          "10.128.239.20",
+          3
+        ]
+      ]
+    }
+  },
+  "overview": {
+    "pcap_count": 4,
+    "event_count": 147,
+    "earliest_event_timestamp": "Dec  4, 2025 04:23:54.644856000 +08",
+    "latest_event_timestamp": "Dec  4, 2025 10:43:54.266456000 +08"
+  },
+  "top_entities": {
+    "event_types": [
+      [
+        "flow",
+        63
+      ],
+      [
+        "timeline",
+        63
+      ],
+      [
+        "tls",
+        15
+      ],
+      [
+        "dns",
+        6
+      ]
+    ],
+    "application_protocols": [
+      [
+        "timeline",
+        63
+      ],
+      [
+        "TCP",
+        43
+      ],
+      [
+        "tls",
+        15
+      ],
+      [
+        "TLSv1.2",
+        6
+      ],
+      [
+        "dns",
+        6
+      ],
+      [
+        "DNS",
+        6
+      ],
+      [
+        "TLSv1",
+        5
+      ],
+      [
+        "SSL",
+        2
+      ],
+      [
+        "0x4502",
+        1
+      ]
+    ],
+    "top_src_ips": [
+      [
+        "10.128.239.23",
+        27
+      ],
+      [
+        "10.128.239.57",
+        23
+      ],
+      [
+        "10.128.239.221",
+        18
+      ],
+      [
+        "10.128.239.39",
+        11
+      ],
+      [
+        "45.135.232.37",
+        8
+      ],
+      [
+        "147.45.112.186",
+        7
+      ],
+      [
+        "10.128.239.21",
+        6
+      ],
+      [
+        "10.128.239.155",
+        6
+      ],
+      [
+        "52.182.143.215",
+        5
+      ],
+      [
+        "88.214.25.115",
+        3
+      ]
+    ],
+    "top_dst_ips": [
+      [
+        "10.128.239.57",
+        35
+      ],
+      [
+        "10.128.239.23",
+        26
+      ],
+      [
+        "10.128.239.221",
+        18
+      ],
+      [
+        "52.182.143.215",
+        11
+      ],
+      [
+        "10.128.239.21",
+        6
+      ],
+      [
+        "10.128.239.155",
+        6
+      ],
+      [
+        "10.128.239.39",
+        5
+      ],
+      [
+        "147.45.112.186",
+        5
+      ],
+      [
+        "98.159.33.51",
+        3
+      ],
+      [
+        "10.128.239.20",
+        3
+      ]
+    ],
+    "top_domains_or_names": []
+  },
+  "suspicious_highlights": [],
+  "timeline_preview": [
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.644856000 +08",
+      "event_type": "flow",
+      "summary": "flow 194.165.17.11:14904 -> 10.128.239.57:3389 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.644856000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 194.165.17.11:14904 -> 10.128.239.57:3389"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.709830000 +08",
+      "event_type": "flow",
+      "summary": "flow 88.214.25.115:34811 -> 10.128.239.57:3389 proto=TLSv1.2"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.709830000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 88.214.25.115:34811 -> 10.128.239.57:3389"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.709830000 +08",
+      "event_type": "tls",
+      "summary": "tls session sni= type="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.768401000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:3389 -> 88.214.25.115:34811 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.768401000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 88.214.25.115:34811"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.838051000 +08",
+      "event_type": "flow",
+      "summary": "flow 98.159.33.51:7420 -> 10.128.239.57:3389 proto=TLSv1"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.838051000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 98.159.33.51:7420 -> 10.128.239.57:3389"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.838051000 +08",
+      "event_type": "tls",
+      "summary": "tls session sni= type=16"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.901189000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:3389 -> 98.159.33.51:7420 proto=TLSv1"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.901189000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 98.159.33.51:7420"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.901189000 +08",
+      "event_type": "tls",
+      "summary": "tls session sni= type="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.962924000 +08",
+      "event_type": "dns",
+      "summary": "dns query=ocsp.digicert.com type=1 answer="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.962924000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.162:54369 -> 10.128.239.20:53 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:54.962924000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.162:54369 -> 10.128.239.20:53"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.032038000 +08",
+      "event_type": "dns",
+      "summary": "dns query=ocsp.digicert.com type=1 answer=23.60.131.209"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.032038000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.20:53 -> 10.128.239.162:54369 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.032038000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.20:53 -> 10.128.239.162:54369"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.095948000 +08",
+      "event_type": "dns",
+      "summary": "dns query=v10.events.data.microsoft.com type=1 answer="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.095948000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.156:54275 -> 10.128.239.21:53 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.095948000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.156:54275 -> 10.128.239.21:53"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.159104000 +08",
+      "event_type": "dns",
+      "summary": "dns query=v10.events.data.microsoft.com type=1 answer="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.159104000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:59687 -> 150.171.16.39:53 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.159104000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:59687 -> 150.171.16.39:53"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.227073000 +08",
+      "event_type": "dns",
+      "summary": "dns query=v10.events.data.microsoft.com type=1 answer="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.227073000 +08",
+      "event_type": "flow",
+      "summary": "flow 150.171.16.39:53 -> 10.128.239.21:59687 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.227073000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 150.171.16.39:53 -> 10.128.239.21:59687"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.290290000 +08",
+      "event_type": "dns",
+      "summary": "dns query=onedscolprdcus10.centralus.cloudapp.azure.com type=1 answer="
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.290290000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:59666 -> 204.14.183.201:53 proto=DNS"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.290290000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:59666 -> 204.14.183.201:53"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.348248000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.155:58560 -> 10.128.239.23:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.348248000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.155:58560 -> 10.128.239.23:49668"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.405055000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.155:58561 -> 10.128.239.23:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.405055000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.155:58561 -> 10.128.239.23:49668"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.463310000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.23:49668 -> 10.128.239.155:58561 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.463310000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.23:49668 -> 10.128.239.155:58561"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.521073000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.23:49668 -> 10.128.239.155:58561 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.521073000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.23:49668 -> 10.128.239.155:58561"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.583299000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.155:58561 -> 10.128.239.23:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.583299000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.155:58561 -> 10.128.239.23:49668"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.644048000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.23:49668 -> 10.128.239.155:58560 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 04:23:55.644048000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.23:49668 -> 10.128.239.155:58560"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.291617000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:3389 -> 178.20.129.235:53820 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.291617000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 178.20.129.235:53820"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.349081000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.39:53700 -> 52.182.143.215:443 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.349081000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.39:53700 -> 52.182.143.215:443"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.426516000 +08",
+      "event_type": "flow",
+      "summary": "flow 52.182.143.215:443 -> 10.128.239.39:53700 proto=TLSv1.2"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.426516000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 52.182.143.215:443 -> 10.128.239.39:53700"
+    },
+    {
+      "event_timestamp": "Dec  4, 2025 05:08:22.426516000 +08",
+      "event_type": "tls",
+      "summary": "tls session sni= type="
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-04-12T14:54:39+00:00",
+    "source_pcap_ids": [
+      "pcap_000062",
+      "pcap_000075",
+      "pcap_000101",
+      "pcap_000015"
+    ],
+    "source_paths": [
+      "/home/seed/Downloads/MJP/input_pcaps/4 Dec - 7 Dec.pcap",
+      "/home/seed/Downloads/MJP/input_pcaps/4 Dec - 19 Dec.pcap",
+      "/home/seed/Downloads/MJP/input_pcaps/4 Dec.pcap",
+      "/home/seed/Downloads/MJP/input_pcaps/4 Dec - 5 Dec.pcap"
+    ],
+    "event_sources": [
+      "pcap_000015_chunk_001_flow",
+      "pcap_000015_chunk_001_timeline",
+      "pcap_000015_chunk_001_tls",
+      "pcap_000062_chunk_001_flow",
+      "pcap_000062_chunk_001_timeline",
+      "pcap_000062_chunk_001_tls",
+      "pcap_000075_chunk_001_flow",
+      "pcap_000075_chunk_001_timeline",
+      "pcap_000101_chunk_001_dns",
+      "pcap_000101_chunk_001_flow",
+      "pcap_000101_chunk_001_timeline",
+      "pcap_000101_chunk_001_tls"
+    ],
+    "note": "Bundle created from normalized ingestion-layer outputs for downstream agentic analysis."
+  }
+}

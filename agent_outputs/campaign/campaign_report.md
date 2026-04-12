@@ -1,0 +1,75 @@
+# Cross-Bundle Campaign Investigation Report
+
+## Executive Summary
+
+The campaign correlator analyzed **52 bundle(s)** and identified **4 campaign-level finding(s)**. The top finding was **Suspected Long-Running Malicious Infrastructure** with confidence **0.70**.
+
+## Campaign Findings
+
+### 1. Suspected Long-Running Malicious Infrastructure
+- Severity: **MEDIUM**
+- Confidence: **0.70**
+- First Seen: N/A
+- Last Seen: N/A
+- Bundles: bundle_2025-12-03_nested_overlap, bundle_2025-12-04_nested_overlap, bundle_2025-12-05_nested_overlap, bundle_2025-12-09_nested_overlap, bundle_2025-12-11_nested_overlap, bundle_2025-12-12_nested_overlap, bundle_2025-12-13_nested_overlap, bundle_2025-12-14_nested_overlap, bundle_2025-12-16_nested_overlap, bundle_2025-12-17_nested_overlap, bundle_2025-12-19_nested_overlap, bundle_2025-12-20_nested_overlap, bundle_2026-01-02_nested_overlap, bundle_2026-01-03_nested_overlap, bundle_2026-01-04_nested_overlap, bundle_2026-01-05_nested_overlap, bundle_2026-01-10_nested_overlap, bundle_2026-01-11_nested_overlap, bundle_2026-01-14_nested_overlap, bundle_2026-01-16_nested_overlap, bundle_2026-01-21_nested_overlap, bundle_2026-01-23_nested_overlap, bundle_2026-01-24_nested_overlap, bundle_2026-01-27_nested_overlap, bundle_2026-01-29_nested_overlap
+- Source Hosts: 103.180.176.136, 136.144.42.225, 138.199.59.143, 141.98.11.109, 141.98.11.114, 141.98.11.127, 141.98.11.170, 141.98.83.10, 141.98.83.70, 147.45.112.181, 147.45.112.188, 149.50.116.107, 179.60.146.32, 179.60.146.33, 179.60.146.36, 179.60.146.37, 181.49.207.198, 185.16.39.19, 193.111.248.57, 194.0.234.17, 194.165.17.11, 210.19.252.30, 45.135.232.19, 45.141.84.95, 45.141.87.151, 45.227.254.152, 45.92.229.189, 79.127.132.53, 85.237.194.86, 88.214.25.121, 88.214.25.122, 88.214.25.123, 88.214.25.125, 91.199.163.12, 91.238.181.39, 91.238.181.7, 91.238.181.8, 91.238.181.92, 91.238.181.93, 91.238.181.95, 98.159.33.51
+- Destination Hosts: 10.128.239.57
+- MITRE ATT&CK: T1071, T1573
+- Description: The entity `10.128.239.57` persisted across multiple bundles and hosts, suggesting campaign-level malicious activity rather than an isolated event.
+- Recommendation: Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.
+- Rationale:
+  - Observed across 25 bundles
+  - Persistence across many bundles
+  - Observed from 41 source hosts
+  - Mapped to MITRE ATT&CK techniques
+
+### 2. Suspected Long-Running DNS-Based C2 Activity
+- Severity: **MEDIUM**
+- Confidence: **0.70**
+- First Seen: N/A
+- Last Seen: N/A
+- Bundles: bundle_2025-12-06_nested_overlap, bundle_2025-12-07_nested_overlap, bundle_2025-12-17_nested_overlap, bundle_2025-12-19_nested_overlap, bundle_2026-01-10_nested_overlap, bundle_2026-01-19_nested_overlap, bundle_2026-01-25_nested_overlap
+- Source Hosts: 10.128.239.171, 10.128.239.20, 10.128.239.36
+- Destination Hosts: N/A
+- MITRE ATT&CK: T1071.004
+- Description: The entity `us-v20.events.data.microsoft.com` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.
+- Recommendation: Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.
+- Rationale:
+  - Observed across 7 bundles
+  - Persistence across many bundles
+  - Observed from 3 source hosts
+  - Mapped to MITRE ATT&CK techniques
+
+### 3. Suspected Long-Running DNS-Based C2 Activity
+- Severity: **MEDIUM**
+- Confidence: **0.70**
+- First Seen: N/A
+- Last Seen: N/A
+- Bundles: bundle_2025-12-06_nested_overlap, bundle_2025-12-07_nested_overlap, bundle_2025-12-08_nested_overlap, bundle_2025-12-09_nested_overlap, bundle_2025-12-17_nested_overlap, bundle_2025-12-19_nested_overlap, bundle_2026-01-04_nested_overlap, bundle_2026-01-10_nested_overlap, bundle_2026-01-14_nested_overlap, bundle_2026-01-18_nested_overlap, bundle_2026-01-19_nested_overlap, bundle_2026-01-21_nested_overlap, bundle_2026-01-25_nested_overlap, bundle_2026-01-26_nested_overlap
+- Source Hosts: 10.128.239.20
+- Destination Hosts: 20.42.65.91
+- MITRE ATT&CK: T1071, T1071.004, T1573
+- Description: The entity `10.128.239.20` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.
+- Recommendation: Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.
+- Rationale:
+  - Observed across 14 bundles
+  - Persistence across many bundles
+  - Corroborated by 2 different indicators
+  - Mapped to MITRE ATT&CK techniques
+
+### 4. Suspected Long-Running DNS-Based C2 Activity
+- Severity: **MEDIUM**
+- Confidence: **0.70**
+- First Seen: N/A
+- Last Seen: N/A
+- Bundles: bundle_2025-12-08_nested_overlap, bundle_2026-01-04_nested_overlap, bundle_2026-01-14_nested_overlap, bundle_2026-01-19_nested_overlap, bundle_2026-01-26_nested_overlap
+- Source Hosts: 10.128.239.148, 10.128.239.20, 10.128.239.21, 10.128.239.44, 10.128.239.50, 10.128.239.54, 10.128.239.82
+- Destination Hosts: N/A
+- MITRE ATT&CK: T1071.004
+- Description: The entity `us-v20.events.endpoint.security.microsoft.com` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.
+- Recommendation: Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.
+- Rationale:
+  - Observed across 5 bundles
+  - Persistence across many bundles
+  - Observed from 7 source hosts
+  - Mapped to MITRE ATT&CK techniques

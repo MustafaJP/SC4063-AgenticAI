@@ -1,0 +1,340 @@
+{
+  "bundle_id": "bundle_2025-12-10_nested_overlap",
+  "time_bucket": "2025-12-10",
+  "parse_group": "2025-12-10_nested_overlap",
+  "summary_generated_at": "2026-04-12T14:54:40+00:00",
+  "bundle_stats": {
+    "pcap_summary": {
+      "pcap_count": 1,
+      "total_duration_seconds": 0,
+      "total_packets": 1125430,
+      "overlap_class_breakdown": {
+        "NESTED_OVERLAP": 1
+      },
+      "processing_priority_breakdown": {
+        "1": 1
+      }
+    },
+    "event_summary": {
+      "event_count": 30,
+      "event_type_breakdown": {
+        "flow": 15,
+        "timeline": 15
+      },
+      "app_proto_breakdown": {
+        "DCERPC": 4,
+        "timeline": 15,
+        "TCP": 9,
+        "RPC_NETLOGON": 2
+      },
+      "top_src_ips": [
+        [
+          "10.128.239.21",
+          10
+        ],
+        [
+          "10.128.239.20",
+          8
+        ],
+        [
+          "10.128.239.57",
+          6
+        ],
+        [
+          "10.128.239.29",
+          2
+        ],
+        [
+          "45.135.232.124",
+          2
+        ],
+        [
+          "45.130.145.6",
+          2
+        ]
+      ],
+      "top_dst_ips": [
+        [
+          "10.128.239.20",
+          10
+        ],
+        [
+          "10.128.239.21",
+          6
+        ],
+        [
+          "10.128.239.57",
+          6
+        ],
+        [
+          "10.128.239.29",
+          4
+        ],
+        [
+          "45.135.232.124",
+          2
+        ],
+        [
+          "10.128.239.80",
+          2
+        ]
+      ]
+    }
+  },
+  "overview": {
+    "pcap_count": 1,
+    "event_count": 30,
+    "earliest_event_timestamp": "Dec 10, 2025 00:16:34.870032000 +08",
+    "latest_event_timestamp": "Dec 10, 2025 00:16:35.854146000 +08"
+  },
+  "top_entities": {
+    "event_types": [
+      [
+        "flow",
+        15
+      ],
+      [
+        "timeline",
+        15
+      ]
+    ],
+    "application_protocols": [
+      [
+        "timeline",
+        15
+      ],
+      [
+        "TCP",
+        9
+      ],
+      [
+        "DCERPC",
+        4
+      ],
+      [
+        "RPC_NETLOGON",
+        2
+      ]
+    ],
+    "top_src_ips": [
+      [
+        "10.128.239.21",
+        10
+      ],
+      [
+        "10.128.239.20",
+        8
+      ],
+      [
+        "10.128.239.57",
+        6
+      ],
+      [
+        "10.128.239.29",
+        2
+      ],
+      [
+        "45.135.232.124",
+        2
+      ],
+      [
+        "45.130.145.6",
+        2
+      ]
+    ],
+    "top_dst_ips": [
+      [
+        "10.128.239.20",
+        10
+      ],
+      [
+        "10.128.239.21",
+        6
+      ],
+      [
+        "10.128.239.57",
+        6
+      ],
+      [
+        "10.128.239.29",
+        4
+      ],
+      [
+        "45.135.232.124",
+        2
+      ],
+      [
+        "10.128.239.80",
+        2
+      ]
+    ],
+    "top_domains_or_names": []
+  },
+  "suspicious_highlights": [],
+  "timeline_preview": [
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:34.870032000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:51208 -> 10.128.239.29:49671 proto=DCERPC"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:34.870032000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:51208 -> 10.128.239.29:49671"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:34.933696000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:63038 -> 10.128.239.20:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:34.933696000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:63038 -> 10.128.239.20:49668"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.003155000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.20:49668 -> 10.128.239.21:63038 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.003155000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.20:49668 -> 10.128.239.21:63038"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.069345000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:63038 -> 10.128.239.20:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.069345000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:63038 -> 10.128.239.20:49668"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.146767000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:63038 -> 10.128.239.20:49668 proto=DCERPC"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.146767000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:63038 -> 10.128.239.20:49668"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.216256000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.20:49668 -> 10.128.239.21:63038 proto=DCERPC"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.216256000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.20:49668 -> 10.128.239.21:63038"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.338163000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:63038 -> 10.128.239.20:49668 proto=RPC_NETLOGON"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.338163000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:63038 -> 10.128.239.20:49668"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.407330000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.20:49668 -> 10.128.239.21:63038 proto=RPC_NETLOGON"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.407330000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.20:49668 -> 10.128.239.21:63038"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.479142000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.29:49671 -> 10.128.239.57:51208 proto=DCERPC"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.479142000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.29:49671 -> 10.128.239.57:51208"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.543743000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.21:63038 -> 10.128.239.20:49668 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.543743000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.21:63038 -> 10.128.239.20:49668"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.602596000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:51208 -> 10.128.239.29:49671 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.602596000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:51208 -> 10.128.239.29:49671"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.663519000 +08",
+      "event_type": "flow",
+      "summary": "flow 45.135.232.124:36220 -> 10.128.239.57:3389 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.663519000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 45.135.232.124:36220 -> 10.128.239.57:3389"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.727243000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.57:3389 -> 45.135.232.124:36220 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.727243000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.57:3389 -> 45.135.232.124:36220"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.790553000 +08",
+      "event_type": "flow",
+      "summary": "flow 45.130.145.6:50525 -> 10.128.239.57:3389 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.790553000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 45.130.145.6:50525 -> 10.128.239.57:3389"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.854146000 +08",
+      "event_type": "flow",
+      "summary": "flow 10.128.239.20:389 -> 10.128.239.80:49598 proto=TCP"
+    },
+    {
+      "event_timestamp": "Dec 10, 2025 00:16:35.854146000 +08",
+      "event_type": "timeline",
+      "summary": "timeline event 10.128.239.20:389 -> 10.128.239.80:49598"
+    }
+  ],
+  "provenance": {
+    "generated_at": "2026-04-12T14:54:39+00:00",
+    "source_pcap_ids": [
+      "pcap_000103"
+    ],
+    "source_paths": [
+      "/home/seed/Downloads/MJP/input_pcaps/10 Dec - 11 Dec (DCERPC).pcap"
+    ],
+    "event_sources": [
+      "pcap_000103_chunk_001_flow",
+      "pcap_000103_chunk_001_timeline"
+    ],
+    "note": "Bundle created from normalized ingestion-layer outputs for downstream agentic analysis."
+  }
+}
