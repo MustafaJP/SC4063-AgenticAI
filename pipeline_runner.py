@@ -101,17 +101,14 @@ def build_phase_plan(args):
         phases.append(("Phase 4: Extraction Plan", cmd))
 
     if 5 >= args.start_phase and 5 <= args.end_phase:
-        print("step5")
         cmd = [
             "python3", "injestion/extraction_executor.py",
             "--db-path", db,
         ]
 
-        # Only apply limit when explicitly provided
         if args.step5_limit is not None:
             cmd += ["--limit", str(args.step5_limit)]
 
-        # Optional task-type filter
         if args.step5_task_types:
             cmd += ["--task-types", *args.step5_task_types]
 
@@ -172,6 +169,21 @@ def build_phase_plan(args):
             ],
         ))
 
+    if 11 >= args.start_phase and 11 <= args.end_phase:
+        cmd = [
+            "python3", "master_report_synthesizer.py",
+            "--agent-outdir", args.agent_outdir,
+            "--master-subdir", args.master_subdir,
+        ]
+
+        if args.master_use_llm:
+            cmd.append("--use-llm")
+
+        if args.master_ollama_model:
+            cmd += ["--ollama-model", args.master_ollama_model]
+
+        phases.append(("Phase 11: Master Findings Synthesis", cmd))
+
     return phases
 
 
@@ -186,6 +198,10 @@ def main():
     parser.add_argument("--metrics-out", default="pipeline_run_metrics.json")
     parser.add_argument("--agent-outdir", default="agent_outputs")
     parser.add_argument("--agent-max-events", type=int, default=50000)
+
+    parser.add_argument("--master-subdir", default="master")
+    parser.add_argument("--master-use-llm", action="store_true")
+    parser.add_argument("--master-ollama-model", default="")
 
     parser.add_argument(
         "--step5-limit",
@@ -205,13 +221,13 @@ def main():
         "--start-phase",
         type=int,
         default=1,
-        help="Start phase number (1-10)."
+        help="Start phase number (1-11)."
     )
     parser.add_argument(
         "--end-phase",
         type=int,
-        default=10,
-        help="End phase number (1-10)."
+        default=11,
+        help="End phase number (1-11)."
     )
 
     parser.add_argument(

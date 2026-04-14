@@ -1,0 +1,129 @@
+flowchart TD
+    A[All Bundle Reports]
+    Z[Campaign Report]
+    A --> F1["Suspicious DNS Activity (11)"]
+    A --> F2["Suspicious TLS Session (9)"]
+    E1["10.128.239.115:settings-win.data.microsoft.com"]
+    F1 --> E1
+    E2["10.128.239.148:us-v20.events.endpoint.security.microsoft.com"]
+    F1 --> E2
+    E3["10.128.239.166:wdatp-prd-eus2-10.eastus2.cloudapp.azure.com"]
+    F1 --> E3
+    E4["10.128.239.171:us-v20.events.data.microsoft.com"]
+    F1 --> E4
+    E5["10.128.239.20:atm-settingsfe-prod-geo2.trafficmanager.net"]
+    F1 --> E5
+    E6["10.128.239.20:onedscolprdwus10.westus.cloudapp.azure.com"]
+    F1 --> E6
+    E7["10.128.239.20:settings-win.data.microsoft.com"]
+    F1 --> E7
+    E8["10.128.239.20:us-v20.events.data.microsoft.com"]
+    F1 --> E8
+    E9["10.128.239.57->103.180.176.136:15683"]
+    F2 --> E9
+    E10["10.128.239.57->136.144.42.225:1231"]
+    F2 --> E10
+    E11["10.128.239.57->138.199.59.143:32188"]
+    F2 --> E11
+    E12["10.128.239.57->141.98.11.114:13853"]
+    F2 --> E12
+    E13["10.128.239.57->141.98.11.114:18890"]
+    F2 --> E13
+    E14["10.128.239.57->141.98.11.170:21025"]
+    F2 --> E14
+    E15["10.128.239.57->141.98.11.49:54971"]
+    F2 --> E15
+    E16["10.128.239.57->141.98.83.10:51340"]
+    F2 --> E16
+    E17["Source 10.128.239.115"]
+    F1 --> E17
+    E18["Source 10.128.239.148"]
+    F1 --> E18
+    E19["Source 10.128.239.166"]
+    F1 --> E19
+    E20["Source 10.128.239.171"]
+    F1 --> E20
+    E21["Source 10.128.239.20"]
+    F1 --> E21
+    E22["Source 10.128.239.57"]
+    F2 --> E22
+    E23["Source 103.180.176.136"]
+    F2 --> E23
+    E24["Source 138.199.59.143"]
+    F2 --> E24
+    E25["Source 141.98.11.114"]
+    F2 --> E25
+    E26["Source 141.98.11.170"]
+    F2 --> E26
+    E27["Destination 10.128.239.57"]
+    F2 --> E27
+    E28["Destination 103.180.176.136"]
+    F2 --> E28
+    E29["Destination 136.144.42.225"]
+    F2 --> E29
+    E30["Destination 138.199.59.143"]
+    F2 --> E30
+    E31["Destination 141.98.11.114"]
+    F2 --> E31
+    R1[Repeated Entities Across Findings]
+    E4 --> R1
+    E8 --> R1
+    E20 --> R1
+    E21 --> R1
+    E32["Source 10.128.239.21"]
+    E32 --> R1
+    E33["Source 13.107.222.240"]
+    E33 --> R1
+    E34["10.128.239.20:us-v20.events.endpoint.security.microsoft.com"]
+    E34 --> R1
+    E35["10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net"]
+    E35 --> R1
+    E36["13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net"]
+    E36 --> R1
+    E22 --> R1
+    Z --> C1["Suspected Long-Running Malicious Infrastructure"]
+    E23 --> C1
+    E37["Source 136.144.42.225"]
+    E37 --> C1
+    E24 --> C1
+    E38["Source 141.98.11.109"]
+    E38 --> C1
+    E25 --> C1
+    E27 --> C1
+    E39["10.128.239.57"]
+    E39 --> C1
+    Z --> C2["Suspected Long-Running DNS-Based C2 Activity"]
+    E20 --> C2
+    E21 --> C2
+    E40["Source 10.128.239.36"]
+    E40 --> C2
+    E41["us-v20.events.data.microsoft.com"]
+    E41 --> C2
+    Z --> C3["Suspected Long-Running DNS-Based C2 Activity"]
+    E21 --> C3
+    E42["Destination 20.42.65.91"]
+    E42 --> C3
+    E43["10.128.239.20"]
+    E43 --> C3
+    Z --> C4["Suspected Long-Running DNS-Based C2 Activity"]
+    E18 --> C4
+    E21 --> C4
+    E32 --> C4
+    E44["Source 10.128.239.44"]
+    E44 --> C4
+    E45["Source 10.128.239.50"]
+    E45 --> C4
+    E46["us-v20.events.endpoint.security.microsoft.com"]
+    E46 --> C4
+    X1[Cross-Signal Correlation]
+    X2[Likely Sustained Malicious Activity]
+    X3[Containment / Blocking / Retrospective Scoping]
+    R1 --> X1
+    C1 --> X2
+    C2 --> X2
+    C3 --> X2
+    C4 --> X2
+    F1 --> X1
+    F2 --> X1
+    X1 --> X2
+    X2 --> X3

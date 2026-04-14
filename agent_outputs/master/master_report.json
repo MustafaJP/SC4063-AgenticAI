@@ -1,0 +1,1521 @@
+{
+  "generated_at": "2026-04-14T14:24:24+00:00",
+  "bundle_count": 52,
+  "campaign_finding_count": 4,
+  "total_bundle_findings": 46,
+  "human_review_required_count": 4,
+  "severity_distribution": {
+    "MEDIUM": 46
+  },
+  "top_finding_titles": [
+    {
+      "title": "Suspicious TLS Session",
+      "count": 31
+    },
+    {
+      "title": "Suspicious DNS Activity",
+      "count": 15
+    }
+  ],
+  "top_mitre_techniques": [
+    {
+      "technique": "T1573",
+      "count": 31
+    },
+    {
+      "technique": "T1071",
+      "count": 31
+    },
+    {
+      "technique": "T1071.004",
+      "count": 15
+    }
+  ],
+  "top_entities": [
+    {
+      "entity": "10.128.239.20:us-v20.events.data.microsoft.com",
+      "count": 7
+    },
+    {
+      "entity": "10.128.239.171:us-v20.events.data.microsoft.com",
+      "count": 6
+    },
+    {
+      "entity": "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+      "count": 4
+    },
+    {
+      "entity": "179.60.146.36->10.128.239.57:3389",
+      "count": 3
+    },
+    {
+      "entity": "194.165.17.11->10.128.239.57:3389",
+      "count": 3
+    },
+    {
+      "entity": "10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net",
+      "count": 2
+    },
+    {
+      "entity": "13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net",
+      "count": 2
+    },
+    {
+      "entity": "91.199.163.12->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "45.227.254.152->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "149.50.116.107->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "179.60.146.32->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "141.98.11.114->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "10.128.239.166:wdatp-prd-eus2-10.eastus2.cloudapp.azure.com",
+      "count": 2
+    },
+    {
+      "entity": "179.60.146.33->10.128.239.57:3389",
+      "count": 2
+    },
+    {
+      "entity": "10.128.239.21:onedscolprdcus10.centralus.cloudapp.azure.com",
+      "count": 1
+    }
+  ],
+  "top_source_hosts": [
+    {
+      "host": "10.128.239.57",
+      "count": 177
+    },
+    {
+      "host": "10.128.239.20",
+      "count": 23
+    },
+    {
+      "host": "10.128.239.21",
+      "count": 15
+    },
+    {
+      "host": "10.128.239.171",
+      "count": 14
+    },
+    {
+      "host": "194.165.17.11",
+      "count": 12
+    },
+    {
+      "host": "179.60.146.36",
+      "count": 11
+    },
+    {
+      "host": "179.60.146.33",
+      "count": 8
+    },
+    {
+      "host": "141.98.11.114",
+      "count": 7
+    },
+    {
+      "host": "20.42.65.91",
+      "count": 5
+    },
+    {
+      "host": "13.107.222.240",
+      "count": 4
+    }
+  ],
+  "top_destination_hosts": [
+    {
+      "host": "10.128.239.57",
+      "count": 106
+    },
+    {
+      "host": "195.211.190.189",
+      "count": 10
+    },
+    {
+      "host": "179.60.146.33",
+      "count": 9
+    },
+    {
+      "host": "179.60.146.36",
+      "count": 9
+    },
+    {
+      "host": "194.165.17.11",
+      "count": 7
+    },
+    {
+      "host": "141.98.83.10",
+      "count": 6
+    },
+    {
+      "host": "141.98.11.114",
+      "count": 5
+    },
+    {
+      "host": "10.128.239.20",
+      "count": 5
+    },
+    {
+      "host": "91.238.181.7",
+      "count": 4
+    },
+    {
+      "host": "88.214.25.115",
+      "count": 4
+    }
+  ],
+  "bundle_summaries": [
+    {
+      "bundle_id": "bundle_2025-11-18_nested_overlap",
+      "finding_count": 0,
+      "event_count": 214,
+      "pcap_count": 6,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-11-22_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-11-23_nested_overlap",
+      "finding_count": 0,
+      "event_count": 24,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-11-24_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-11-28_nested_overlap",
+      "finding_count": 0,
+      "event_count": 32,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-03_nested_overlap",
+      "finding_count": 2,
+      "event_count": 122,
+      "pcap_count": 3,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 0.98
+    },
+    {
+      "bundle_id": "bundle_2025-12-04_nested_overlap",
+      "finding_count": 1,
+      "event_count": 147,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.79
+    },
+    {
+      "bundle_id": "bundle_2025-12-05_nested_overlap",
+      "finding_count": 1,
+      "event_count": 38,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.763
+    },
+    {
+      "bundle_id": "bundle_2025-12-06_nested_overlap",
+      "finding_count": 1,
+      "event_count": 39,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2025-12-07_nested_overlap",
+      "finding_count": 2,
+      "event_count": 156,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2025-12-08_nested_overlap",
+      "finding_count": 1,
+      "event_count": 42,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 0.88
+    },
+    {
+      "bundle_id": "bundle_2025-12-09_nested_overlap",
+      "finding_count": 2,
+      "event_count": 198,
+      "pcap_count": 5,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2025-12-10_nested_overlap",
+      "finding_count": 0,
+      "event_count": 30,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-11_nested_overlap",
+      "finding_count": 1,
+      "event_count": 99,
+      "pcap_count": 3,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.797
+    },
+    {
+      "bundle_id": "bundle_2025-12-12_nested_overlap",
+      "finding_count": 1,
+      "event_count": 143,
+      "pcap_count": 4,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.81
+    },
+    {
+      "bundle_id": "bundle_2025-12-13_nested_overlap",
+      "finding_count": 0,
+      "event_count": 130,
+      "pcap_count": 4,
+      "hypothesis_count": 1,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-14_nested_overlap",
+      "finding_count": 1,
+      "event_count": 38,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.78
+    },
+    {
+      "bundle_id": "bundle_2025-12-15_nested_overlap",
+      "finding_count": 1,
+      "event_count": 117,
+      "pcap_count": 4,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2025-12-16_nested_overlap",
+      "finding_count": 1,
+      "event_count": 41,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.755
+    },
+    {
+      "bundle_id": "bundle_2025-12-17_nested_overlap",
+      "finding_count": 2,
+      "event_count": 163,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2025-12-18_nested_overlap",
+      "finding_count": 1,
+      "event_count": 113,
+      "pcap_count": 3,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.73
+    },
+    {
+      "bundle_id": "bundle_2025-12-19_nested_overlap",
+      "finding_count": 2,
+      "event_count": 143,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2025-12-20_nested_overlap",
+      "finding_count": 1,
+      "event_count": 108,
+      "pcap_count": 3,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.847
+    },
+    {
+      "bundle_id": "bundle_2025-12-21_nested_overlap",
+      "finding_count": 1,
+      "event_count": 79,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.73
+    },
+    {
+      "bundle_id": "bundle_2025-12-24_nested_overlap",
+      "finding_count": 0,
+      "event_count": 39,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-26_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-27_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-28_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2025-12-31_nested_overlap",
+      "finding_count": 0,
+      "event_count": 28,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-02_nested_overlap",
+      "finding_count": 1,
+      "event_count": 84,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-03_nested_overlap",
+      "finding_count": 0,
+      "event_count": 25,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-04_nested_overlap",
+      "finding_count": 2,
+      "event_count": 152,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 0.88
+    },
+    {
+      "bundle_id": "bundle_2026-01-05_nested_overlap",
+      "finding_count": 1,
+      "event_count": 79,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.755
+    },
+    {
+      "bundle_id": "bundle_2026-01-06_nested_overlap",
+      "finding_count": 0,
+      "event_count": 80,
+      "pcap_count": 2,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-08_nested_overlap",
+      "finding_count": 1,
+      "event_count": 72,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.73
+    },
+    {
+      "bundle_id": "bundle_2026-01-09_nested_overlap",
+      "finding_count": 0,
+      "event_count": 18,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-10_nested_overlap",
+      "finding_count": 2,
+      "event_count": 152,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2026-01-11_nested_overlap",
+      "finding_count": 1,
+      "event_count": 69,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-12_nested_overlap",
+      "finding_count": 0,
+      "event_count": 36,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-14_nested_overlap",
+      "finding_count": 2,
+      "event_count": 147,
+      "pcap_count": 3,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.808
+    },
+    {
+      "bundle_id": "bundle_2026-01-15_nested_overlap",
+      "finding_count": 0,
+      "event_count": 27,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-16_nested_overlap",
+      "finding_count": 2,
+      "event_count": 80,
+      "pcap_count": 2,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-18_nested_overlap",
+      "finding_count": 1,
+      "event_count": 213,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-19_nested_overlap",
+      "finding_count": 2,
+      "event_count": 182,
+      "pcap_count": 4,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2026-01-21_nested_overlap",
+      "finding_count": 1,
+      "event_count": 127,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-23_nested_overlap",
+      "finding_count": 1,
+      "event_count": 132,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-24_nested_overlap",
+      "finding_count": 2,
+      "event_count": 73,
+      "pcap_count": 1,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.83
+    },
+    {
+      "bundle_id": "bundle_2026-01-25_nested_overlap",
+      "finding_count": 1,
+      "event_count": 66,
+      "pcap_count": 1,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 0.78
+    },
+    {
+      "bundle_id": "bundle_2026-01-26_nested_overlap",
+      "finding_count": 2,
+      "event_count": 150,
+      "pcap_count": 3,
+      "hypothesis_count": 2,
+      "top_finding": "Suspicious DNS Activity",
+      "top_confidence": 1.0
+    },
+    {
+      "bundle_id": "bundle_2026-01-27_nested_overlap",
+      "finding_count": 1,
+      "event_count": 285,
+      "pcap_count": 4,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.839
+    },
+    {
+      "bundle_id": "bundle_2026-01-28_nested_overlap",
+      "finding_count": 0,
+      "event_count": 58,
+      "pcap_count": 1,
+      "hypothesis_count": 0,
+      "top_finding": null,
+      "top_confidence": null
+    },
+    {
+      "bundle_id": "bundle_2026-01-29_nested_overlap",
+      "finding_count": 1,
+      "event_count": 128,
+      "pcap_count": 2,
+      "hypothesis_count": 1,
+      "top_finding": "Suspicious TLS Session",
+      "top_confidence": 0.839
+    }
+  ],
+  "top_findings": [
+    {
+      "bundle_id": "bundle_2025-12-06_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.171",
+        "10.128.239.20"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-07_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com",
+        "10.128.239.21:edge.ds-c7114-microsoft.global.dns.qwilted-cds.cqloud.com",
+        "15.197.148.211:edge.ds-c7114-microsoft.global.dns.qwilted-cds.cqloud.com"
+      ],
+      "source_hosts": [
+        "10.128.239.171",
+        "10.128.239.20",
+        "10.128.239.21",
+        "15.197.148.211"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-09_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.20:atm-settingsfe-prod-geo2.trafficmanager.net",
+        "10.128.239.21:atm-settingsfe-prod-geo2.trafficmanager.net",
+        "10.128.239.21:settings-prod-wus2-1.westus2.cloudapp.azure.com",
+        "13.107.222.240:atm-settingsfe-prod-geo2.trafficmanager.net",
+        "150.171.21.2:settings-prod-wus2-1.westus2.cloudapp.azure.com"
+      ],
+      "source_hosts": [
+        "10.128.239.20",
+        "10.128.239.21",
+        "13.107.222.240",
+        "150.171.21.2"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-17_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.171",
+        "10.128.239.20"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-19_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.171",
+        "10.128.239.20"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-10_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.171",
+        "10.128.239.20"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-19_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.115:settings-win.data.microsoft.com",
+        "10.128.239.171:us-v20.events.data.microsoft.com",
+        "10.128.239.20:settings-win.data.microsoft.com",
+        "10.128.239.20:us-v20.events.data.microsoft.com",
+        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.21:settings-prod-eus2-1.eastus2.cloudapp.azure.com",
+        "10.128.239.21:settings-win.data.microsoft.com",
+        "10.128.239.50:us-v20.events.endpoint.security.microsoft.com",
+        "13.107.236.6:settings-prod-eus2-1.eastus2.cloudapp.azure.com"
+      ],
+      "source_hosts": [
+        "10.128.239.115",
+        "10.128.239.171",
+        "10.128.239.20",
+        "10.128.239.21",
+        "10.128.239.50",
+        "13.107.236.6"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-26_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.21:onedscolprdweu10.westeurope.cloudapp.azure.com",
+        "10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net",
+        "10.128.239.82:us-v20.events.endpoint.security.microsoft.com",
+        "13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net",
+        "150.171.16.39:onedscolprdweu10.westeurope.cloudapp.azure.com"
+      ],
+      "source_hosts": [
+        "10.128.239.20",
+        "10.128.239.21",
+        "10.128.239.82",
+        "13.107.222.240",
+        "150.171.16.39"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-03_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 0.98,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.21:onedscolprdcus10.centralus.cloudapp.azure.com",
+        "10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net",
+        "13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net",
+        "204.14.183.201:onedscolprdcus10.centralus.cloudapp.azure.com"
+      ],
+      "source_hosts": [
+        "10.128.239.21",
+        "13.107.222.240",
+        "204.14.183.201"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-08_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 0.88,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.148:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.20:onedscolprdwus10.westus.cloudapp.azure.com",
+        "10.128.239.21:onedscolprdwus10.westus.cloudapp.azure.com",
+        "10.128.239.21:us-v20.events.endpoint.security.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.148",
+        "10.128.239.20",
+        "10.128.239.21"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-04_nested_overlap",
+      "title": "Suspicious DNS Activity",
+      "severity": "MEDIUM",
+      "confidence": 0.88,
+      "mitre_techniques": [
+        "T1071.004"
+      ],
+      "affected_entities": [
+        "10.128.239.166:wdatp-prd-eus2-10.eastus2.cloudapp.azure.com",
+        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
+        "10.128.239.20:wdatp-prd-eus2-10.eastus2.cloudapp.azure.com",
+        "10.128.239.54:us-v20.events.endpoint.security.microsoft.com"
+      ],
+      "source_hosts": [
+        "10.128.239.166",
+        "10.128.239.20",
+        "10.128.239.54"
+      ],
+      "destination_hosts": [],
+      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-20_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.847,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->88.214.25.123:3500",
+        "10.128.239.57->98.159.33.51:56387",
+        "88.214.25.123->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "88.214.25.123"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "88.214.25.123",
+        "98.159.33.51"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-10_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.843,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->141.98.83.70:59761",
+        "10.128.239.57->45.227.254.152:46276",
+        "10.128.239.57->88.214.25.115:1735",
+        "10.128.239.57->88.214.25.125:14773",
+        "141.98.83.70->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "141.98.83.70"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "141.98.83.70",
+        "45.227.254.152",
+        "88.214.25.115",
+        "88.214.25.125"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-27_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.839,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->103.180.176.136:15683",
+        "10.128.239.57->179.60.146.33:54973",
+        "10.128.239.57->179.60.146.36:53742",
+        "10.128.239.57->179.60.146.36:54168",
+        "10.128.239.57->179.60.146.37:65315",
+        "10.128.239.57->185.42.12.42:36653",
+        "10.128.239.57->80.75.212.32:39007",
+        "10.128.239.57->88.214.25.121:29514",
+        "10.128.239.57->91.238.181.7:38080",
+        "10.128.239.57->91.238.181.95:5484",
+        "103.180.176.136->10.128.239.57:3389",
+        "179.60.146.33->10.128.239.57:3389",
+        "179.60.146.36->10.128.239.57:3389",
+        "88.214.25.121->10.128.239.57:3389",
+        "91.238.181.95->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "103.180.176.136",
+        "179.60.146.33",
+        "179.60.146.36",
+        "88.214.25.121",
+        "91.238.181.95"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "103.180.176.136",
+        "179.60.146.33",
+        "179.60.146.36",
+        "179.60.146.37",
+        "185.42.12.42",
+        "80.75.212.32",
+        "88.214.25.121",
+        "91.238.181.7",
+        "91.238.181.95"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-29_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.839,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->194.165.17.11:40280",
+        "10.128.239.57->91.238.181.7:47120",
+        "194.165.17.11->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "194.165.17.11"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "194.165.17.11",
+        "91.238.181.7"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-07_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.83,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->150.242.202.185:50286",
+        "10.128.239.57->179.60.146.33:55220",
+        "10.128.239.57->179.60.146.33:63085",
+        "10.128.239.57->194.165.16.167:14433",
+        "10.128.239.57->45.227.254.151:56649",
+        "10.128.239.57->88.214.25.115:7102",
+        "10.128.239.57->91.238.181.7:44928",
+        "10.128.239.57->91.238.181.93:45627"
+      ],
+      "source_hosts": [
+        "10.128.239.57"
+      ],
+      "destination_hosts": [
+        "150.242.202.185",
+        "179.60.146.33",
+        "194.165.16.167",
+        "45.227.254.151",
+        "88.214.25.115",
+        "91.238.181.7",
+        "91.238.181.93"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-15_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.83,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->141.98.11.114:13853",
+        "10.128.239.57->141.98.11.49:54971",
+        "10.128.239.57->178.20.129.235:50722",
+        "10.128.239.57->195.211.190.189:53789",
+        "10.128.239.57->91.238.181.10:54874"
+      ],
+      "source_hosts": [
+        "10.128.239.57"
+      ],
+      "destination_hosts": [
+        "141.98.11.114",
+        "141.98.11.49",
+        "178.20.129.235",
+        "195.211.190.189",
+        "91.238.181.10"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-17_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.83,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->136.144.42.225:1231",
+        "10.128.239.57->141.98.11.170:21025",
+        "10.128.239.57->141.98.83.10:51340",
+        "10.128.239.57->141.98.83.10:51994",
+        "10.128.239.57->141.98.83.10:56475",
+        "10.128.239.57->179.60.146.35:57485",
+        "10.128.239.57->179.60.146.36:60950",
+        "10.128.239.57->45.135.232.19:41921",
+        "10.128.239.57->80.75.212.45:29451",
+        "10.128.239.57->91.238.181.6:43463",
+        "10.128.239.57->91.238.181.8:36312",
+        "10.128.239.57->98.159.33.100:10385",
+        "141.98.11.170->10.128.239.57:3389",
+        "45.135.232.19->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "141.98.11.170",
+        "45.135.232.19"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "136.144.42.225",
+        "141.98.11.170",
+        "141.98.83.10",
+        "179.60.146.35",
+        "179.60.146.36",
+        "45.135.232.19",
+        "80.75.212.45",
+        "91.238.181.6",
+        "91.238.181.8",
+        "98.159.33.100"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2025-12-19_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.83,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->138.199.59.143:32188",
+        "10.128.239.57->193.111.248.57:43765",
+        "10.128.239.57->194.165.17.11:53520",
+        "10.128.239.57->91.238.181.7:38303",
+        "138.199.59.143->10.128.239.57:3389",
+        "193.111.248.57->10.128.239.57:3389",
+        "194.165.17.11->10.128.239.57:3389",
+        "91.238.181.7->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "138.199.59.143",
+        "193.111.248.57",
+        "194.165.17.11",
+        "91.238.181.7"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "138.199.59.143",
+        "193.111.248.57",
+        "194.165.17.11",
+        "91.238.181.7"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    },
+    {
+      "bundle_id": "bundle_2026-01-02_nested_overlap",
+      "title": "Suspicious TLS Session",
+      "severity": "MEDIUM",
+      "confidence": 0.83,
+      "mitre_techniques": [
+        "T1071",
+        "T1573"
+      ],
+      "affected_entities": [
+        "10.128.239.57->141.98.11.114:18890",
+        "10.128.239.57->179.60.146.33:58944",
+        "10.128.239.57->194.165.16.167:29737",
+        "10.128.239.57->88.214.25.121:41245",
+        "10.128.239.57->91.238.181.93:8728",
+        "141.98.11.114->10.128.239.57:3389",
+        "91.238.181.93->10.128.239.57:3389"
+      ],
+      "source_hosts": [
+        "10.128.239.57",
+        "141.98.11.114",
+        "91.238.181.93"
+      ],
+      "destination_hosts": [
+        "10.128.239.57",
+        "141.98.11.114",
+        "179.60.146.33",
+        "194.165.16.167",
+        "88.214.25.121",
+        "91.238.181.93"
+      ],
+      "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
+      "human_review_required": false,
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ]
+    }
+  ],
+  "campaign_report": {
+    "metrics": {
+      "bundle_count": 52,
+      "campaign_finding_count": 4
+    },
+    "notes": [
+      "Campaign correlation completed across bundle-level investigation results"
+    ],
+    "campaign_findings": [
+      {
+        "title": "Suspected Long-Running Malicious Infrastructure",
+        "description": "The entity `10.128.239.57` persisted across multiple bundles and hosts, suggesting campaign-level malicious activity rather than an isolated event.",
+        "confidence": 0.7,
+        "severity": "MEDIUM",
+        "first_seen": "",
+        "last_seen": "",
+        "bundle_ids": [
+          "bundle_2025-12-03_nested_overlap",
+          "bundle_2025-12-04_nested_overlap",
+          "bundle_2025-12-05_nested_overlap",
+          "bundle_2025-12-09_nested_overlap",
+          "bundle_2025-12-11_nested_overlap",
+          "bundle_2025-12-12_nested_overlap",
+          "bundle_2025-12-13_nested_overlap",
+          "bundle_2025-12-14_nested_overlap",
+          "bundle_2025-12-16_nested_overlap",
+          "bundle_2025-12-17_nested_overlap",
+          "bundle_2025-12-19_nested_overlap",
+          "bundle_2025-12-20_nested_overlap",
+          "bundle_2026-01-02_nested_overlap",
+          "bundle_2026-01-03_nested_overlap",
+          "bundle_2026-01-04_nested_overlap",
+          "bundle_2026-01-05_nested_overlap",
+          "bundle_2026-01-10_nested_overlap",
+          "bundle_2026-01-11_nested_overlap",
+          "bundle_2026-01-14_nested_overlap",
+          "bundle_2026-01-16_nested_overlap",
+          "bundle_2026-01-21_nested_overlap",
+          "bundle_2026-01-23_nested_overlap",
+          "bundle_2026-01-24_nested_overlap",
+          "bundle_2026-01-27_nested_overlap",
+          "bundle_2026-01-29_nested_overlap"
+        ],
+        "source_hosts": [
+          "103.180.176.136",
+          "136.144.42.225",
+          "138.199.59.143",
+          "141.98.11.109",
+          "141.98.11.114",
+          "141.98.11.127",
+          "141.98.11.170",
+          "141.98.83.10",
+          "141.98.83.70",
+          "147.45.112.181",
+          "147.45.112.188",
+          "149.50.116.107",
+          "179.60.146.32",
+          "179.60.146.33",
+          "179.60.146.36",
+          "179.60.146.37",
+          "181.49.207.198",
+          "185.16.39.19",
+          "193.111.248.57",
+          "194.0.234.17",
+          "194.165.17.11",
+          "210.19.252.30",
+          "45.135.232.19",
+          "45.141.84.95",
+          "45.141.87.151",
+          "45.227.254.152",
+          "45.92.229.189",
+          "79.127.132.53",
+          "85.237.194.86",
+          "88.214.25.121",
+          "88.214.25.122",
+          "88.214.25.123",
+          "88.214.25.125",
+          "91.199.163.12",
+          "91.238.181.39",
+          "91.238.181.7",
+          "91.238.181.8",
+          "91.238.181.92",
+          "91.238.181.93",
+          "91.238.181.95",
+          "98.159.33.51"
+        ],
+        "destination_hosts": [
+          "10.128.239.57"
+        ],
+        "entities": [
+          {
+            "entity_type": "dst_ip",
+            "value": "10.128.239.57"
+          }
+        ],
+        "mitre_techniques": [
+          "T1071",
+          "T1573"
+        ],
+        "recommendation": "Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.",
+        "rationale": [
+          "Observed across 25 bundles",
+          "Persistence across many bundles",
+          "Observed from 41 source hosts",
+          "Mapped to MITRE ATT&CK techniques"
+        ]
+      },
+      {
+        "title": "Suspected Long-Running DNS-Based C2 Activity",
+        "description": "The entity `us-v20.events.data.microsoft.com` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.",
+        "confidence": 0.7,
+        "severity": "MEDIUM",
+        "first_seen": "",
+        "last_seen": "",
+        "bundle_ids": [
+          "bundle_2025-12-06_nested_overlap",
+          "bundle_2025-12-07_nested_overlap",
+          "bundle_2025-12-17_nested_overlap",
+          "bundle_2025-12-19_nested_overlap",
+          "bundle_2026-01-10_nested_overlap",
+          "bundle_2026-01-19_nested_overlap",
+          "bundle_2026-01-25_nested_overlap"
+        ],
+        "source_hosts": [
+          "10.128.239.171",
+          "10.128.239.20",
+          "10.128.239.36"
+        ],
+        "destination_hosts": [],
+        "entities": [
+          {
+            "entity_type": "domain_or_uri",
+            "value": "us-v20.events.data.microsoft.com"
+          }
+        ],
+        "mitre_techniques": [
+          "T1071.004"
+        ],
+        "recommendation": "Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.",
+        "rationale": [
+          "Observed across 7 bundles",
+          "Persistence across many bundles",
+          "Observed from 3 source hosts",
+          "Mapped to MITRE ATT&CK techniques"
+        ]
+      },
+      {
+        "title": "Suspected Long-Running DNS-Based C2 Activity",
+        "description": "The entity `10.128.239.20` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.",
+        "confidence": 0.7,
+        "severity": "MEDIUM",
+        "first_seen": "",
+        "last_seen": "",
+        "bundle_ids": [
+          "bundle_2025-12-06_nested_overlap",
+          "bundle_2025-12-07_nested_overlap",
+          "bundle_2025-12-08_nested_overlap",
+          "bundle_2025-12-09_nested_overlap",
+          "bundle_2025-12-17_nested_overlap",
+          "bundle_2025-12-19_nested_overlap",
+          "bundle_2026-01-04_nested_overlap",
+          "bundle_2026-01-10_nested_overlap",
+          "bundle_2026-01-14_nested_overlap",
+          "bundle_2026-01-18_nested_overlap",
+          "bundle_2026-01-19_nested_overlap",
+          "bundle_2026-01-21_nested_overlap",
+          "bundle_2026-01-25_nested_overlap",
+          "bundle_2026-01-26_nested_overlap"
+        ],
+        "source_hosts": [
+          "10.128.239.20"
+        ],
+        "destination_hosts": [
+          "20.42.65.91"
+        ],
+        "entities": [
+          {
+            "entity_type": "src_ip",
+            "value": "10.128.239.20"
+          }
+        ],
+        "mitre_techniques": [
+          "T1071",
+          "T1071.004",
+          "T1573"
+        ],
+        "recommendation": "Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.",
+        "rationale": [
+          "Observed across 14 bundles",
+          "Persistence across many bundles",
+          "Corroborated by 2 different indicators",
+          "Mapped to MITRE ATT&CK techniques"
+        ]
+      },
+      {
+        "title": "Suspected Long-Running DNS-Based C2 Activity",
+        "description": "The entity `us-v20.events.endpoint.security.microsoft.com` appeared repeatedly across bundles and hosts with DNS-related anomalies, suggesting sustained malicious DNS communication or command-and-control.",
+        "confidence": 0.7,
+        "severity": "MEDIUM",
+        "first_seen": "",
+        "last_seen": "",
+        "bundle_ids": [
+          "bundle_2025-12-08_nested_overlap",
+          "bundle_2026-01-04_nested_overlap",
+          "bundle_2026-01-14_nested_overlap",
+          "bundle_2026-01-19_nested_overlap",
+          "bundle_2026-01-26_nested_overlap"
+        ],
+        "source_hosts": [
+          "10.128.239.148",
+          "10.128.239.20",
+          "10.128.239.21",
+          "10.128.239.44",
+          "10.128.239.50",
+          "10.128.239.54",
+          "10.128.239.82"
+        ],
+        "destination_hosts": [],
+        "entities": [
+          {
+            "entity_type": "domain_or_uri",
+            "value": "us-v20.events.endpoint.security.microsoft.com"
+          }
+        ],
+        "mitre_techniques": [
+          "T1071.004"
+        ],
+        "recommendation": "Perform retrospective scoping across all affected hosts, block associated infrastructure, and validate whether this activity represents sustained intrusion or command-and-control.",
+        "rationale": [
+          "Observed across 5 bundles",
+          "Persistence across many bundles",
+          "Observed from 7 source hosts",
+          "Mapped to MITRE ATT&CK techniques"
+        ]
+      }
+    ],
+    "_source_path": "agent_outputs/campaign/campaign_report.json"
+  },
+  "investigation_window": {
+    "first_seen": "2026-04-12T14:54:40.889712Z",
+    "last_seen": "2026-04-12T14:54:41.262729Z"
+  },
+  "executive_summary": "The master synthesizer reviewed 52 bundle-level reports and consolidated 46 reportable findings. The most recurrent finding categories were Suspicious TLS Session, Suspicious DNS Activity. The most frequently affected entities included 10.128.239.20:us-v20.events.data.microsoft.com, 10.128.239.171:us-v20.events.data.microsoft.com, 10.128.239.20:us-v20.events.endpoint.security.microsoft.com, 179.60.146.36->10.128.239.57:3389, 194.165.17.11->10.128.239.57:3389, and the most recurrent source hosts included 10.128.239.57, 10.128.239.20, 10.128.239.21, 10.128.239.171, 194.165.17.11. Cross-bundle correlation identified 4 campaign-level finding(s), indicating persistence beyond a single bundle."
+}
