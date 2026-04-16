@@ -121,6 +121,53 @@ def _attach_uncertainty_annotations(hyp):
             "This is a correlation-based inference, not direct proof of content theft or data transfer.",
         ])
 
+    elif hyp.title == "SMB Lateral Movement":
+        hyp.false_positive_risks.extend([
+            "Legitimate IT management tools, vulnerability scanners, and backup software may scan SMB ports.",
+            "Network discovery protocols in enterprise environments can produce similar patterns.",
+        ])
+        hyp.missed_detection_risks.extend([
+            "Slow, targeted lateral movement that stays below scan thresholds may not be detected.",
+        ])
+        hyp.limitations.extend([
+            "SMB analysis relies on connection metadata and cannot inspect file-level operations.",
+        ])
+
+    elif hyp.title == "External Sensitive Access":
+        hyp.false_positive_risks.extend([
+            "Legitimate remote administration via RDP or SSH from authorized external IPs.",
+            "VPN or jump-host traffic may appear as external access.",
+        ])
+        hyp.missed_detection_risks.extend([
+            "Access via VPN tunnels that terminate internally will not appear as external.",
+        ])
+        hyp.limitations.extend([
+            "Cannot distinguish between authorized and unauthorized remote access without credential context.",
+        ])
+
+    elif hyp.title == "Potential Data Exfiltration":
+        hyp.false_positive_risks.extend([
+            "Large legitimate uploads (backups, cloud sync, CI/CD) may trigger volumetric thresholds.",
+        ])
+        hyp.missed_detection_risks.extend([
+            "Slow, low-volume exfiltration may stay below detection thresholds.",
+            "Encrypted exfiltration via legitimate services may not be flagged.",
+        ])
+        hyp.limitations.extend([
+            "Volumetric analysis detects transfer patterns, not content — payload inspection requires decryption.",
+        ])
+
+    elif hyp.title == "Multi-Signal Threat":
+        hyp.false_positive_risks.extend([
+            "A host with multiple benign anomalies may still be flagged by correlation.",
+        ])
+        hyp.missed_detection_risks.extend([
+            "Attacks using only one communication channel will not trigger multi-signal correlation.",
+        ])
+        hyp.limitations.extend([
+            "Correlation strength depends on the quality and coverage of upstream analyzers.",
+        ])
+
 
 def apply_guardrails(result, config):
     for hyp in result.hypotheses.values():

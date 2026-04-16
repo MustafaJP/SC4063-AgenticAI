@@ -44,6 +44,14 @@ def analyze_tls(tls_events, config):
             score += 0.2
             reasons.append("repeated_missing_sni_from_source")
 
+        # Check if port is a known TLS-using service (RDP, LDAPS, etc.)
+        dst_port_int = int(dst_port) if dst_port is not None else None
+        is_known_tls_port = dst_port_int in config.tls_known_ports if dst_port_int else False
+
+        if is_known_tls_port:
+            # Known TLS services naturally lack SNI — skip flagging
+            continue
+
         if dst_port not in (443, "443", None):
             score += 0.1
             reasons.append("tls_on_nonstandard_port")

@@ -9,8 +9,9 @@ python3 pipeline_runner.py \
   --db-path evidence_registry.db \
   --input-dir input_pcaps \
   --start-phase 1 \
-  --end-phase 10 \
-  --clear
+  --end-phase 11 \
+  --clear \
+  --step5-workers 8 \
   2>&1 | tee "$LOG_FILE"
 
 echo "Pipeline run completed."

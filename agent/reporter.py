@@ -9,10 +9,15 @@ def recommendation_for(title: str) -> str:
     mapping = {
         "C2 Beaconing": "Isolate affected hosts, block destination endpoints, and inspect persistence mechanisms on the source system.",
         "DNS Tunneling": "Block suspicious domains, review DNS logs for affected hosts, and inspect for encoded or covert exfiltration activity.",
+        "Suspicious DNS Activity": "Investigate flagged domains, check threat intelligence, and block confirmed malicious domains.",
         "Suspicious HTTP C2": "Block suspicious HTTP destinations and user agents, then inspect endpoints for malware or scripts.",
         "Suspicious TLS Session": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
         "Known Bad IP Communication": "Block the destination IP immediately and perform retrospective searches across related logs and endpoints.",
         "Possible Data Exfiltration": "Prioritize host isolation, inspect outbound transfer channels, and verify whether sensitive data was accessed or transmitted.",
+        "SMB Lateral Movement": "Isolate the scanning host immediately, check for compromised credentials, and audit all accessed systems for signs of compromise.",
+        "External Sensitive Access": "Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.",
+        "Potential Data Exfiltration": "Block the destination IP, isolate the source host, and forensically examine what data may have been transferred.",
+        "Multi-Signal Threat": "Treat as high-priority incident — isolate affected host(s), perform full forensic analysis, and coordinate incident response.",
     }
     return mapping.get(title, "Perform additional containment and validation in accordance with incident response procedures.")
 

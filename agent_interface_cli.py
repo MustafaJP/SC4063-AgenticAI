@@ -4,6 +4,8 @@ from pathlib import Path
 
 from agent_interface import AgentInterface
 from agent.service import ForensicInvestigationService
+from agent.agentic_service import AgenticForensicService
+from agent.config import AgentConfig
 from agent.reporter import write_investigation_reports
 from agent.campaign import CampaignInvestigationService
 from agent.campaign_reporter import write_campaign_reports
@@ -52,6 +54,22 @@ def main():
     p_campaign = subparsers.add_parser("campaign-investigate")
     p_campaign.add_argument("--outdir", default="agent_outputs")
     p_campaign.add_argument("--max-events", type=int, default=50000)
+
+    # Agentic investigation commands
+    p_agentic = subparsers.add_parser("agentic-investigate")
+    p_agentic.add_argument("--bundle-id", required=True)
+    p_agentic.add_argument("--outdir", default="agent_outputs")
+    p_agentic.add_argument("--max-events", type=int, default=50000)
+    p_agentic.add_argument("--ollama-model", default="llama3.1")
+    p_agentic.add_argument("--ollama-url", default="http://localhost:11434")
+    p_agentic.add_argument("--max-iterations", type=int, default=8)
+
+    p_agentic_all = subparsers.add_parser("agentic-investigate-all")
+    p_agentic_all.add_argument("--outdir", default="agent_outputs")
+    p_agentic_all.add_argument("--max-events", type=int, default=50000)
+    p_agentic_all.add_argument("--ollama-model", default="llama3.1")
+    p_agentic_all.add_argument("--ollama-url", default="http://localhost:11434")
+    p_agentic_all.add_argument("--max-iterations", type=int, default=8)
 
     args = parser.parse_args()
     api = AgentInterface(db_path=args.db_path)
@@ -157,6 +175,71 @@ def main():
                 "bundle_count": len(all_case_data),
                 "campaign_finding_count": len(result.campaign_findings),
                 "outdir": str(outdir),
+            })
+
+        elif args.command == "agentic-investigate":
+            config = AgentConfig(
+                ollama_model=args.ollama_model,
+                ollama_url=args.ollama_url,
+                agentic_max_iterations=args.max_iterations,
+                agentic_enabled=True,
+            )
+            case_data = api.load_case_bundle(
+                bundle_id=args.bundle_id,
+                max_events=args.max_events,
+            )
+            service = AgenticForensicService(config=config)
+            result = service.run(case_data)
+
+            outdir = Path(args.outdir) / args.bundle_id
+            write_investigation_reports(result, outdir)
+
+            pretty_print({
+                "status": "ok",
+                "bundle_id": args.bundle_id,
+                "outdir": str(outdir),
+                "finding_count": len(result.findings),
+                "hypothesis_count": len(result.hypotheses),
+                "agentic_mode": result.metrics.get("agentic_mode", False),
+                "tools_invoked": result.metrics.get("tools_invoked", []),
+                "llm_rounds": result.metrics.get("llm_rounds", 0),
+            })
+
+        elif args.command == "agentic-investigate-all":
+            config = AgentConfig(
+                ollama_model=args.ollama_model,
+                ollama_url=args.ollama_url,
+                agentic_max_iterations=args.max_iterations,
+                agentic_enabled=True,
+            )
+            bundles = api.list_bundles()
+            service = AgenticForensicService(config=config)
+            results = []
+
+            for row in bundles:
+                bundle_id = row["bundle_id"]
+                case_data = api.load_case_bundle(
+                    bundle_id=bundle_id,
+                    max_events=args.max_events,
+                )
+                result = service.run(case_data)
+                outdir = Path(args.outdir) / bundle_id
+                write_investigation_reports(result, outdir)
+
+                results.append({
+                    "bundle_id": bundle_id,
+                    "outdir": str(outdir),
+                    "finding_count": len(result.findings),
+                    "hypothesis_count": len(result.hypotheses),
+                    "agentic_mode": result.metrics.get("agentic_mode", False),
+                    "tools_invoked": result.metrics.get("tools_invoked", []),
+                    "llm_rounds": result.metrics.get("llm_rounds", 0),
+                })
+
+            pretty_print({
+                "status": "ok",
+                "bundle_count": len(results),
+                "results": results,
             })
 
     finally:

@@ -112,6 +112,9 @@ def build_phase_plan(args):
         if args.step5_task_types:
             cmd += ["--task-types", *args.step5_task_types]
 
+        if args.step5_workers > 1:
+            cmd += ["--workers", str(args.step5_workers)]
+
         phases.append(("Phase 5: Evidence Extraction", cmd))
 
     if 6 >= args.start_phase and 6 <= args.end_phase:
@@ -146,16 +149,32 @@ def build_phase_plan(args):
         ))
 
     if 9 >= args.start_phase and 9 <= args.end_phase:
-        phases.append((
-            "Phase 9: Agent Investigation",
-            [
+        if args.agentic:
+            cmd = [
                 "python3", "agent_interface_cli.py",
                 "--db-path", db,
-                "investigate-all",
+                "agentic-investigate-all",
                 "--outdir", args.agent_outdir,
                 "--max-events", str(args.agent_max_events),
-            ],
-        ))
+            ]
+            if args.ollama_model:
+                cmd += ["--ollama-model", args.ollama_model]
+            if args.ollama_url:
+                cmd += ["--ollama-url", args.ollama_url]
+            if args.agentic_max_iterations:
+                cmd += ["--max-iterations", str(args.agentic_max_iterations)]
+            phases.append(("Phase 9: Agentic Investigation", cmd))
+        else:
+            phases.append((
+                "Phase 9: Agent Investigation",
+                [
+                    "python3", "agent_interface_cli.py",
+                    "--db-path", db,
+                    "investigate-all",
+                    "--outdir", args.agent_outdir,
+                    "--max-events", str(args.agent_max_events),
+                ],
+            ))
 
     if 10 >= args.start_phase and 10 <= args.end_phase:
         phases.append((
@@ -203,6 +222,16 @@ def main():
     parser.add_argument("--master-use-llm", action="store_true")
     parser.add_argument("--master-ollama-model", default="")
 
+    # Agentic investigation options
+    parser.add_argument("--agentic", action="store_true",
+                        help="Use LLM-driven agentic investigation instead of rule-based pipeline")
+    parser.add_argument("--ollama-model", default="llama3.1",
+                        help="Ollama model for agentic investigation")
+    parser.add_argument("--ollama-url", default="http://localhost:11434",
+                        help="Ollama server URL")
+    parser.add_argument("--agentic-max-iterations", type=int, default=8,
+                        help="Maximum LLM reasoning iterations per bundle")
+
     parser.add_argument(
         "--step5-limit",
         type=int,
@@ -215,6 +244,13 @@ def main():
         nargs="+",
         choices=["flow", "dns", "http", "tls", "ioc", "timeline"],
         help="Optional Phase 5 task-type filter, e.g. --step5-task-types http tls ioc"
+    )
+
+    parser.add_argument(
+        "--step5-workers",
+        type=int,
+        default=1,
+        help="Number of parallel workers for Phase 5 extraction. Default 1 (sequential)."
     )
 
     parser.add_argument(

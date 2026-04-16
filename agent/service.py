@@ -9,6 +9,9 @@ from agent.analyzers import (
     analyze_http,
     analyze_tls,
     analyze_bad_ip_reputation,
+    analyze_smb,
+    analyze_external_access,
+    analyze_volumetric,
 )
 from agent.hypothesis_engine import (
     upsert_hypothesis,
@@ -94,11 +97,41 @@ class ForensicInvestigationService:
             )
         self._timeline(result, "analyze_bad_ip_reputation", "Completed IP reputation analysis")
 
+        for ev in analyze_smb(flows, self.config):
+            upsert_hypothesis(
+                result,
+                "SMB Lateral Movement",
+                "Internal SMB scanning or enumeration suggests lateral movement and network reconnaissance.",
+                "HIGH",
+                ev,
+            )
+        self._timeline(result, "analyze_smb", "Completed SMB analysis")
+
+        for ev in analyze_external_access(flows, self.config):
+            upsert_hypothesis(
+                result,
+                "External Sensitive Access",
+                "External IP accessed internal host on sensitive port, suggesting unauthorized remote access.",
+                "HIGH",
+                ev,
+            )
+        self._timeline(result, "analyze_external_access", "Completed external access analysis")
+
+        for ev in analyze_volumetric(flows, self.config):
+            upsert_hypothesis(
+                result,
+                "Potential Data Exfiltration",
+                "Large or frequent outbound transfers to external host suggest data exfiltration.",
+                "HIGH",
+                ev,
+            )
+        self._timeline(result, "analyze_volumetric", "Completed volumetric analysis")
+
         for ev in correlate_multi_signal_hosts(result):
             upsert_hypothesis(
                 result,
-                "Possible Data Exfiltration",
-                "Multiple suspicious communication patterns from the same host suggest possible staged exfiltration or multi-channel malicious activity.",
+                "Multi-Signal Threat",
+                "Multiple suspicious communication patterns from the same host suggest coordinated malicious activity.",
                 "HIGH",
                 ev,
             )

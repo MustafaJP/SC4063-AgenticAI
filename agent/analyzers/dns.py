@@ -98,6 +98,13 @@ def analyze_dns(dns_events, config):
         if not query:
             continue
 
+        # Skip allowlisted domains (Microsoft, Azure, Google, etc.)
+        if base_domain in config.allowlisted_domains:
+            continue
+        # Also check if any allowlisted domain is a suffix of the query
+        if any(query.endswith("." + d) or query == d for d in config.allowlisted_domains):
+            continue
+
         entropy = shannon_entropy(query.replace(".", ""))
         label_lengths = [len(part) for part in query.split(".") if part]
 

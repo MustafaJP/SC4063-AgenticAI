@@ -24,7 +24,64 @@ def _to_float_timestamp(value):
         from datetime import datetime
         return datetime.fromisoformat(text.replace("Z", "+00:00")).timestamp()
     except Exception:
-        return None
+        pass
+
+    # Wireshark-style timestamp: "Dec  3, 2025 06:28:07.160439000 +08"
+    import re
+    from datetime import datetime, timezone, timedelta
+
+    # Normalize multiple spaces to single
+    normalized = re.sub(r"\s+", " ", text).strip()
+
+    # Try common Wireshark formats
+    wireshark_patterns = [
+        # "Dec  3, 2025 06:28:07.160439000 +08"
+        (r"^(\w{3}) (\d{1,2}), (\d{4}) (\d{2}:\d{2}:\d{2})\.(\d+) ([+-]\d{2})$", True),
+        # "Dec  3, 2025 06:28:07 +08"
+        (r"^(\w{3}) (\d{1,2}), (\d{4}) (\d{2}:\d{2}:\d{2}) ([+-]\d{2})$", False),
+        # Without timezone
+        (r"^(\w{3}) (\d{1,2}), (\d{4}) (\d{2}:\d{2}:\d{2})\.(\d+)$", True),
+        (r"^(\w{3}) (\d{1,2}), (\d{4}) (\d{2}:\d{2}:\d{2})$", False),
+    ]
+
+    months = {
+        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+    }
+
+    for pattern, has_frac in wireshark_patterns:
+        m = re.match(pattern, normalized)
+        if not m:
+            continue
+        try:
+            groups = m.groups()
+            month = months.get(groups[0].lower())
+            if not month:
+                continue
+            day = int(groups[1])
+            year = int(groups[2])
+            time_parts = groups[3].split(":")
+            hour, minute, second = int(time_parts[0]), int(time_parts[1]), int(time_parts[2])
+            microsecond = 0
+            tz_offset = None
+
+            idx = 4
+            if has_frac:
+                frac_str = groups[idx][:6].ljust(6, "0")
+                microsecond = int(frac_str)
+                idx += 1
+
+            if idx < len(groups) and groups[idx]:
+                tz_hours = int(groups[idx])
+                tz_offset = timezone(timedelta(hours=tz_hours))
+
+            dt = datetime(year, month, day, hour, minute, second, microsecond,
+                          tzinfo=tz_offset or timezone.utc)
+            return dt.timestamp()
+        except Exception:
+            continue
+
+    return None
 
 
 def analyze_beaconing(flows, config):

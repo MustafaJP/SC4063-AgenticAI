@@ -13,21 +13,22 @@ def correlate_multi_signal_hosts(result):
             if src_ip not in source_scores:
                 source_scores[src_ip] = {"signals": set(), "score": 0.0}
 
-            if ev.indicator == "high_entropy_dns":
-                source_scores[src_ip]["signals"].add("dns")
-                source_scores[src_ip]["score"] += 0.3
-            elif ev.indicator == "suspicious_http":
-                source_scores[src_ip]["signals"].add("http")
-                source_scores[src_ip]["score"] += 0.3
-            elif ev.indicator == "suspicious_tls":
-                source_scores[src_ip]["signals"].add("tls")
-                source_scores[src_ip]["score"] += 0.2
-            elif ev.indicator == "periodic_communication":
-                source_scores[src_ip]["signals"].add("beaconing")
-                source_scores[src_ip]["score"] += 0.4
-            elif ev.indicator == "bad_reputation_ip":
-                source_scores[src_ip]["signals"].add("intel")
-                source_scores[src_ip]["score"] += 0.4
+            indicator_scores = {
+                "high_entropy_dns": ("dns", 0.3),
+                "suspicious_http": ("http", 0.3),
+                "suspicious_tls": ("tls", 0.2),
+                "periodic_communication": ("beaconing", 0.4),
+                "bad_reputation_ip": ("intel", 0.4),
+                "smb_lateral_scan": ("smb", 0.4),
+                "epm_enumeration": ("smb", 0.3),
+                "external_sensitive_access": ("external_access", 0.4),
+                "volumetric_anomaly": ("volumetric", 0.3),
+            }
+
+            if ev.indicator in indicator_scores:
+                signal_name, score_val = indicator_scores[ev.indicator]
+                source_scores[src_ip]["signals"].add(signal_name)
+                source_scores[src_ip]["score"] += score_val
 
     evidence_items = []
     for src_ip, data in source_scores.items():

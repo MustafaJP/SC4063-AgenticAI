@@ -2,6 +2,8 @@ import argparse
 import hashlib
 import json
 import subprocess
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional
 
@@ -270,12 +272,16 @@ def run_tls_extractor(task_row) -> List[Dict]:
     return events
 
 
-def run_ioc_extractor(task_row) -> List[Dict]:
+def run_ioc_extractor(task_row, dns_cache=None, tls_cache=None) -> List[Dict]:
+    """
+    IOC extractor that reuses cached DNS/TLS results instead of re-running tshark.
+    """
     events = []
 
-    dns_events = run_dns_extractor(task_row)
+    # Reuse cached DNS events or extract fresh
+    dns_events = dns_cache if dns_cache is not None else run_dns_extractor(task_row)
     for event in dns_events:
-        raw = json.loads(event["raw_json"])
+        raw = json.loads(event["raw_json"]) if isinstance(event["raw_json"], str) else event["raw_json"]
         q = (raw.get("query_name") or "").lower()
         if any(x in q for x in ["update", "cdn", "login", "verify", "secure"]) and len(q) > 25:
             payload = {
@@ -290,9 +296,10 @@ def run_ioc_extractor(task_row) -> List[Dict]:
             }
             events.append(build_event_base(task_row, "ioc", payload))
 
-    tls_events = run_tls_extractor(task_row)
+    # Reuse cached TLS events or extract fresh
+    tls_events = tls_cache if tls_cache is not None else run_tls_extractor(task_row)
     for event in tls_events:
-        raw = json.loads(event["raw_json"])
+        raw = json.loads(event["raw_json"]) if isinstance(event["raw_json"], str) else event["raw_json"]
         sni = (raw.get("sni") or "").lower()
         if sni and any(x in sni for x in ["login", "verify", "auth", "secure"]):
             payload = {
@@ -310,12 +317,15 @@ def run_ioc_extractor(task_row) -> List[Dict]:
     return events
 
 
-def run_timeline_extractor(task_row) -> List[Dict]:
-    flow_events = run_flow_extractor(task_row)
+def run_timeline_extractor(task_row, flow_cache=None) -> List[Dict]:
+    """
+    Timeline extractor that reuses cached flow results instead of re-running tshark.
+    """
+    flow_events = flow_cache if flow_cache is not None else run_flow_extractor(task_row)
     events = []
 
     for ev in flow_events[:500]:
-        raw = json.loads(ev["raw_json"])
+        raw = json.loads(ev["raw_json"]) if isinstance(ev["raw_json"], str) else ev["raw_json"]
         payload = {
             "event_timestamp": raw.get("event_timestamp"),
             "src_ip": raw.get("src_ip"),
@@ -341,7 +351,124 @@ EXTRACTOR_MAP = {
 }
 
 
+def batch_insert_events(registry: EvidenceRegistry, events: List[Dict]) -> None:
+    """Insert multiple events in a single transaction instead of one commit per event."""
+    if not events:
+        return
+    cur = registry.conn.cursor()
+    for ev in events:
+        cur.execute("""
+        INSERT OR REPLACE INTO normalized_events (
+            event_id, pcap_id, chunk_id, task_id, event_type,
+            event_timestamp, src_ip, dst_ip, src_port, dst_port,
+            network_proto, app_proto, summary, raw_json, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            ev["event_id"], ev["pcap_id"], ev["chunk_id"], ev["task_id"],
+            ev["event_type"], ev.get("event_timestamp"), ev.get("src_ip"),
+            ev.get("dst_ip"), ev.get("src_port"), ev.get("dst_port"),
+            ev.get("network_proto"), ev.get("app_proto"), ev.get("summary"),
+            ev.get("raw_json"), ev["created_at"],
+        ))
+    registry.conn.commit()
+
+
+def execute_chunk_batch(registry: EvidenceRegistry, chunk_tasks: List) -> None:
+    """
+    Execute all tasks for a single chunk in one batch.
+
+    This eliminates redundant tshark calls by:
+    1. Running flow/dns/http/tls extractors first (each = 1 tshark call)
+    2. Passing cached results to ioc and timeline extractors (0 tshark calls)
+
+    Result: 4 tshark calls per chunk instead of 7.
+    """
+    if not chunk_tasks:
+        return
+
+    # Build a lookup of task_type -> task_row for this chunk
+    task_by_type = {}
+    for task in chunk_tasks:
+        task_by_type[task["task_type"]] = task
+
+    # Shared reference task (all tasks in a chunk share pcap/chunk info)
+    ref_task = chunk_tasks[0]
+
+    # Run primary extractors and cache results
+    cached = {}
+    primary_types = ["flow", "dns", "http", "tls"]
+
+    for task_type in primary_types:
+        if task_type not in task_by_type:
+            continue
+
+        task_row = task_by_type[task_type]
+        task_id = task_row["task_id"]
+
+        registry.update_task_status(task_id, "RUNNING")
+        run_id = registry.insert_task_run({
+            "task_id": task_id, "pcap_id": task_row["pcap_id"],
+            "chunk_id": task_row["chunk_id"], "task_type": task_type,
+            "run_started_at": utc_now_iso(), "run_status": "RUNNING",
+            "records_written": 0, "error_message": "",
+        })
+
+        try:
+            extractor = EXTRACTOR_MAP[task_type]
+            events = extractor(task_row)
+            cached[task_type] = events
+
+            batch_insert_events(registry, events)
+
+            registry.update_task_status(task_id, "SUCCESS")
+            registry.update_task_run(run_id, utc_now_iso(), "SUCCESS", len(events), "")
+            print(f"[OK] {task_id} | {task_type} | wrote {len(events)} events")
+        except Exception as e:
+            cached[task_type] = []
+            registry.update_task_status(task_id, "FAILED")
+            registry.update_task_run(run_id, utc_now_iso(), "FAILED", 0, str(e))
+            print(f"[FAIL] {task_id} | {task_type} | {e}")
+
+    # Run derived extractors using cached data (NO extra tshark calls)
+    derived_types = {
+        "ioc": lambda tr: run_ioc_extractor(
+            tr, dns_cache=cached.get("dns", []), tls_cache=cached.get("tls", [])
+        ),
+        "timeline": lambda tr: run_timeline_extractor(
+            tr, flow_cache=cached.get("flow", [])
+        ),
+    }
+
+    for task_type, extractor_fn in derived_types.items():
+        if task_type not in task_by_type:
+            continue
+
+        task_row = task_by_type[task_type]
+        task_id = task_row["task_id"]
+
+        registry.update_task_status(task_id, "RUNNING")
+        run_id = registry.insert_task_run({
+            "task_id": task_id, "pcap_id": task_row["pcap_id"],
+            "chunk_id": task_row["chunk_id"], "task_type": task_type,
+            "run_started_at": utc_now_iso(), "run_status": "RUNNING",
+            "records_written": 0, "error_message": "",
+        })
+
+        try:
+            events = extractor_fn(task_row)
+            batch_insert_events(registry, events)
+
+            registry.update_task_status(task_id, "SUCCESS")
+            registry.update_task_run(run_id, utc_now_iso(), "SUCCESS", len(events), "")
+            print(f"[OK] {task_id} | {task_type} | wrote {len(events)} events (cached)")
+        except Exception as e:
+            registry.update_task_status(task_id, "FAILED")
+            registry.update_task_run(run_id, utc_now_iso(), "FAILED", 0, str(e))
+            print(f"[FAIL] {task_id} | {task_type} | {e}")
+
+
 def execute_task(registry: EvidenceRegistry, task_row) -> None:
+    """Legacy single-task executor (used when tasks aren't grouped by chunk)."""
     task_id = task_row["task_id"]
     task_type = task_row["task_type"]
 
@@ -364,9 +491,7 @@ def execute_task(registry: EvidenceRegistry, task_row) -> None:
             raise RuntimeError(f"No extractor registered for task type: {task_type}")
 
         events = extractor(task_row)
-
-        for ev in events:
-            registry.insert_normalized_event(ev)
+        batch_insert_events(registry, events)
 
         registry.update_task_status(task_id, "SUCCESS")
         registry.update_task_run(
@@ -391,7 +516,8 @@ def execute_task(registry: EvidenceRegistry, task_row) -> None:
         print(f"[FAIL] {task_id} | {task_type} | {e}")
 
 
-def main(db_path: str, limit: Optional[int] = None, task_types: Optional[List[str]] = None) -> None:
+def main(db_path: str, limit: Optional[int] = None, task_types: Optional[List[str]] = None,
+         workers: int = 1) -> None:
     registry = EvidenceRegistry(db_path=db_path)
 
     try:
@@ -410,11 +536,45 @@ def main(db_path: str, limit: Optional[int] = None, task_types: Optional[List[st
         if limit is None:
             print("[INFO] No limit provided. Running full planned set.")
 
+        # Group tasks by chunk_id so we can batch and reuse cached results
+        chunks = defaultdict(list)
         for task in tasks:
-            execute_task(registry, task)
+            chunks[task["chunk_id"]].append(task)
+
+        print(f"[INFO] Grouped into {len(chunks)} chunks (eliminates redundant tshark calls)")
+
+        if workers > 1:
+            # Parallel execution: one chunk per worker thread
+            # Note: each thread gets its own DB connection to avoid SQLite threading issues
+            print(f"[INFO] Using {workers} parallel workers")
+
+            def process_chunk(chunk_id, chunk_tasks):
+                thread_registry = EvidenceRegistry(db_path=db_path)
+                try:
+                    execute_chunk_batch(thread_registry, chunk_tasks)
+                finally:
+                    thread_registry.close()
+
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                futures = {}
+                for chunk_id, chunk_tasks in chunks.items():
+                    future = executor.submit(process_chunk, chunk_id, chunk_tasks)
+                    futures[future] = chunk_id
+
+                for future in as_completed(futures):
+                    chunk_id = futures[future]
+                    try:
+                        future.result()
+                    except Exception as e:
+                        print(f"[FAIL] Chunk {chunk_id} failed: {e}")
+        else:
+            # Sequential execution with chunk batching
+            for chunk_id, chunk_tasks in chunks.items():
+                execute_chunk_batch(registry, chunk_tasks)
 
         print("\n=== EXTRACTION COMPLETE ===")
         print(f"Tasks attempted: {len(tasks)}")
+        print(f"Chunks processed: {len(chunks)}")
 
     finally:
         registry.close()
@@ -441,10 +601,17 @@ if __name__ == "__main__":
         choices=["flow", "dns", "http", "tls", "ioc", "timeline"],
         help="Optional list of task types to execute."
     )
+    parser.add_argument(
+        "--workers",
+        type=int,
+        default=1,
+        help="Number of parallel workers for chunk processing. Default 1 (sequential)."
+    )
     args = parser.parse_args()
 
     main(
         db_path=args.db_path,
         limit=args.limit,
-        task_types=args.task_types
+        task_types=args.task_types,
+        workers=args.workers,
     )
