@@ -13,7 +13,7 @@ def utc_now_iso() -> str:
 
 def run_command(cmd, phase_name):
     print(f"\n========== RUNNING: {phase_name} ==========")
-    print("Command:", " ".join(cmd))
+    print("Command:", " ".join(cmd), flush=True)
 
     started = time.perf_counter()
     started_at = utc_now_iso()
@@ -67,7 +67,7 @@ def build_phase_plan(args):
         phases.append((
             "Phase 1: File Ingestion",
             [
-                "python3", "injestion/discover_pcaps.py",
+                "python3", "-u", "injestion/discover_pcaps.py",
                 "--input-dir", args.input_dir,
                 "--db-path", db,
             ],
@@ -77,14 +77,14 @@ def build_phase_plan(args):
         phases.append((
             "Phase 2: Metadata Enrichment",
             [
-                "python3", "injestion/extract_metadata.py",
+                "python3", "-u", "injestion/extract_metadata.py",
                 "--db-path", db,
             ],
         ))
 
     if 3 >= args.start_phase and 3 <= args.end_phase:
         cmd = [
-            "python3", "injestion/build_processing_plan.py",
+            "python3", "-u", "injestion/build_processing_plan.py",
             "--db-path", db,
         ]
         if args.clear:
@@ -93,7 +93,7 @@ def build_phase_plan(args):
 
     if 4 >= args.start_phase and 4 <= args.end_phase:
         cmd = [
-            "python3", "injestion/build_extraction_plan.py",
+            "python3", "-u", "injestion/build_extraction_plan.py",
             "--db-path", db,
         ]
         if args.clear:
@@ -102,7 +102,7 @@ def build_phase_plan(args):
 
     if 5 >= args.start_phase and 5 <= args.end_phase:
         cmd = [
-            "python3", "injestion/extraction_executor.py",
+            "python3", "-u", "injestion/extraction_executor.py",
             "--db-path", db,
         ]
 
@@ -119,7 +119,7 @@ def build_phase_plan(args):
 
     if 6 >= args.start_phase and 6 <= args.end_phase:
         cmd = [
-            "python3", "injestion/build_ai_handoff.py",
+            "python3", "-u", "injestion/build_ai_handoff.py",
             "--db-path", db,
             "--output-dir", args.bundle_dir,
         ]
@@ -129,7 +129,7 @@ def build_phase_plan(args):
 
     if 7 >= args.start_phase and 7 <= args.end_phase:
         cmd = [
-            "python3", "injestion/build_preai_summaries.py",
+            "python3", "-u", "injestion/build_preai_summaries.py",
             "--db-path", db,
             "--summary-dir", args.summary_dir,
             "--retrieval-dir", args.retrieval_dir,
@@ -142,7 +142,7 @@ def build_phase_plan(args):
         phases.append((
             "Phase 8: Interface Validation",
             [
-                "python3", "agent_interface_cli.py",
+                "python3", "-u", "agent_interface_cli.py",
                 "--db-path", db,
                 "list-bundles",
             ],
@@ -151,7 +151,7 @@ def build_phase_plan(args):
     if 9 >= args.start_phase and 9 <= args.end_phase:
         if args.agentic:
             cmd = [
-                "python3", "agent_interface_cli.py",
+                "python3", "-u", "agent_interface_cli.py",
                 "--db-path", db,
                 "agentic-investigate-all",
                 "--outdir", args.agent_outdir,
@@ -168,7 +168,7 @@ def build_phase_plan(args):
             phases.append((
                 "Phase 9: Agent Investigation",
                 [
-                    "python3", "agent_interface_cli.py",
+                    "python3", "-u", "agent_interface_cli.py",
                     "--db-path", db,
                     "investigate-all",
                     "--outdir", args.agent_outdir,
@@ -180,7 +180,7 @@ def build_phase_plan(args):
         phases.append((
             "Phase 10: Campaign Investigation",
             [
-                "python3", "agent_interface_cli.py",
+                "python3", "-u", "agent_interface_cli.py",
                 "--db-path", db,
                 "campaign-investigate",
                 "--outdir", args.agent_outdir,
@@ -190,7 +190,7 @@ def build_phase_plan(args):
 
     if 11 >= args.start_phase and 11 <= args.end_phase:
         cmd = [
-            "python3", "master_report_synthesizer.py",
+            "python3", "-u", "master_report_synthesizer.py",
             "--agent-outdir", args.agent_outdir,
             "--master-subdir", args.master_subdir,
         ]

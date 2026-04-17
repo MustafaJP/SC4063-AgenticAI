@@ -8,12 +8,12 @@ No finding met the minimum confidence threshold for formal reporting.
 
 - Event Count: 24
 - PCAP Count: 1
-- Hypothesis Count: 0
+- Hypothesis Count: 1
 - Finding Count: 0
-- Analysis Runtime (seconds): 0.0
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 0
+- Guardrailed Hypothesis Count: 1
 
 ## Safety Controls and Guardrails
 
@@ -44,11 +44,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.905773Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.905829Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.905841Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.905843Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.905845Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.905849Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.905852Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.905860Z | materialize_findings | Generated 0 final findings
+- 2026-04-16T18:55:06.670746Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.671230Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.671242Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.671244Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.671247Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.671251Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.671259Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.671266Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.671335Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.671340Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.671360Z | materialize_findings | Generated 0 final findings

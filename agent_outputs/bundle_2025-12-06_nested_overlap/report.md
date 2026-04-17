@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-06_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **Suspicious DNS Activity** with confidence **1.00** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-06_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
@@ -10,7 +10,7 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-0
 - PCAP Count: 1
 - Hypothesis Count: 1
 - Finding Count: 1
-- Analysis Runtime (seconds): 0.0
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
 - Guardrailed Hypothesis Count: 1
@@ -24,28 +24,26 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-0
 
 ## Findings
 
-### 1. Suspicious DNS Activity
-- Severity: **MEDIUM**
+### 1. External Sensitive Access
+- Severity: **HIGH**
 - Confidence: **1.00**
-- MITRE ATT&CK: T1071.004
-- Description: High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.
-- Recommendation: Perform additional containment and validation in accordance with incident response procedures.
-- Affected Entities: 10.128.239.171:us-v20.events.data.microsoft.com, 10.128.239.20:us-v20.events.data.microsoft.com
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 45.227.254.151->10.128.239.57:3389, 91.238.181.7->10.128.239.57:3389, 91.238.181.8->10.128.239.57:3389
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
-  - High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.
-  - Repeated subdomain variation is suspicious but does not alone prove DNS tunneling.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - Low-volume DNS covert channels may stay below threshold.
-  - Benign-looking domains used by attackers may evade entropy-based heuristics.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - DNS classification relies on metadata and naming patterns rather than payload semantics.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.90) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Dec  6, 2025 01:03:26.714351000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.90) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Dec  6, 2025 01:03:26.772436000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.90) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Dec  6, 2025 01:03:26.839250000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.90) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Dec  6, 2025 01:03:26.904619000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.227.254.151->10.128.239.57:3389 (score=0.90) details={'entity': '45.227.254.151->10.128.239.57:3389', 'src_ip': '45.227.254.151', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  6, 2025 01:03:26.961942000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.7->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.7->10.128.239.57:3389', 'src_ip': '91.238.181.7', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  6, 2025 01:03:27.311846000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.8->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.8->10.128.239.57:3389', 'src_ip': '91.238.181.8', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  6, 2025 01:03:27.474849000 +08'}
 
 ## Analyst Validation Notes
 
@@ -66,11 +64,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.949509Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.949611Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.949712Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.949715Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.949732Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.949738Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.949744Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.949764Z | materialize_findings | Generated 1 final findings
+- 2026-04-16T18:55:06.715003Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.715577Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.715611Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.715614Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.715629Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.715634Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.715644Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.715705Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.715771Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.715777Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.715798Z | materialize_findings | Generated 1 final findings

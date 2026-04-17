@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-No finding met the minimum confidence threshold for formal reporting.
+The autonomous forensic agent analyzed structured evidence for `bundle_2025-11-18_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 214
 - PCAP Count: 6
-- Hypothesis Count: 0
-- Finding Count: 0
-- Analysis Runtime (seconds): 0.001
+- Hypothesis Count: 2
+- Finding Count: 1
+- Analysis Runtime (seconds): 0.005
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 0
+- Guardrailed Hypothesis Count: 2
 
 ## Safety Controls and Guardrails
 
@@ -24,7 +24,27 @@ No finding met the minimum confidence threshold for formal reporting.
 
 ## Findings
 
-No reportable findings.
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **1.00**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 80.75.212.32->10.128.239.57:3389, 88.214.25.115->10.128.239.57:3389, 91.238.181.7->10.128.239.57:3389
+- Human Review Required: No
+- Guardrail Flags: limited_source_diversity
+- False Positive Risks:
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
+- Missed Detection Risks:
+  - Access via VPN tunnels that terminate internally will not appear as external.
+- Technical Limitations:
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
+- Evidence:
+  - [external_access_analysis] external_sensitive_access = 80.75.212.32->10.128.239.57:3389 (score=0.90) details={'entity': '80.75.212.32->10.128.239.57:3389', 'src_ip': '80.75.212.32', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Nov 18, 2025 21:30:11.906844000 +08'}
+  - [external_access_analysis] external_sensitive_access = 88.214.25.115->10.128.239.57:3389 (score=0.90) details={'entity': '88.214.25.115->10.128.239.57:3389', 'src_ip': '88.214.25.115', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 6, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Nov 18, 2025 21:30:23.897899000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.7->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.7->10.128.239.57:3389', 'src_ip': '91.238.181.7', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 6, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Nov 18, 2025 21:30:24.039869000 +08'}
+
 ## Analyst Validation Notes
 
 No current findings were specifically flagged for mandatory human review.
@@ -44,11 +64,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.889712Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.890947Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.891051Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.891053Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.891072Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.891091Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.891094Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.891107Z | materialize_findings | Generated 0 final findings
+- 2026-04-16T18:55:06.652613Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.657426Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.657500Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.657503Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.657526Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.657543Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.657592Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.657703Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.657919Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.657928Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.657969Z | materialize_findings | Generated 1 final findings

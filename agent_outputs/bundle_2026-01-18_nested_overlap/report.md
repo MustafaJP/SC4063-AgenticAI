@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-18_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **Suspicious TLS Session** with confidence **0.83** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-18_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 213
 - PCAP Count: 4
-- Hypothesis Count: 2
-- Finding Count: 1
-- Analysis Runtime (seconds): 0.001
+- Hypothesis Count: 4
+- Finding Count: 2
+- Analysis Runtime (seconds): 0.003
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 2
+- Guardrailed Hypothesis Count: 4
 
 ## Safety Controls and Guardrails
 
@@ -24,7 +24,40 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-1
 
 ## Findings
 
-### 1. Suspicious TLS Session
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **1.00**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 194.165.17.11->10.128.239.57:3389, 91.238.181.91->10.128.239.57:3389, 88.214.25.123->10.128.239.57:3389, 194.165.16.163->10.128.239.57:3389, 179.60.146.37->10.128.239.57:3389, 147.45.112.185->10.128.239.57:3389, 147.45.112.186->10.128.239.57:3389, 179.60.146.32->10.128.239.57:3389, 91.238.181.6->10.128.239.57:3389, 57.129.133.249->10.128.239.57:3389, 194.165.16.162->10.128.239.57:3389, 45.141.87.87->10.128.239.57:3389, 45.141.84.95->10.128.239.57:3389, 193.141.60.147->10.128.239.57:3389, 179.60.146.34->10.128.239.57:3389
+- Human Review Required: No
+- Guardrail Flags: limited_source_diversity
+- False Positive Risks:
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
+- Missed Detection Risks:
+  - Access via VPN tunnels that terminate internally will not appear as external.
+- Technical Limitations:
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
+- Evidence:
+  - [external_access_analysis] external_sensitive_access = 194.165.17.11->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.17.11->10.128.239.57:3389', 'src_ip': '194.165.17.11', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 6, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 01:42:23.197892000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.91->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.91->10.128.239.57:3389', 'src_ip': '91.238.181.91', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 01:42:23.278975000 +08'}
+  - [external_access_analysis] external_sensitive_access = 88.214.25.123->10.128.239.57:3389 (score=0.90) details={'entity': '88.214.25.123->10.128.239.57:3389', 'src_ip': '88.214.25.123', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 01:42:23.359923000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.16.163->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.16.163->10.128.239.57:3389', 'src_ip': '194.165.16.163', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 03:59:24.951046000 +08'}
+  - [external_access_analysis] external_sensitive_access = 179.60.146.37->10.128.239.57:3389 (score=0.90) details={'entity': '179.60.146.37->10.128.239.57:3389', 'src_ip': '179.60.146.37', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 03:59:25.375210000 +08'}
+  - [external_access_analysis] external_sensitive_access = 147.45.112.185->10.128.239.57:3389 (score=0.90) details={'entity': '147.45.112.185->10.128.239.57:3389', 'src_ip': '147.45.112.185', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 7, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 03:59:25.487858000 +08'}
+  - [external_access_analysis] external_sensitive_access = 147.45.112.186->10.128.239.57:3389 (score=0.90) details={'entity': '147.45.112.186->10.128.239.57:3389', 'src_ip': '147.45.112.186', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 03:59:25.726780000 +08'}
+  - [external_access_analysis] external_sensitive_access = 179.60.146.32->10.128.239.57:3389 (score=0.80) details={'entity': '179.60.146.32->10.128.239.57:3389', 'src_ip': '179.60.146.32', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 18, 2026 03:59:25.860291000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.6->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.6->10.128.239.57:3389', 'src_ip': '91.238.181.6', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 08:13:11.727995000 +08'}
+  - [external_access_analysis] external_sensitive_access = 57.129.133.249->10.128.239.57:3389 (score=0.80) details={'entity': '57.129.133.249->10.128.239.57:3389', 'src_ip': '57.129.133.249', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 18, 2026 08:13:11.758998000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.16.162->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.16.162->10.128.239.57:3389', 'src_ip': '194.165.16.162', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 5, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 08:13:11.916593000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.141.87.87->10.128.239.57:3389 (score=0.90) details={'entity': '45.141.87.87->10.128.239.57:3389', 'src_ip': '45.141.87.87', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 8, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 08:13:11.947944000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.141.84.95->10.128.239.57:3389 (score=0.90) details={'entity': '45.141.84.95->10.128.239.57:3389', 'src_ip': '45.141.84.95', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 6, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 18, 2026 08:13:12.036976000 +08'}
+  - [external_access_analysis] external_sensitive_access = 193.141.60.147->10.128.239.57:3389 (score=0.80) details={'entity': '193.141.60.147->10.128.239.57:3389', 'src_ip': '193.141.60.147', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 18, 2026 08:13:12.460639000 +08'}
+  - [external_access_analysis] external_sensitive_access = 179.60.146.34->10.128.239.57:3389 (score=0.80) details={'entity': '179.60.146.34->10.128.239.57:3389', 'src_ip': '179.60.146.34', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 18, 2026 08:13:12.523322000 +08'}
+
+### 2. Suspicious TLS Session
 - Severity: **MEDIUM**
 - Confidence: **0.83**
 - MITRE ATT&CK: T1573, T1071
@@ -70,11 +103,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.185864Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.186313Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.186405Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.186407Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.186469Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.186488Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.186494Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.186515Z | materialize_findings | Generated 1 final findings
+- 2026-04-16T18:55:06.973741Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.976342Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.976449Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.976452Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.976520Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.976536Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.976585Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.976809Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.977152Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.977175Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.977209Z | materialize_findings | Generated 2 final findings

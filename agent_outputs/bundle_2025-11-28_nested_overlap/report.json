@@ -3,7 +3,7 @@
   "metrics": {
     "event_count": 32,
     "pcap_count": 1,
-    "analysis_runtime_seconds": 0.0,
+    "analysis_runtime_seconds": 0.001,
     "hypothesis_count": 0,
     "finding_count": 0,
     "estimated_analysis_cost": 0.0,
@@ -39,42 +39,57 @@
   ],
   "timeline": [
     {
-      "timestamp": "2026-04-12T14:54:40.918893Z",
+      "timestamp": "2026-04-16T18:55:06.683284Z",
       "step": "review_summary",
       "summary": "Started summary-first investigation"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918968Z",
+      "timestamp": "2026-04-16T18:55:06.684027Z",
       "step": "analyze_beaconing",
       "summary": "Completed beaconing analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918978Z",
+      "timestamp": "2026-04-16T18:55:06.684040Z",
       "step": "analyze_dns",
       "summary": "Completed DNS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918979Z",
+      "timestamp": "2026-04-16T18:55:06.684042Z",
       "step": "analyze_http",
       "summary": "Completed HTTP analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918982Z",
+      "timestamp": "2026-04-16T18:55:06.684045Z",
       "step": "analyze_tls",
       "summary": "Completed TLS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918986Z",
+      "timestamp": "2026-04-16T18:55:06.684050Z",
       "step": "analyze_bad_ip_reputation",
       "summary": "Completed IP reputation analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918988Z",
+      "timestamp": "2026-04-16T18:55:06.684059Z",
+      "step": "analyze_smb",
+      "summary": "Completed SMB analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.684068Z",
+      "step": "analyze_external_access",
+      "summary": "Completed external access analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.684095Z",
+      "step": "analyze_volumetric",
+      "summary": "Completed volumetric analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.684098Z",
       "step": "cross_signal_correlation",
       "summary": "Completed cross-signal correlation"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.918995Z",
+      "timestamp": "2026-04-16T18:55:06.684108Z",
       "step": "materialize_findings",
       "summary": "Generated 0 final findings"
     }
@@ -86,6 +101,9 @@
     "analyze_http",
     "analyze_tls",
     "analyze_bad_ip_reputation",
+    "analyze_smb",
+    "analyze_external_access",
+    "analyze_volumetric",
     "cross_signal_correlation",
     "materialize_findings"
   ],

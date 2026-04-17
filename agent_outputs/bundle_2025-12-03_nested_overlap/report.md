@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-03_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **Suspicious DNS Activity** with confidence **0.98** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-03_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
@@ -10,7 +10,7 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-0
 - PCAP Count: 3
 - Hypothesis Count: 2
 - Finding Count: 2
-- Analysis Runtime (seconds): 0.001
+- Analysis Runtime (seconds): 0.002
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
 - Guardrailed Hypothesis Count: 2
@@ -24,36 +24,38 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-0
 
 ## Findings
 
-### 1. Suspicious DNS Activity
-- Severity: **MEDIUM**
-- Confidence: **0.98**
-- MITRE ATT&CK: T1071.004
-- Description: High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.
-- Recommendation: Perform additional containment and validation in accordance with incident response procedures.
-- Affected Entities: 10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net, 13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net, 10.128.239.21:onedscolprdcus10.centralus.cloudapp.azure.com, 204.14.183.201:onedscolprdcus10.centralus.cloudapp.azure.com
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **1.00**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 194.165.17.11->10.128.239.57:3389, 91.199.163.12->10.128.239.57:3389, 147.45.112.188->10.128.239.57:3389, 147.45.112.181->10.128.239.57:3389, 194.165.16.167->10.128.239.57:3389, 45.227.254.152->10.128.239.57:3389, 179.60.146.33->10.128.239.57:3389
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
-  - High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.
-  - Repeated subdomain variation is suspicious but does not alone prove DNS tunneling.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - Low-volume DNS covert channels may stay below threshold.
-  - Benign-looking domains used by attackers may evade entropy-based heuristics.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - DNS classification relies on metadata and naming patterns rather than payload semantics.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=0.90) details={'entity': '10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '10.128.239.21', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'multi_host_domain'], 'event_timestamp': 'Dec  3, 2025 06:28:07.160439000 +08'}
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=0.90) details={'entity': '13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '13.107.222.240', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'multi_host_domain'], 'event_timestamp': 'Dec  3, 2025 06:28:07.291875000 +08'}
-  - [dns_analysis] high_entropy_dns = onedscolprdcus10.centralus.cloudapp.azure.com (score=0.70) details={'entity': '10.128.239.21:onedscolprdcus10.centralus.cloudapp.azure.com', 'src_ip': '10.128.239.21', 'query': 'onedscolprdcus10.centralus.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 3.824, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Dec  3, 2025 06:28:07.356088000 +08'}
-  - [dns_analysis] high_entropy_dns = onedscolprdcus10.centralus.cloudapp.azure.com (score=0.70) details={'entity': '204.14.183.201:onedscolprdcus10.centralus.cloudapp.azure.com', 'src_ip': '204.14.183.201', 'query': 'onedscolprdcus10.centralus.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 3.824, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Dec  3, 2025 06:28:07.419621000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.17.11->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.17.11->10.128.239.57:3389', 'src_ip': '194.165.17.11', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 06:28:06.792081000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.199.163.12->10.128.239.57:3389 (score=0.90) details={'entity': '91.199.163.12->10.128.239.57:3389', 'src_ip': '91.199.163.12', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 07:02:13.933736000 +08'}
+  - [external_access_analysis] external_sensitive_access = 147.45.112.188->10.128.239.57:3389 (score=0.90) details={'entity': '147.45.112.188->10.128.239.57:3389', 'src_ip': '147.45.112.188', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 07:02:14.064649000 +08'}
+  - [external_access_analysis] external_sensitive_access = 147.45.112.181->10.128.239.57:3389 (score=0.80) details={'entity': '147.45.112.181->10.128.239.57:3389', 'src_ip': '147.45.112.181', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Dec  3, 2025 07:02:14.417383000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.16.167->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.16.167->10.128.239.57:3389', 'src_ip': '194.165.16.167', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 07:02:14.544142000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.227.254.152->10.128.239.57:3389 (score=0.90) details={'entity': '45.227.254.152->10.128.239.57:3389', 'src_ip': '45.227.254.152', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 07:02:14.613014000 +08'}
+  - [external_access_analysis] external_sensitive_access = 179.60.146.33->10.128.239.57:3389 (score=0.90) details={'entity': '179.60.146.33->10.128.239.57:3389', 'src_ip': '179.60.146.33', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec  3, 2025 07:02:14.849358000 +08'}
 
 ### 2. Suspicious TLS Session
 - Severity: **MEDIUM**
-- Confidence: **0.79**
+- Confidence: **0.78**
 - MITRE ATT&CK: T1573, T1071
 - Description: Suspicious TLS metadata suggests encrypted malicious communication.
 - Recommendation: Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.
-- Affected Entities: 91.199.163.12->10.128.239.57:3389, 10.128.239.57->91.199.163.12:54990, 147.45.112.188->10.128.239.57:3389, 10.128.239.57->147.45.112.188:30081, 10.128.239.57->193.3.19.42:28398, 45.227.254.152->10.128.239.57:3389, 10.128.239.57->45.227.254.152:48731
+- Affected Entities: 10.128.239.57->91.199.163.12:54990, 10.128.239.57->147.45.112.188:30081, 10.128.239.57->193.3.19.42:28398, 10.128.239.57->45.227.254.152:48731
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
@@ -65,12 +67,9 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-0
 - Technical Limitations:
   - TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata.
 - Evidence:
-  - [tls_analysis] suspicious_tls = 91.199.163.12->10.128.239.57:3389 (score=0.50) details={'entity': '91.199.163.12->10.128.239.57:3389', 'src_ip': '91.199.163.12', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '16', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 1, 'reasons': ['missing_sni', 'tls_on_nonstandard_port', 'unusual_handshake_type', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:13.933736000 +08'}
   - [tls_analysis] suspicious_tls = 10.128.239.57->91.199.163.12:54990 (score=0.60) details={'entity': '10.128.239.57->91.199.163.12:54990', 'src_ip': '10.128.239.57', 'dst_ip': '91.199.163.12', 'dst_port': 54990, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:13.996119000 +08'}
-  - [tls_analysis] suspicious_tls = 147.45.112.188->10.128.239.57:3389 (score=0.50) details={'entity': '147.45.112.188->10.128.239.57:3389', 'src_ip': '147.45.112.188', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '16', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 1, 'reasons': ['missing_sni', 'tls_on_nonstandard_port', 'unusual_handshake_type', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:14.064649000 +08'}
   - [tls_analysis] suspicious_tls = 10.128.239.57->147.45.112.188:30081 (score=0.60) details={'entity': '10.128.239.57->147.45.112.188:30081', 'src_ip': '10.128.239.57', 'dst_ip': '147.45.112.188', 'dst_port': 30081, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:14.182431000 +08'}
   - [tls_analysis] suspicious_tls = 10.128.239.57->193.3.19.42:28398 (score=0.60) details={'entity': '10.128.239.57->193.3.19.42:28398', 'src_ip': '10.128.239.57', 'dst_ip': '193.3.19.42', 'dst_port': 28398, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:14.241530000 +08'}
-  - [tls_analysis] suspicious_tls = 45.227.254.152->10.128.239.57:3389 (score=0.50) details={'entity': '45.227.254.152->10.128.239.57:3389', 'src_ip': '45.227.254.152', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '16', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 1, 'reasons': ['missing_sni', 'tls_on_nonstandard_port', 'unusual_handshake_type', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:14.613014000 +08'}
   - [tls_analysis] suspicious_tls = 10.128.239.57->45.227.254.152:48731 (score=0.60) details={'entity': '10.128.239.57->45.227.254.152:48731', 'src_ip': '10.128.239.57', 'dst_ip': '45.227.254.152', 'dst_port': 48731, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec  3, 2025 07:02:14.775735000 +08'}
 
 ## Analyst Validation Notes
@@ -92,11 +91,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.926080Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.926327Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.926504Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.926506Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.926554Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.926567Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.926576Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.926612Z | materialize_findings | Generated 2 final findings
+- 2026-04-16T18:55:06.690107Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.691413Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.691476Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.691479Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.691532Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.691542Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.691579Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.691687Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.691865Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.691877Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.691914Z | materialize_findings | Generated 2 final findings

@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-26_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **Suspicious DNS Activity** with confidence **1.00** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-26_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 150
 - PCAP Count: 3
-- Hypothesis Count: 2
+- Hypothesis Count: 4
 - Finding Count: 2
-- Analysis Runtime (seconds): 0.001
+- Analysis Runtime (seconds): 0.003
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 2
+- Guardrailed Hypothesis Count: 4
 
 ## Safety Controls and Guardrails
 
@@ -24,32 +24,27 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-2
 
 ## Findings
 
-### 1. Suspicious DNS Activity
-- Severity: **MEDIUM**
+### 1. External Sensitive Access
+- Severity: **HIGH**
 - Confidence: **1.00**
-- MITRE ATT&CK: T1071.004
-- Description: High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.
-- Recommendation: Perform additional containment and validation in accordance with incident response procedures.
-- Affected Entities: 10.128.239.82:us-v20.events.endpoint.security.microsoft.com, 10.128.239.20:us-v20.events.endpoint.security.microsoft.com, 10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net, 13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net, 10.128.239.21:onedscolprdweu10.westeurope.cloudapp.azure.com, 150.171.16.39:onedscolprdweu10.westeurope.cloudapp.azure.com
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 88.214.25.115->10.128.239.57:3389, 79.127.132.53->10.128.239.57:3389, 91.238.181.96->10.128.239.57:3389, 194.165.17.11->10.128.239.57:3389
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
-  - High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.
-  - Repeated subdomain variation is suspicious but does not alone prove DNS tunneling.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - Low-volume DNS covert channels may stay below threshold.
-  - Benign-looking domains used by attackers may evade entropy-based heuristics.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - DNS classification relies on metadata and naming patterns rather than payload semantics.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [dns_analysis] high_entropy_dns = us-v20.events.endpoint.security.microsoft.com (score=0.70) details={'entity': '10.128.239.82:us-v20.events.endpoint.security.microsoft.com', 'src_ip': '10.128.239.82', 'query': 'us-v20.events.endpoint.security.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.965, 'query_count': 2, 'base_domain_count': 5, 'host_count_for_query': 2, 'host_count_for_base_domain': 4, 'varying_subdomain_count': 2, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:34.889508000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.endpoint.security.microsoft.com (score=0.70) details={'entity': '10.128.239.20:us-v20.events.endpoint.security.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.endpoint.security.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.965, 'query_count': 2, 'base_domain_count': 5, 'host_count_for_query': 2, 'host_count_for_base_domain': 4, 'varying_subdomain_count': 2, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:34.926934000 +08'}
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=1.00) details={'entity': '10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '10.128.239.21', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.276393000 +08'}
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=1.00) details={'entity': '10.128.239.21:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '10.128.239.21', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.343091000 +08'}
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=1.00) details={'entity': '13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '13.107.222.240', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.409353000 +08'}
-  - [dns_analysis] high_entropy_dns = win-global-asimov-leafs-events-data.trafficmanager.net (score=1.00) details={'entity': '13.107.222.240:win-global-asimov-leafs-events-data.trafficmanager.net', 'src_ip': '13.107.222.240', 'query': 'win-global-asimov-leafs-events-data.trafficmanager.net', 'base_domain': 'trafficmanager.net', 'qtype': '1', 'entropy': 3.927, 'query_count': 4, 'base_domain_count': 4, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'long_label', 'repeated_domain', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.444829000 +08'}
-  - [dns_analysis] high_entropy_dns = onedscolprdweu10.westeurope.cloudapp.azure.com (score=0.70) details={'entity': '10.128.239.21:onedscolprdweu10.westeurope.cloudapp.azure.com', 'src_ip': '10.128.239.21', 'query': 'onedscolprdweu10.westeurope.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 3.836, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.478087000 +08'}
-  - [dns_analysis] high_entropy_dns = onedscolprdweu10.westeurope.cloudapp.azure.com (score=0.70) details={'entity': '150.171.16.39:onedscolprdweu10.westeurope.cloudapp.azure.com', 'src_ip': '150.171.16.39', 'query': 'onedscolprdweu10.westeurope.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 3.836, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 26, 2026 13:29:35.518038000 +08'}
+  - [external_access_analysis] external_sensitive_access = 88.214.25.115->10.128.239.57:3389 (score=0.90) details={'entity': '88.214.25.115->10.128.239.57:3389', 'src_ip': '88.214.25.115', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 26, 2026 13:29:34.958468000 +08'}
+  - [external_access_analysis] external_sensitive_access = 79.127.132.53->10.128.239.57:3389 (score=0.80) details={'entity': '79.127.132.53->10.128.239.57:3389', 'src_ip': '79.127.132.53', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 26, 2026 13:29:35.212137000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.96->10.128.239.57:3389 (score=0.90) details={'entity': '91.238.181.96->10.128.239.57:3389', 'src_ip': '91.238.181.96', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 26, 2026 13:29:35.552212000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.17.11->10.128.239.57:3389 (score=0.80) details={'entity': '194.165.17.11->10.128.239.57:3389', 'src_ip': '194.165.17.11', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 26, 2026 13:29:35.763524000 +08'}
 
 ### 2. Suspicious TLS Session
 - Severity: **MEDIUM**
@@ -92,11 +87,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.233661Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.233961Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.234130Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.234134Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.234173Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.234189Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.234198Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.234226Z | materialize_findings | Generated 2 final findings
+- 2026-04-16T18:55:07.025370Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:07.027454Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:07.027520Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:07.027523Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:07.027567Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:07.027586Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:07.027619Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:07.027718Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:07.027929Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:07.027945Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:07.027985Z | materialize_findings | Generated 2 final findings

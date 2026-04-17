@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-14_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **Suspicious TLS Session** with confidence **0.78** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-14_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 38
 - PCAP Count: 1
-- Hypothesis Count: 1
+- Hypothesis Count: 2
 - Finding Count: 1
-- Analysis Runtime (seconds): 0.0
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 1
+- Guardrailed Hypothesis Count: 2
 
 ## Safety Controls and Guardrails
 
@@ -24,28 +24,26 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-1
 
 ## Findings
 
-### 1. Suspicious TLS Session
-- Severity: **MEDIUM**
-- Confidence: **0.78**
-- MITRE ATT&CK: T1573, T1071
-- Description: Suspicious TLS metadata suggests encrypted malicious communication.
-- Recommendation: Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.
-- Affected Entities: 88.214.25.122->10.128.239.57:3389
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **1.00**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 88.214.25.122->10.128.239.57:3389, 194.165.16.167->10.128.239.57:3389, 91.238.181.92->10.128.239.57:3389
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
-  - Missing SNI may occur in privacy-focused or legacy environments and is not inherently malicious.
-  - TLS on non-standard ports is suspicious but can still be legitimate.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - If JA3 is unavailable, TLS detections rely on weaker metadata signals.
-  - Encrypted malicious traffic with normal TLS fingerprints may not be flagged.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [tls_analysis] suspicious_tls = 88.214.25.122->10.128.239.57:3389 (score=0.60) details={'entity': '88.214.25.122->10.128.239.57:3389', 'src_ip': '88.214.25.122', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec 14, 2025 05:30:25.835223000 +08'}
-  - [tls_analysis] suspicious_tls = 88.214.25.122->10.128.239.57:3389 (score=0.60) details={'entity': '88.214.25.122->10.128.239.57:3389', 'src_ip': '88.214.25.122', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec 14, 2025 05:30:25.895202000 +08'}
-  - [tls_analysis] suspicious_tls = 88.214.25.122->10.128.239.57:3389 (score=0.60) details={'entity': '88.214.25.122->10.128.239.57:3389', 'src_ip': '88.214.25.122', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec 14, 2025 05:30:26.275418000 +08'}
-  - [tls_analysis] suspicious_tls = 88.214.25.122->10.128.239.57:3389 (score=0.60) details={'entity': '88.214.25.122->10.128.239.57:3389', 'src_ip': '88.214.25.122', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'ja3': '', 'sni': '', 'handshake_type': '1', 'handshake_version': '', 'record_version': '', 'missing_sni_count_for_src': 4, 'reasons': ['missing_sni', 'repeated_missing_sni_from_source', 'tls_on_nonstandard_port', 'low_metadata_visibility'], 'event_timestamp': 'Dec 14, 2025 05:30:26.625571000 +08'}
+  - [external_access_analysis] external_sensitive_access = 88.214.25.122->10.128.239.57:3389 (score=0.90) details={'entity': '88.214.25.122->10.128.239.57:3389', 'src_ip': '88.214.25.122', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 20, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec 14, 2025 05:30:25.720450000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.16.167->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.16.167->10.128.239.57:3389', 'src_ip': '194.165.16.167', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Dec 14, 2025 05:30:26.163609000 +08'}
+  - [external_access_analysis] external_sensitive_access = 91.238.181.92->10.128.239.57:3389 (score=0.80) details={'entity': '91.238.181.92->10.128.239.57:3389', 'src_ip': '91.238.181.92', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Dec 14, 2025 05:30:26.502171000 +08'}
 
 ## Analyst Validation Notes
 
@@ -66,11 +64,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.010347Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.010441Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.010452Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.010454Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.010492Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.010498Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.010504Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.010523Z | materialize_findings | Generated 1 final findings
+- 2026-04-16T18:55:06.782537Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.783153Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.783163Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.783165Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.783185Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.783190Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.783202Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.783289Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.783372Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.783379Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.783400Z | materialize_findings | Generated 1 final findings

@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-19_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **Suspicious DNS Activity** with confidence **1.00** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-19_nested_overlap` and identified **2 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **1.00** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 182
 - PCAP Count: 4
-- Hypothesis Count: 2
+- Hypothesis Count: 4
 - Finding Count: 2
-- Analysis Runtime (seconds): 0.001
+- Analysis Runtime (seconds): 0.003
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 2
+- Guardrailed Hypothesis Count: 4
 
 ## Safety Controls and Guardrails
 
@@ -24,41 +24,29 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-1
 
 ## Findings
 
-### 1. Suspicious DNS Activity
-- Severity: **MEDIUM**
+### 1. External Sensitive Access
+- Severity: **HIGH**
 - Confidence: **1.00**
-- MITRE ATT&CK: T1071.004
-- Description: High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.
-- Recommendation: Perform additional containment and validation in accordance with incident response procedures.
-- Affected Entities: 10.128.239.171:us-v20.events.data.microsoft.com, 10.128.239.20:us-v20.events.data.microsoft.com, 10.128.239.115:settings-win.data.microsoft.com, 10.128.239.21:settings-prod-eus2-1.eastus2.cloudapp.azure.com, 10.128.239.20:settings-win.data.microsoft.com, 13.107.236.6:settings-prod-eus2-1.eastus2.cloudapp.azure.com, 10.128.239.21:settings-win.data.microsoft.com, 10.128.239.50:us-v20.events.endpoint.security.microsoft.com, 10.128.239.20:us-v20.events.endpoint.security.microsoft.com
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 194.165.17.11->10.128.239.57:3389, 136.144.43.111->10.128.239.57:3389, 80.75.212.45->10.128.239.57:3389, 185.147.125.31->10.128.239.57:3389, 141.98.83.10->10.128.239.57:3389, 45.141.87.201->10.128.239.57:3389
 - Human Review Required: No
 - Guardrail Flags: limited_source_diversity
 - False Positive Risks:
-  - High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.
-  - Repeated subdomain variation is suspicious but does not alone prove DNS tunneling.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - Low-volume DNS covert channels may stay below threshold.
-  - Benign-looking domains used by attackers may evade entropy-based heuristics.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - DNS classification relies on metadata and naming patterns rather than payload semantics.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.130626000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.163429000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.199933000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.240453000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-win.data.microsoft.com (score=0.60) details={'entity': '10.128.239.115:settings-win.data.microsoft.com', 'src_ip': '10.128.239.115', 'query': 'settings-win.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.726, 'query_count': 5, 'base_domain_count': 17, 'host_count_for_query': 3, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.273711000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-win.data.microsoft.com (score=0.60) details={'entity': '10.128.239.115:settings-win.data.microsoft.com', 'src_ip': '10.128.239.115', 'query': 'settings-win.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.726, 'query_count': 5, 'base_domain_count': 17, 'host_count_for_query': 3, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.305886000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-prod-eus2-1.eastus2.cloudapp.azure.com (score=0.70) details={'entity': '10.128.239.21:settings-prod-eus2-1.eastus2.cloudapp.azure.com', 'src_ip': '10.128.239.21', 'query': 'settings-prod-eus2-1.eastus2.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 4.045, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 19, 2026 01:09:44.339122000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-win.data.microsoft.com (score=0.60) details={'entity': '10.128.239.20:settings-win.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'settings-win.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.726, 'query_count': 5, 'base_domain_count': 17, 'host_count_for_query': 3, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.376492000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-prod-eus2-1.eastus2.cloudapp.azure.com (score=0.70) details={'entity': '13.107.236.6:settings-prod-eus2-1.eastus2.cloudapp.azure.com', 'src_ip': '13.107.236.6', 'query': 'settings-prod-eus2-1.eastus2.cloudapp.azure.com', 'base_domain': 'azure.com', 'qtype': '1', 'entropy': 4.045, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 19, 2026 01:09:44.410977000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-win.data.microsoft.com (score=0.60) details={'entity': '10.128.239.21:settings-win.data.microsoft.com', 'src_ip': '10.128.239.21', 'query': 'settings-win.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.726, 'query_count': 5, 'base_domain_count': 17, 'host_count_for_query': 3, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.449543000 +08'}
-  - [dns_analysis] high_entropy_dns = settings-win.data.microsoft.com (score=0.60) details={'entity': '10.128.239.115:settings-win.data.microsoft.com', 'src_ip': '10.128.239.115', 'query': 'settings-win.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.726, 'query_count': 5, 'base_domain_count': 17, 'host_count_for_query': 3, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 01:09:44.488818000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.172724000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.171:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.171', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.230858000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.352853000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=1.00) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '28', 'entropy': 3.941, 'query_count': 8, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'repeated_domain', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.425945000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.endpoint.security.microsoft.com (score=0.90) details={'entity': '10.128.239.50:us-v20.events.endpoint.security.microsoft.com', 'src_ip': '10.128.239.50', 'query': 'us-v20.events.endpoint.security.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.965, 'query_count': 2, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.774793000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.endpoint.security.microsoft.com (score=0.90) details={'entity': '10.128.239.20:us-v20.events.endpoint.security.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.endpoint.security.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.965, 'query_count': 2, 'base_domain_count': 17, 'host_count_for_query': 2, 'host_count_for_base_domain': 6, 'varying_subdomain_count': 4, 'reasons': ['high_entropy', 'multi_host_domain', 'varying_subdomains_same_base'], 'event_timestamp': 'Jan 19, 2026 23:50:55.847855000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.17.11->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.17.11->10.128.239.57:3389', 'src_ip': '194.165.17.11', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 19, 2026 01:09:43.832354000 +08'}
+  - [external_access_analysis] external_sensitive_access = 136.144.43.111->10.128.239.57:3389 (score=0.80) details={'entity': '136.144.43.111->10.128.239.57:3389', 'src_ip': '136.144.43.111', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 19, 2026 01:09:44.098250000 +08'}
+  - [external_access_analysis] external_sensitive_access = 80.75.212.45->10.128.239.57:3389 (score=0.90) details={'entity': '80.75.212.45->10.128.239.57:3389', 'src_ip': '80.75.212.45', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 10, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 19, 2026 04:17:19.486891000 +08'}
+  - [external_access_analysis] external_sensitive_access = 185.147.125.31->10.128.239.57:3389 (score=0.90) details={'entity': '185.147.125.31->10.128.239.57:3389', 'src_ip': '185.147.125.31', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 7, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 19, 2026 04:17:19.609830000 +08'}
+  - [external_access_analysis] external_sensitive_access = 141.98.83.10->10.128.239.57:3389 (score=0.80) details={'entity': '141.98.83.10->10.128.239.57:3389', 'src_ip': '141.98.83.10', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 19, 2026 23:50:55.966326000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.141.87.201->10.128.239.57:3389 (score=0.90) details={'entity': '45.141.87.201->10.128.239.57:3389', 'src_ip': '45.141.87.201', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 3, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 19, 2026 23:50:56.027422000 +08'}
 
 ### 2. Suspicious TLS Session
 - Severity: **MEDIUM**
@@ -104,11 +92,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.194112Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.194501Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.194818Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.194821Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.194871Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.194891Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.194905Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.194934Z | materialize_findings | Generated 2 final findings
+- 2026-04-16T18:55:06.984422Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.986717Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.986831Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.986833Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.986878Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.986892Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.986929Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.987053Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.987296Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.987313Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.987343Z | materialize_findings | Generated 2 final findings

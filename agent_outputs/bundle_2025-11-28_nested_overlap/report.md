@@ -10,7 +10,7 @@ No finding met the minimum confidence threshold for formal reporting.
 - PCAP Count: 1
 - Hypothesis Count: 0
 - Finding Count: 0
-- Analysis Runtime (seconds): 0.0
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 0
 - Guardrailed Hypothesis Count: 0
@@ -44,11 +44,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.918893Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.918968Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.918978Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.918979Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.918982Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.918986Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.918988Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.918995Z | materialize_findings | Generated 0 final findings
+- 2026-04-16T18:55:06.683284Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.684027Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.684040Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.684042Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.684045Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.684050Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.684059Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.684068Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.684095Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.684098Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.684108Z | materialize_findings | Generated 0 final findings

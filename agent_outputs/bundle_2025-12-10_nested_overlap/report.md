@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-No finding met the minimum confidence threshold for formal reporting.
+The autonomous forensic agent analyzed structured evidence for `bundle_2025-12-10_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **0.90** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 30
 - PCAP Count: 1
-- Hypothesis Count: 0
-- Finding Count: 0
-- Analysis Runtime (seconds): 0.0
+- Hypothesis Count: 1
+- Finding Count: 1
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
-- Human Review Required Count: 0
-- Guardrailed Hypothesis Count: 0
+- Human Review Required Count: 1
+- Guardrailed Hypothesis Count: 1
 
 ## Safety Controls and Guardrails
 
@@ -24,10 +24,30 @@ No finding met the minimum confidence threshold for formal reporting.
 
 ## Findings
 
-No reportable findings.
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **0.90**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 45.135.232.124->10.128.239.57:3389, 45.130.145.6->10.128.239.57:3389
+- Human Review Required: Yes
+- Guardrail Flags: limited_source_diversity, reportable_but_thin_evidence
+- False Positive Risks:
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
+- Missed Detection Risks:
+  - Access via VPN tunnels that terminate internally will not appear as external.
+- Technical Limitations:
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
+- Evidence:
+  - [external_access_analysis] external_sensitive_access = 45.135.232.124->10.128.239.57:3389 (score=0.80) details={'entity': '45.135.232.124->10.128.239.57:3389', 'src_ip': '45.135.232.124', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Dec 10, 2025 00:16:35.663519000 +08'}
+  - [external_access_analysis] external_sensitive_access = 45.130.145.6->10.128.239.57:3389 (score=0.80) details={'entity': '45.130.145.6->10.128.239.57:3389', 'src_ip': '45.130.145.6', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Dec 10, 2025 00:16:35.790553000 +08'}
+
 ## Analyst Validation Notes
 
-No current findings were specifically flagged for mandatory human review.
+The following findings should be validated by a human analyst before containment or attribution decisions:
+- External Sensitive Access (confidence=0.90, flags=limited_source_diversity, reportable_but_thin_evidence)
 
 ## Investigation Limitations
 
@@ -44,11 +64,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:40.980476Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:40.980555Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:40.980566Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:40.980568Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:40.980570Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:40.980575Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:40.980577Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:40.980585Z | materialize_findings | Generated 0 final findings
+- 2026-04-16T18:55:06.748472Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.749083Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.749098Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.749101Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.749104Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.749109Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.749120Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.749164Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.749197Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.749203Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.749225Z | materialize_findings | Generated 1 final findings

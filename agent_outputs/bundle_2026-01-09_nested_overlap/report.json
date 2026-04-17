@@ -39,42 +39,57 @@
   ],
   "timeline": [
     {
-      "timestamp": "2026-04-12T14:54:41.136244Z",
+      "timestamp": "2026-04-16T18:55:06.921373Z",
       "step": "review_summary",
       "summary": "Started summary-first investigation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136287Z",
+      "timestamp": "2026-04-16T18:55:06.921741Z",
       "step": "analyze_beaconing",
       "summary": "Completed beaconing analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136295Z",
+      "timestamp": "2026-04-16T18:55:06.921749Z",
       "step": "analyze_dns",
       "summary": "Completed DNS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136297Z",
+      "timestamp": "2026-04-16T18:55:06.921751Z",
       "step": "analyze_http",
       "summary": "Completed HTTP analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136299Z",
+      "timestamp": "2026-04-16T18:55:06.921753Z",
       "step": "analyze_tls",
       "summary": "Completed TLS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136302Z",
+      "timestamp": "2026-04-16T18:55:06.921756Z",
       "step": "analyze_bad_ip_reputation",
       "summary": "Completed IP reputation analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136304Z",
+      "timestamp": "2026-04-16T18:55:06.921762Z",
+      "step": "analyze_smb",
+      "summary": "Completed SMB analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.921767Z",
+      "step": "analyze_external_access",
+      "summary": "Completed external access analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.921807Z",
+      "step": "analyze_volumetric",
+      "summary": "Completed volumetric analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.921809Z",
       "step": "cross_signal_correlation",
       "summary": "Completed cross-signal correlation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.136310Z",
+      "timestamp": "2026-04-16T18:55:06.921815Z",
       "step": "materialize_findings",
       "summary": "Generated 0 final findings"
     }
@@ -86,6 +101,9 @@
     "analyze_http",
     "analyze_tls",
     "analyze_bad_ip_reputation",
+    "analyze_smb",
+    "analyze_external_access",
+    "analyze_volumetric",
     "cross_signal_correlation",
     "materialize_findings"
   ],

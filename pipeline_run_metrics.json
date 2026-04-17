@@ -1,22 +1,23 @@
 {
-  "started_at": "2026-04-12T04:50:52+00:00",
-  "finished_at": "2026-04-12T14:54:41+00:00",
-  "total_elapsed_seconds": 36229.254,
+  "started_at": "2026-04-16T17:21:02+00:00",
+  "finished_at": "2026-04-16T18:55:07+00:00",
+  "total_elapsed_seconds": 5644.99,
   "status": "SUCCESS",
   "phases": [
     {
       "phase_name": "Phase 1: File Ingestion",
       "command": [
         "python3",
+        "-u",
         "injestion/discover_pcaps.py",
         "--input-dir",
         "input_pcaps",
         "--db-path",
         "evidence_registry.db"
       ],
-      "started_at": "2026-04-12T04:50:52+00:00",
-      "finished_at": "2026-04-12T04:55:28+00:00",
-      "elapsed_seconds": 276.26,
+      "started_at": "2026-04-16T17:21:02+00:00",
+      "finished_at": "2026-04-16T17:21:02+00:00",
+      "elapsed_seconds": 0.039,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -24,13 +25,14 @@
       "phase_name": "Phase 2: Metadata Enrichment",
       "command": [
         "python3",
+        "-u",
         "injestion/extract_metadata.py",
         "--db-path",
         "evidence_registry.db"
       ],
-      "started_at": "2026-04-12T04:55:28+00:00",
-      "finished_at": "2026-04-12T04:59:55+00:00",
-      "elapsed_seconds": 266.583,
+      "started_at": "2026-04-16T17:21:02+00:00",
+      "finished_at": "2026-04-16T17:21:02+00:00",
+      "elapsed_seconds": 0.029,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -38,14 +40,14 @@
       "phase_name": "Phase 3: Processing Plan",
       "command": [
         "python3",
+        "-u",
         "injestion/build_processing_plan.py",
         "--db-path",
-        "evidence_registry.db",
-        "--clear-existing"
+        "evidence_registry.db"
       ],
-      "started_at": "2026-04-12T04:59:55+00:00",
-      "finished_at": "2026-04-12T04:59:57+00:00",
-      "elapsed_seconds": 2.235,
+      "started_at": "2026-04-16T17:21:02+00:00",
+      "finished_at": "2026-04-16T17:21:05+00:00",
+      "elapsed_seconds": 2.798,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -53,14 +55,14 @@
       "phase_name": "Phase 4: Extraction Plan",
       "command": [
         "python3",
+        "-u",
         "injestion/build_extraction_plan.py",
         "--db-path",
-        "evidence_registry.db",
-        "--clear-existing"
+        "evidence_registry.db"
       ],
-      "started_at": "2026-04-12T04:59:57+00:00",
-      "finished_at": "2026-04-12T04:59:59+00:00",
-      "elapsed_seconds": 2.145,
+      "started_at": "2026-04-16T17:21:05+00:00",
+      "finished_at": "2026-04-16T17:21:10+00:00",
+      "elapsed_seconds": 5.004,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -68,13 +70,16 @@
       "phase_name": "Phase 5: Evidence Extraction",
       "command": [
         "python3",
+        "-u",
         "injestion/extraction_executor.py",
         "--db-path",
-        "evidence_registry.db"
+        "evidence_registry.db",
+        "--workers",
+        "4"
       ],
-      "started_at": "2026-04-12T04:59:59+00:00",
-      "finished_at": "2026-04-12T14:54:39+00:00",
-      "elapsed_seconds": 35679.983,
+      "started_at": "2026-04-16T17:21:10+00:00",
+      "finished_at": "2026-04-16T18:55:05+00:00",
+      "elapsed_seconds": 5634.949,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -82,16 +87,16 @@
       "phase_name": "Phase 6: Bundle Construction",
       "command": [
         "python3",
+        "-u",
         "injestion/build_ai_handoff.py",
         "--db-path",
         "evidence_registry.db",
         "--output-dir",
-        "ai_handoff_bundles",
-        "--clear-existing"
+        "ai_handoff_bundles"
       ],
-      "started_at": "2026-04-12T14:54:39+00:00",
-      "finished_at": "2026-04-12T14:54:40+00:00",
-      "elapsed_seconds": 0.692,
+      "started_at": "2026-04-16T18:55:05+00:00",
+      "finished_at": "2026-04-16T18:55:06+00:00",
+      "elapsed_seconds": 0.664,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -99,18 +104,18 @@
       "phase_name": "Phase 7: Summary Construction",
       "command": [
         "python3",
+        "-u",
         "injestion/build_preai_summaries.py",
         "--db-path",
         "evidence_registry.db",
         "--summary-dir",
         "preai_summaries",
         "--retrieval-dir",
-        "preai_retrieval",
-        "--clear-existing"
+        "preai_retrieval"
       ],
-      "started_at": "2026-04-12T14:54:40+00:00",
-      "finished_at": "2026-04-12T14:54:40+00:00",
-      "elapsed_seconds": 0.373,
+      "started_at": "2026-04-16T18:55:06+00:00",
+      "finished_at": "2026-04-16T18:55:06+00:00",
+      "elapsed_seconds": 0.309,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -118,14 +123,15 @@
       "phase_name": "Phase 8: Interface Validation",
       "command": [
         "python3",
+        "-u",
         "agent_interface_cli.py",
         "--db-path",
         "evidence_registry.db",
         "list-bundles"
       ],
-      "started_at": "2026-04-12T14:54:40+00:00",
-      "finished_at": "2026-04-12T14:54:40+00:00",
-      "elapsed_seconds": 0.133,
+      "started_at": "2026-04-16T18:55:06+00:00",
+      "finished_at": "2026-04-16T18:55:06+00:00",
+      "elapsed_seconds": 0.172,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -133,6 +139,7 @@
       "phase_name": "Phase 9: Agent Investigation",
       "command": [
         "python3",
+        "-u",
         "agent_interface_cli.py",
         "--db-path",
         "evidence_registry.db",
@@ -142,9 +149,9 @@
         "--max-events",
         "50000"
       ],
-      "started_at": "2026-04-12T14:54:40+00:00",
-      "finished_at": "2026-04-12T14:54:41+00:00",
-      "elapsed_seconds": 0.435,
+      "started_at": "2026-04-16T18:55:06+00:00",
+      "finished_at": "2026-04-16T18:55:07+00:00",
+      "elapsed_seconds": 0.489,
       "status": "SUCCESS",
       "return_code": 0
     },
@@ -152,6 +159,7 @@
       "phase_name": "Phase 10: Campaign Investigation",
       "command": [
         "python3",
+        "-u",
         "agent_interface_cli.py",
         "--db-path",
         "evidence_registry.db",
@@ -161,9 +169,26 @@
         "--max-events",
         "50000"
       ],
-      "started_at": "2026-04-12T14:54:41+00:00",
-      "finished_at": "2026-04-12T14:54:41+00:00",
-      "elapsed_seconds": 0.396,
+      "started_at": "2026-04-16T18:55:07+00:00",
+      "finished_at": "2026-04-16T18:55:07+00:00",
+      "elapsed_seconds": 0.462,
+      "status": "SUCCESS",
+      "return_code": 0
+    },
+    {
+      "phase_name": "Phase 11: Master Findings Synthesis",
+      "command": [
+        "python3",
+        "-u",
+        "master_report_synthesizer.py",
+        "--agent-outdir",
+        "agent_outputs",
+        "--master-subdir",
+        "master"
+      ],
+      "started_at": "2026-04-16T18:55:07+00:00",
+      "finished_at": "2026-04-16T18:55:07+00:00",
+      "elapsed_seconds": 0.059,
       "status": "SUCCESS",
       "return_code": 0
     }
@@ -171,6 +196,6 @@
   "cost_estimate": {
     "model": "simple_local_cpu_estimate",
     "cpu_hour_rate": 0.05,
-    "estimated_cpu_cost": 0.5032
+    "estimated_cpu_cost": 0.0784
   }
 }

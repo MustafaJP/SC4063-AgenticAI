@@ -23,6 +23,7 @@ import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Dict, List
 
 from flask import (
     Flask, Response, jsonify, redirect, render_template,
@@ -57,12 +58,12 @@ pipeline_state = {
 state_lock = threading.Lock()
 
 # Per-client log queues: client_id -> queue.Queue
-log_queues: dict[str, queue.Queue] = {}
+log_queues: Dict[str, queue.Queue] = {}
 log_queues_lock = threading.Lock()
 
 # Ring buffer of the last 500 log lines (for late-joining clients)
 LOG_BUFFER_MAX = 500
-log_buffer: list[str] = []
+log_buffer: List[str] = []
 log_buffer_lock = threading.Lock()
 
 

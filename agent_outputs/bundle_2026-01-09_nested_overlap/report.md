@@ -44,11 +44,14 @@ No current findings were specifically flagged for mandatory human review.
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.136244Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.136287Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.136295Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.136297Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.136299Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.136302Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.136304Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.136310Z | materialize_findings | Generated 0 final findings
+- 2026-04-16T18:55:06.921373Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:06.921741Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:06.921749Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:06.921751Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:06.921753Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:06.921756Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:06.921762Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:06.921767Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:06.921807Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:06.921809Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:06.921815Z | materialize_findings | Generated 0 final findings

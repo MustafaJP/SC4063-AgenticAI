@@ -2,18 +2,18 @@
 
 ## Executive Summary
 
-The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-25_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **Suspicious DNS Activity** with confidence **0.78** and severity **MEDIUM**.
+The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-25_nested_overlap` and identified **1 reportable finding(s)**. The highest-confidence finding was **External Sensitive Access** with confidence **0.95** and severity **HIGH**.
 
 ## Analysis Metrics
 
 - Event Count: 66
 - PCAP Count: 1
-- Hypothesis Count: 1
+- Hypothesis Count: 2
 - Finding Count: 1
-- Analysis Runtime (seconds): 0.0
+- Analysis Runtime (seconds): 0.001
 - Estimated Analysis Cost: 0.0
 - Human Review Required Count: 1
-- Guardrailed Hypothesis Count: 1
+- Guardrailed Hypothesis Count: 2
 
 ## Safety Controls and Guardrails
 
@@ -24,31 +24,30 @@ The autonomous forensic agent analyzed structured evidence for `bundle_2026-01-2
 
 ## Findings
 
-### 1. Suspicious DNS Activity
-- Severity: **MEDIUM**
-- Confidence: **0.78**
-- MITRE ATT&CK: T1071.004
-- Description: High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.
-- Recommendation: Perform additional containment and validation in accordance with incident response procedures.
-- Affected Entities: 10.128.239.36:us-v20.events.data.microsoft.com, 10.128.239.20:us-v20.events.data.microsoft.com
+### 1. External Sensitive Access
+- Severity: **HIGH**
+- Confidence: **0.95**
+- MITRE ATT&CK: T1133, T1078, T1021.001
+- Description: External IP accessed internal host on sensitive port, suggesting unauthorized remote access.
+- Recommendation: Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.
+- Affected Entities: 98.159.33.18->10.128.239.57:3389, 194.165.16.161->10.128.239.57:3389
 - Human Review Required: Yes
 - Guardrail Flags: limited_source_diversity, reportable_but_thin_evidence
 - False Positive Risks:
-  - High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.
-  - Repeated subdomain variation is suspicious but does not alone prove DNS tunneling.
+  - Legitimate remote administration via RDP or SSH from authorized external IPs.
+  - VPN or jump-host traffic may appear as external access.
 - Missed Detection Risks:
-  - Low-volume DNS covert channels may stay below threshold.
-  - Benign-looking domains used by attackers may evade entropy-based heuristics.
+  - Access via VPN tunnels that terminate internally will not appear as external.
 - Technical Limitations:
-  - DNS classification relies on metadata and naming patterns rather than payload semantics.
+  - Cannot distinguish between authorized and unauthorized remote access without credential context.
 - Evidence:
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.70) details={'entity': '10.128.239.36:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.36', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 25, 2026 05:25:41.986857000 +08'}
-  - [dns_analysis] high_entropy_dns = us-v20.events.data.microsoft.com (score=0.70) details={'entity': '10.128.239.20:us-v20.events.data.microsoft.com', 'src_ip': '10.128.239.20', 'query': 'us-v20.events.data.microsoft.com', 'base_domain': 'microsoft.com', 'qtype': '1', 'entropy': 3.941, 'query_count': 2, 'base_domain_count': 2, 'host_count_for_query': 2, 'host_count_for_base_domain': 2, 'varying_subdomain_count': 1, 'reasons': ['high_entropy', 'multi_host_domain'], 'event_timestamp': 'Jan 25, 2026 05:25:42.024531000 +08'}
+  - [external_access_analysis] external_sensitive_access = 98.159.33.18->10.128.239.57:3389 (score=0.80) details={'entity': '98.159.33.18->10.128.239.57:3389', 'src_ip': '98.159.33.18', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 2, 'reasons': ['external_rdp_access', 'external_rdp_inbound'], 'event_timestamp': 'Jan 25, 2026 05:25:41.922570000 +08'}
+  - [external_access_analysis] external_sensitive_access = 194.165.16.161->10.128.239.57:3389 (score=0.90) details={'entity': '194.165.16.161->10.128.239.57:3389', 'src_ip': '194.165.16.161', 'dst_ip': '10.128.239.57', 'dst_port': 3389, 'service': 'RDP', 'connection_count': 8, 'reasons': ['external_rdp_access', 'external_rdp_inbound', 'repeated_access'], 'event_timestamp': 'Jan 25, 2026 05:25:42.255332000 +08'}
 
 ## Analyst Validation Notes
 
 The following findings should be validated by a human analyst before containment or attribution decisions:
-- Suspicious DNS Activity (confidence=0.78, flags=limited_source_diversity, reportable_but_thin_evidence)
+- External Sensitive Access (confidence=0.95, flags=limited_source_diversity, reportable_but_thin_evidence)
 
 ## Investigation Limitations
 
@@ -65,11 +64,14 @@ The following findings should be validated by a human analyst before containment
 
 ## Investigation Timeline
 
-- 2026-04-12T14:54:41.224915Z | review_summary | Started summary-first investigation
-- 2026-04-12T14:54:41.225073Z | analyze_beaconing | Completed beaconing analysis
-- 2026-04-12T14:54:41.225193Z | analyze_dns | Completed DNS analysis
-- 2026-04-12T14:54:41.225196Z | analyze_http | Completed HTTP analysis
-- 2026-04-12T14:54:41.225215Z | analyze_tls | Completed TLS analysis
-- 2026-04-12T14:54:41.225224Z | analyze_bad_ip_reputation | Completed IP reputation analysis
-- 2026-04-12T14:54:41.225229Z | cross_signal_correlation | Completed cross-signal correlation
-- 2026-04-12T14:54:41.225248Z | materialize_findings | Generated 1 final findings
+- 2026-04-16T18:55:07.018042Z | review_summary | Started summary-first investigation
+- 2026-04-16T18:55:07.019063Z | analyze_beaconing | Completed beaconing analysis
+- 2026-04-16T18:55:07.019162Z | analyze_dns | Completed DNS analysis
+- 2026-04-16T18:55:07.019164Z | analyze_http | Completed HTTP analysis
+- 2026-04-16T18:55:07.019181Z | analyze_tls | Completed TLS analysis
+- 2026-04-16T18:55:07.019188Z | analyze_bad_ip_reputation | Completed IP reputation analysis
+- 2026-04-16T18:55:07.019203Z | analyze_smb | Completed SMB analysis
+- 2026-04-16T18:55:07.019252Z | analyze_external_access | Completed external access analysis
+- 2026-04-16T18:55:07.019356Z | analyze_volumetric | Completed volumetric analysis
+- 2026-04-16T18:55:07.019363Z | cross_signal_correlation | Completed cross-signal correlation
+- 2026-04-16T18:55:07.019382Z | materialize_findings | Generated 1 final findings

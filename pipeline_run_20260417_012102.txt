@@ -1,0 +1,1818 @@
+
+========== RUNNING: Phase 1: File Ingestion ==========
+Command: python3 -u injestion/discover_pcaps.py --input-dir input_pcaps --db-path evidence_registry.db
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/6 Jan - 14 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/7 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/16 Jan - 23 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/15 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Dec - 21 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/12 Dec - 14 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/11 Dec - 13 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/10 Jan - 12 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/21 Jan - 22 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/16 Jan - 18 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/21 Dec - 24 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Jan - 21 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Dec - 5 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/21 Dec - 4 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/8 Dec - 9 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov 2025 - 4 Dec 2025.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Jan - 20 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/12 Dec - 15 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/10 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/20 Dec 2025 - 4 Jan 2026.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Dec - 12 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/12 Dec - 27 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/6 Jan - 9 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/11 Jan - 12 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Jan - 10 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Dec - 21 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/26 Dec - 11 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/5 Jan - 19 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Dec - 11 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov - 3 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/2 Jan - 4 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/15 Dec - 17 Dec (3).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/23 Jan - 26 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/27 Jan - 29 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/13 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Jan - 27 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/5 Jan - 8 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/7 Dec - 9 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Dec - 31 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/7 Dec - 9 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/15 Dec - 17 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/13 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/27 Jan - 28 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/26 Jan - 27 Jan (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/8 Jan - 21 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Jan - 6 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Jan - 19 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/14 Dec - 16 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/20 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Jan - 28 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/16 Dec - 18 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/11 Jan - 14 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Jan - 5 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/12 Dec - 14 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Jan - 18 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Dec 2025 - 3 Jan 2026.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/10 Jan - 15 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Dec - 7 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/6 Dec - 8 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/28 Jan - 29 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/23 Nov.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Dec - 12 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/26 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/13 Dec - 15 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/28 Nov - 12 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/25 Jan - 26 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/3 Jan - 4 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/3 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/31 Dec - 2 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Dec - 19 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/13 Dec - 28 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/21 Jan - 23 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/7 Dec - 10 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/27 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/17 Dec - 18 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/17 Dec - 19 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/11 Dec - 13 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/20 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/19 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/15 Dec - 17 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/2 Jan - 6 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/3 Dec - 6 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/23 Jan - 24 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/24 Jan - 25 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/28 Dec - 10 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/14 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/27 Dec - 8 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/15 Jan - 18 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/29 Jan - 30 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/17 Dec - 18 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov - 3 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Jan - 19 Jan (DCERPC).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/12 Jan - 16 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/9 Dec - 11 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/26 Jan - 27 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/24 Nov 2025 - 7 Dec 2025.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/10 Dec - 11 Dec (DCERPC).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/14 Jan - 16 Jan (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov - 4 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/24 Dec - 26 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/24 Nov - 9 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/8 Jan - 10 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Dec - 2 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/4 Jan - 5 Jan (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/10 Jan - 11 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/27 Jan - 30 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/3 Dec - 17 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/11 Dec - 12 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/14 Jan - 16 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/17 Dec - 20 Dec.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/18 Nov - 4 Dec (2).pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/29 Jan.pcap
+[SKIP] Already registered: /home/seed/Downloads/MJP/input_pcaps/5 Dec - 7 Dec.pcap
+
+=== REGISTRY SUMMARY ===
+METADATA_EXTRACTED: 119
+Already registered and skipped: 119
+✅ COMPLETED: Phase 1: File Ingestion | elapsed=0.039s
+
+========== RUNNING: Phase 2: Metadata Enrichment ==========
+Command: python3 -u injestion/extract_metadata.py --db-path evidence_registry.db
+[INFO] No PCAPs pending metadata extraction.
+✅ COMPLETED: Phase 2: Metadata Enrichment | elapsed=0.029s
+
+========== RUNNING: Phase 3: Processing Plan ==========
+Command: python3 -u injestion/build_processing_plan.py --db-path evidence_registry.db
+
+=== STEP 3 COMPLETE (OPTIMIZED) ===
+Metadata-ready PCAPs fetched: 119
+Valid timestamped PCAPs analyzed: 119
+Rows skipped due to bad/missing timestamps: 0
+Pairwise comparisons actually performed: 714
+Overlap relations created: 714
+Processing plan rows created: 119
+✅ COMPLETED: Phase 3: Processing Plan | elapsed=2.798s
+
+========== RUNNING: Phase 4: Extraction Plan ==========
+Command: python3 -u injestion/build_extraction_plan.py --db-path evidence_registry.db
+
+=== STEP 4 COMPLETE ===
+PCAPs planned: 119
+Chunks created: 119
+Extraction tasks created: 714
+✅ COMPLETED: Phase 4: Extraction Plan | elapsed=5.004s
+
+========== RUNNING: Phase 5: Evidence Extraction ==========
+Command: python3 -u injestion/extraction_executor.py --db-path evidence_registry.db --workers 4
+[INFO] Executing 714 planned tasks
+[INFO] No limit provided. Running full planned set.
+[INFO] Grouped into 119 chunks (eliminates redundant tshark calls)
+[INFO] Using 4 parallel workers
+[OK] pcap_000006_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000007_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000006_chunk_001_dns | dns | wrote 3 events
+[OK] pcap_000007_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000006_chunk_001_http | http | wrote 0 events
+[OK] pcap_000007_chunk_001_http | http | wrote 0 events
+[OK] pcap_000001_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000006_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000006_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000006_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000004_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000008_chunk_001_flow | flow | wrote 13 events
+[OK] pcap_000007_chunk_001_tls | tls | wrote 4 events
+[OK] pcap_000007_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000007_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000008_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000009_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000008_chunk_001_http | http | wrote 0 events
+[OK] pcap_000009_chunk_001_dns | dns | wrote 8 events
+[OK] pcap_000008_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000008_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000008_chunk_001_timeline | timeline | wrote 13 events (cached)
+[OK] pcap_000009_chunk_001_http | http | wrote 0 events
+[OK] pcap_000001_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000009_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000009_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000009_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000011_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000004_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000011_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000012_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000011_chunk_001_http | http | wrote 0 events
+[OK] pcap_000001_chunk_001_http | http | wrote 0 events
+[OK] pcap_000012_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000011_chunk_001_tls | tls | wrote 10 events
+[OK] pcap_000011_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000011_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000012_chunk_001_http | http | wrote 0 events
+[OK] pcap_000014_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000004_chunk_001_http | http | wrote 0 events
+[OK] pcap_000012_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000012_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000012_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000014_chunk_001_dns | dns | wrote 9 events
+[OK] pcap_000001_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000001_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000001_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000014_chunk_001_http | http | wrote 0 events
+[OK] pcap_000014_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000014_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000014_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000004_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000004_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000004_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000019_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000019_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000021_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000019_chunk_001_http | http | wrote 0 events
+[OK] pcap_000021_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000019_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000019_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000019_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000016_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000021_chunk_001_http | http | wrote 0 events
+[OK] pcap_000018_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000021_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000021_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000021_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000024_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000024_chunk_001_dns | dns | wrote 6 events
+[OK] pcap_000024_chunk_001_http | http | wrote 0 events
+[OK] pcap_000016_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000023_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000018_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000024_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000024_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000024_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000023_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000016_chunk_001_http | http | wrote 0 events
+[OK] pcap_000025_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000018_chunk_001_http | http | wrote 0 events
+[OK] pcap_000023_chunk_001_http | http | wrote 0 events
+[OK] pcap_000016_chunk_001_tls | tls | wrote 1 events
+[OK] pcap_000016_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000016_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000025_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000026_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000018_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000018_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000018_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000026_chunk_001_dns | dns | wrote 7 events
+[OK] pcap_000029_chunk_001_flow | flow | wrote 8 events
+[OK] pcap_000026_chunk_001_http | http | wrote 0 events
+[OK] pcap_000029_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000029_chunk_001_http | http | wrote 0 events
+[OK] pcap_000026_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000026_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000026_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000029_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000029_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000029_chunk_001_timeline | timeline | wrote 8 events (cached)
+[OK] pcap_000023_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000023_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000023_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000032_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000025_chunk_001_http | http | wrote 0 events
+[OK] pcap_000032_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000032_chunk_001_http | http | wrote 0 events
+[OK] pcap_000032_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000032_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000032_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000030_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000031_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000025_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000025_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000025_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000035_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000035_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000033_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000035_chunk_001_http | http | wrote 0 events
+[OK] pcap_000035_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000035_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000035_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000030_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000036_chunk_001_flow | flow | wrote 12 events
+[OK] pcap_000031_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000036_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000036_chunk_001_http | http | wrote 0 events
+[OK] pcap_000036_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000036_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000036_chunk_001_timeline | timeline | wrote 12 events (cached)
+[OK] pcap_000033_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000030_chunk_001_http | http | wrote 0 events
+[OK] pcap_000037_chunk_001_flow | flow | wrote 32 events
+[OK] pcap_000031_chunk_001_http | http | wrote 0 events
+[OK] pcap_000037_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000033_chunk_001_http | http | wrote 0 events
+[OK] pcap_000037_chunk_001_http | http | wrote 0 events
+[OK] pcap_000030_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000030_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000030_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000038_chunk_001_flow | flow | wrote 27 events
+[OK] pcap_000031_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000031_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000031_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000038_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000037_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000037_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000037_chunk_001_timeline | timeline | wrote 32 events (cached)
+[OK] pcap_000038_chunk_001_http | http | wrote 0 events
+[OK] pcap_000038_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000038_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000038_chunk_001_timeline | timeline | wrote 27 events (cached)
+[OK] pcap_000041_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000033_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000033_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000033_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000042_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000041_chunk_001_dns | dns | wrote 1 events
+[OK] pcap_000042_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000041_chunk_001_http | http | wrote 0 events
+[OK] pcap_000042_chunk_001_http | http | wrote 0 events
+[OK] pcap_000041_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000041_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000041_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000042_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000042_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000042_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000040_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000044_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000044_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000043_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000044_chunk_001_http | http | wrote 0 events
+[OK] pcap_000044_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000044_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000044_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000050_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000049_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000050_chunk_001_dns | dns | wrote 8 events
+[OK] pcap_000040_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000050_chunk_001_http | http | wrote 0 events
+[OK] pcap_000043_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000050_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000050_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000050_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000052_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000049_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000040_chunk_001_http | http | wrote 0 events
+[OK] pcap_000052_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000043_chunk_001_http | http | wrote 0 events
+[OK] pcap_000052_chunk_001_http | http | wrote 0 events
+[OK] pcap_000052_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000052_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000052_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000049_chunk_001_http | http | wrote 0 events
+[OK] pcap_000043_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000043_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000043_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000040_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000040_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000040_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000055_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000056_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000055_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000056_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000055_chunk_001_http | http | wrote 0 events
+[OK] pcap_000056_chunk_001_http | http | wrote 0 events
+[OK] pcap_000055_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000055_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000055_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000058_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000054_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000056_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000056_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000056_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000058_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000049_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000049_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000049_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000058_chunk_001_http | http | wrote 0 events
+[OK] pcap_000058_chunk_001_tls | tls | wrote 4 events
+[OK] pcap_000058_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000058_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000061_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000054_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000059_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000061_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000060_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000061_chunk_001_http | http | wrote 0 events
+[OK] pcap_000061_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000061_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000061_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000054_chunk_001_http | http | wrote 0 events
+[OK] pcap_000059_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000062_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000060_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000062_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000062_chunk_001_http | http | wrote 0 events
+[OK] pcap_000062_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000062_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000062_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000063_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000059_chunk_001_http | http | wrote 0 events
+[OK] pcap_000054_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000054_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000054_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000063_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000063_chunk_001_http | http | wrote 0 events
+[OK] pcap_000060_chunk_001_http | http | wrote 0 events
+[OK] pcap_000064_chunk_001_flow | flow | wrote 26 events
+[OK] pcap_000063_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000063_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000063_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000064_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000064_chunk_001_http | http | wrote 0 events
+[OK] pcap_000067_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000064_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000064_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000064_chunk_001_timeline | timeline | wrote 26 events (cached)
+[OK] pcap_000067_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000069_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000059_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000059_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000059_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000069_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000067_chunk_001_http | http | wrote 0 events
+[OK] pcap_000069_chunk_001_http | http | wrote 0 events
+[OK] pcap_000060_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000060_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000060_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000067_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000067_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000067_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000069_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000069_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000069_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000071_chunk_001_flow | flow | wrote 26 events
+[OK] pcap_000074_chunk_001_flow | flow | wrote 13 events
+[OK] pcap_000071_chunk_001_dns | dns | wrote 8 events
+[OK] pcap_000074_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000071_chunk_001_http | http | wrote 0 events
+[OK] pcap_000074_chunk_001_http | http | wrote 0 events
+[OK] pcap_000070_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000071_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000071_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000071_chunk_001_timeline | timeline | wrote 26 events (cached)
+[OK] pcap_000074_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000074_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000074_chunk_001_timeline | timeline | wrote 13 events (cached)
+[OK] pcap_000077_chunk_001_flow | flow | wrote 26 events
+[OK] pcap_000075_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000077_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000077_chunk_001_http | http | wrote 0 events
+[OK] pcap_000077_chunk_001_tls | tls | wrote 14 events
+[OK] pcap_000077_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000077_chunk_001_timeline | timeline | wrote 26 events (cached)
+[OK] pcap_000070_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000078_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000076_chunk_001_flow | flow | wrote 19 events
+[OK] pcap_000078_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000078_chunk_001_http | http | wrote 0 events
+[OK] pcap_000075_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000078_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000078_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000078_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000081_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000081_chunk_001_dns | dns | wrote 3 events
+[OK] pcap_000081_chunk_001_http | http | wrote 0 events
+[OK] pcap_000070_chunk_001_http | http | wrote 0 events
+[OK] pcap_000081_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000081_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000081_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000076_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000082_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000082_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000075_chunk_001_http | http | wrote 0 events
+[OK] pcap_000082_chunk_001_http | http | wrote 0 events
+[OK] pcap_000082_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000082_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000082_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000070_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000070_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000070_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000085_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000086_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000085_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000076_chunk_001_http | http | wrote 0 events
+[OK] pcap_000085_chunk_001_http | http | wrote 0 events
+[OK] pcap_000086_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000085_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000085_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000085_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000075_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000075_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000075_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000086_chunk_001_http | http | wrote 0 events
+[OK] pcap_000087_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000088_chunk_001_flow | flow | wrote 27 events
+[OK] pcap_000086_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000086_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000086_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000087_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000088_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000087_chunk_001_http | http | wrote 0 events
+[OK] pcap_000076_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000076_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000076_chunk_001_timeline | timeline | wrote 19 events (cached)
+[OK] pcap_000088_chunk_001_http | http | wrote 0 events
+[OK] pcap_000087_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000087_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000087_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000088_chunk_001_tls | tls | wrote 14 events
+[OK] pcap_000088_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000088_chunk_001_timeline | timeline | wrote 27 events (cached)
+[OK] pcap_000093_chunk_001_flow | flow | wrote 12 events
+[OK] pcap_000094_chunk_001_flow | flow | wrote 26 events
+[OK] pcap_000093_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000094_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000090_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000094_chunk_001_http | http | wrote 0 events
+[OK] pcap_000093_chunk_001_http | http | wrote 0 events
+[OK] pcap_000092_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000094_chunk_001_tls | tls | wrote 1 events
+[OK] pcap_000094_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000094_chunk_001_timeline | timeline | wrote 26 events (cached)
+[OK] pcap_000093_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000093_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000093_chunk_001_timeline | timeline | wrote 12 events (cached)
+[OK] pcap_000097_chunk_001_flow | flow | wrote 31 events
+[OK] pcap_000097_chunk_001_dns | dns | wrote 6 events
+[OK] pcap_000097_chunk_001_http | http | wrote 0 events
+[OK] pcap_000097_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000097_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000097_chunk_001_timeline | timeline | wrote 31 events (cached)
+[OK] pcap_000090_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000092_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000098_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000096_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000098_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000098_chunk_001_http | http | wrote 0 events
+[OK] pcap_000098_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000098_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000098_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000092_chunk_001_http | http | wrote 0 events
+[OK] pcap_000090_chunk_001_http | http | wrote 0 events
+[OK] pcap_000099_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000099_chunk_001_dns | dns | wrote 9 events
+[OK] pcap_000096_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000099_chunk_001_http | http | wrote 0 events
+[OK] pcap_000099_chunk_001_tls | tls | wrote 4 events
+[OK] pcap_000099_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000099_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000092_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000092_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000092_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000090_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000090_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000090_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000103_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000103_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000104_chunk_001_flow | flow | wrote 27 events
+[OK] pcap_000103_chunk_001_http | http | wrote 0 events
+[OK] pcap_000096_chunk_001_http | http | wrote 0 events
+[OK] pcap_000104_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000103_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000103_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000103_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000102_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000104_chunk_001_http | http | wrote 0 events
+[OK] pcap_000104_chunk_001_tls | tls | wrote 15 events
+[OK] pcap_000104_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000104_chunk_001_timeline | timeline | wrote 27 events (cached)
+[OK] pcap_000106_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000106_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000106_chunk_001_http | http | wrote 0 events
+[OK] pcap_000096_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000096_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000096_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000106_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000106_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000106_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000105_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000108_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000102_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000108_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000108_chunk_001_http | http | wrote 0 events
+[OK] pcap_000108_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000108_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000108_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000107_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000105_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000102_chunk_001_http | http | wrote 0 events
+[OK] pcap_000109_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000107_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000105_chunk_001_http | http | wrote 0 events
+[OK] pcap_000102_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000102_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000102_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000109_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000112_chunk_001_flow | flow | wrote 33 events
+[OK] pcap_000107_chunk_001_http | http | wrote 0 events
+[OK] pcap_000112_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000105_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000105_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000105_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000112_chunk_001_http | http | wrote 0 events
+[OK] pcap_000109_chunk_001_http | http | wrote 0 events
+[OK] pcap_000112_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000112_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000112_chunk_001_timeline | timeline | wrote 33 events (cached)
+[OK] pcap_000115_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000107_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000107_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000107_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000115_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000116_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000113_chunk_001_flow | flow | wrote 18 events
+[OK] pcap_000115_chunk_001_http | http | wrote 0 events
+[OK] pcap_000116_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000115_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000115_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000115_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000116_chunk_001_http | http | wrote 0 events
+[OK] pcap_000116_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000116_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000116_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000119_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000109_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000109_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000109_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000119_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000119_chunk_001_http | http | wrote 0 events
+[OK] pcap_000002_chunk_001_flow | flow | wrote 25 events
+[OK] pcap_000119_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000119_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000119_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000003_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000003_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000003_chunk_001_http | http | wrote 0 events
+[OK] pcap_000003_chunk_001_tls | tls | wrote 4 events
+[OK] pcap_000003_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000003_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000005_chunk_001_flow | flow | wrote 9 events
+[OK] pcap_000005_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000005_chunk_001_http | http | wrote 0 events
+[OK] pcap_000005_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000005_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000005_chunk_001_timeline | timeline | wrote 9 events (cached)
+[OK] pcap_000113_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000010_chunk_001_flow | flow | wrote 24 events
+[OK] pcap_000010_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000002_chunk_001_dns | dns | wrote 1 events
+[OK] pcap_000010_chunk_001_http | http | wrote 0 events
+[OK] pcap_000117_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000010_chunk_001_tls | tls | wrote 13 events
+[OK] pcap_000010_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000010_chunk_001_timeline | timeline | wrote 24 events (cached)
+[OK] pcap_000013_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000013_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000013_chunk_001_http | http | wrote 0 events
+[OK] pcap_000013_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000013_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000013_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000015_chunk_001_flow | flow | wrote 11 events
+[OK] pcap_000002_chunk_001_http | http | wrote 0 events
+[OK] pcap_000015_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000015_chunk_001_http | http | wrote 0 events
+[OK] pcap_000015_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000015_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000015_chunk_001_timeline | timeline | wrote 11 events (cached)
+[OK] pcap_000017_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000002_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000002_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000002_chunk_001_timeline | timeline | wrote 25 events (cached)
+[OK] pcap_000020_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000020_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000020_chunk_001_http | http | wrote 0 events
+[OK] pcap_000020_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000020_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000020_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000022_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000017_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000022_chunk_001_dns | dns | wrote 6 events
+[OK] pcap_000022_chunk_001_http | http | wrote 0 events
+[OK] pcap_000022_chunk_001_tls | tls | wrote 4 events
+[OK] pcap_000022_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000022_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000017_chunk_001_http | http | wrote 0 events
+[OK] pcap_000017_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000017_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000017_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000113_chunk_001_http | http | wrote 0 events
+[OK] pcap_000027_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000027_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000117_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000027_chunk_001_http | http | wrote 0 events
+[OK] pcap_000028_chunk_001_flow | flow | wrote 9 events
+[OK] pcap_000027_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000027_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000027_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000034_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000034_chunk_001_dns | dns | wrote 4 events
+[OK] pcap_000034_chunk_001_http | http | wrote 0 events
+[OK] pcap_000034_chunk_001_tls | tls | wrote 9 events
+[OK] pcap_000034_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000034_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000039_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000039_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000039_chunk_001_http | http | wrote 0 events
+[OK] pcap_000039_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000039_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000039_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000045_chunk_001_flow | flow | wrote 11 events
+[OK] pcap_000045_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000028_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000045_chunk_001_http | http | wrote 0 events
+[OK] pcap_000045_chunk_001_tls | tls | wrote 10 events
+[OK] pcap_000045_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000045_chunk_001_timeline | timeline | wrote 11 events (cached)
+[OK] pcap_000046_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000046_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000046_chunk_001_http | http | wrote 0 events
+[OK] pcap_000046_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000046_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000046_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000113_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000113_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000113_chunk_001_timeline | timeline | wrote 18 events (cached)
+[OK] pcap_000047_chunk_001_flow | flow | wrote 28 events
+[OK] pcap_000048_chunk_001_flow | flow | wrote 21 events
+[OK] pcap_000047_chunk_001_dns | dns | wrote 8 events
+[OK] pcap_000047_chunk_001_http | http | wrote 0 events
+[OK] pcap_000048_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000047_chunk_001_tls | tls | wrote 13 events
+[OK] pcap_000047_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000047_chunk_001_timeline | timeline | wrote 28 events (cached)
+[OK] pcap_000048_chunk_001_http | http | wrote 0 events
+[OK] pcap_000028_chunk_001_http | http | wrote 0 events
+[OK] pcap_000048_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000048_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000048_chunk_001_timeline | timeline | wrote 21 events (cached)
+[OK] pcap_000053_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000053_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000117_chunk_001_http | http | wrote 0 events
+[OK] pcap_000053_chunk_001_http | http | wrote 0 events
+[OK] pcap_000053_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000053_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000053_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000057_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000057_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000057_chunk_001_http | http | wrote 0 events
+[OK] pcap_000051_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000028_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000028_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000028_chunk_001_timeline | timeline | wrote 9 events (cached)
+[OK] pcap_000065_chunk_001_flow | flow | wrote 14 events
+[OK] pcap_000065_chunk_001_dns | dns | wrote 3 events
+[OK] pcap_000065_chunk_001_http | http | wrote 0 events
+[OK] pcap_000065_chunk_001_tls | tls | wrote 6 events
+[OK] pcap_000065_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000065_chunk_001_timeline | timeline | wrote 14 events (cached)
+[OK] pcap_000066_chunk_001_flow | flow | wrote 12 events
+[OK] pcap_000066_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000057_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000057_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000057_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000066_chunk_001_http | http | wrote 0 events
+[OK] pcap_000068_chunk_001_flow | flow | wrote 30 events
+[OK] pcap_000068_chunk_001_dns | dns | wrote 11 events
+[OK] pcap_000066_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000066_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000066_chunk_001_timeline | timeline | wrote 12 events (cached)
+[OK] pcap_000068_chunk_001_http | http | wrote 0 events
+[OK] pcap_000068_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000068_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000068_chunk_001_timeline | timeline | wrote 30 events (cached)
+[OK] pcap_000073_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000073_chunk_001_dns | dns | wrote 11 events
+[OK] pcap_000073_chunk_001_http | http | wrote 0 events
+[OK] pcap_000073_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000073_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000073_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000079_chunk_001_flow | flow | wrote 30 events
+[OK] pcap_000079_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000072_chunk_001_flow | flow | wrote 11 events
+[OK] pcap_000079_chunk_001_http | http | wrote 0 events
+[OK] pcap_000079_chunk_001_tls | tls | wrote 19 events
+[OK] pcap_000079_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000079_chunk_001_timeline | timeline | wrote 30 events (cached)
+[OK] pcap_000072_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000080_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000080_chunk_001_dns | dns | wrote 1 events
+[OK] pcap_000072_chunk_001_http | http | wrote 0 events
+[OK] pcap_000080_chunk_001_http | http | wrote 0 events
+[OK] pcap_000072_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000072_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000072_chunk_001_timeline | timeline | wrote 11 events (cached)
+[OK] pcap_000080_chunk_001_tls | tls | wrote 7 events
+[OK] pcap_000080_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000080_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000084_chunk_001_flow | flow | wrote 25 events
+[OK] pcap_000084_chunk_001_dns | dns | wrote 13 events
+[OK] pcap_000084_chunk_001_http | http | wrote 0 events
+[OK] pcap_000084_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000084_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000084_chunk_001_timeline | timeline | wrote 25 events (cached)
+[OK] pcap_000083_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000089_chunk_001_flow | flow | wrote 30 events
+[OK] pcap_000089_chunk_001_dns | dns | wrote 2 events
+[OK] pcap_000051_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000083_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000089_chunk_001_http | http | wrote 0 events
+[OK] pcap_000089_chunk_001_tls | tls | wrote 11 events
+[OK] pcap_000089_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000089_chunk_001_timeline | timeline | wrote 30 events (cached)
+[OK] pcap_000091_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000091_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000091_chunk_001_http | http | wrote 0 events
+[OK] pcap_000091_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000091_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000091_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000083_chunk_001_http | http | wrote 0 events
+[OK] pcap_000095_chunk_001_flow | flow | wrote 16 events
+[OK] pcap_000117_chunk_001_tls | tls | wrote 1 events
+[OK] pcap_000117_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000117_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000095_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000083_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000083_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000083_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000095_chunk_001_http | http | wrote 0 events
+[OK] pcap_000101_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000101_chunk_001_dns | dns | wrote 6 events
+[OK] pcap_000101_chunk_001_http | http | wrote 0 events
+[OK] pcap_000101_chunk_001_tls | tls | wrote 3 events
+[OK] pcap_000101_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000101_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000100_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000110_chunk_001_flow | flow | wrote 17 events
+[OK] pcap_000110_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000095_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000095_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000095_chunk_001_timeline | timeline | wrote 16 events (cached)
+[OK] pcap_000110_chunk_001_http | http | wrote 0 events
+[OK] pcap_000110_chunk_001_tls | tls | wrote 2 events
+[OK] pcap_000110_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000110_chunk_001_timeline | timeline | wrote 17 events (cached)
+[OK] pcap_000114_chunk_001_flow | flow | wrote 15 events
+[OK] pcap_000114_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000100_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000114_chunk_001_http | http | wrote 0 events
+[OK] pcap_000111_chunk_001_flow | flow | wrote 13 events
+[OK] pcap_000114_chunk_001_tls | tls | wrote 1 events
+[OK] pcap_000114_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000114_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000118_chunk_001_flow | flow | wrote 31 events
+[OK] pcap_000118_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000118_chunk_001_http | http | wrote 0 events
+[OK] pcap_000118_chunk_001_tls | tls | wrote 13 events
+[OK] pcap_000118_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000118_chunk_001_timeline | timeline | wrote 31 events (cached)
+[OK] pcap_000100_chunk_001_http | http | wrote 0 events
+[OK] pcap_000111_chunk_001_dns | dns | wrote 0 events
+[OK] pcap_000051_chunk_001_http | http | wrote 0 events
+[OK] pcap_000100_chunk_001_tls | tls | wrote 0 events
+[OK] pcap_000100_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000100_chunk_001_timeline | timeline | wrote 15 events (cached)
+[OK] pcap_000111_chunk_001_http | http | wrote 0 events
+[OK] pcap_000111_chunk_001_tls | tls | wrote 5 events
+[OK] pcap_000111_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000111_chunk_001_timeline | timeline | wrote 13 events (cached)
+[OK] pcap_000051_chunk_001_tls | tls | wrote 8 events
+[OK] pcap_000051_chunk_001_ioc | ioc | wrote 0 events (cached)
+[OK] pcap_000051_chunk_001_timeline | timeline | wrote 17 events (cached)
+
+=== EXTRACTION COMPLETE ===
+Tasks attempted: 714
+Chunks processed: 119
+✅ COMPLETED: Phase 5: Evidence Extraction | elapsed=5634.949s
+
+========== RUNNING: Phase 6: Bundle Construction ==========
+Command: python3 -u injestion/build_ai_handoff.py --db-path evidence_registry.db --output-dir ai_handoff_bundles
+[OK] Built bundle bundle_2025-11-18_nested_overlap | pcaps=6 | events=214 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-18_nested_overlap.json
+[OK] Built bundle bundle_2025-11-22_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-22_nested_overlap.json
+[OK] Built bundle bundle_2025-11-23_nested_overlap | pcaps=1 | events=24 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-23_nested_overlap.json
+[OK] Built bundle bundle_2025-11-24_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-24_nested_overlap.json
+[OK] Built bundle bundle_2025-11-28_nested_overlap | pcaps=1 | events=32 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-28_nested_overlap.json
+[OK] Built bundle bundle_2025-12-03_nested_overlap | pcaps=3 | events=122 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-03_nested_overlap.json
+[OK] Built bundle bundle_2025-12-04_nested_overlap | pcaps=4 | events=147 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-04_nested_overlap.json
+[OK] Built bundle bundle_2025-12-05_nested_overlap | pcaps=1 | events=38 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-05_nested_overlap.json
+[OK] Built bundle bundle_2025-12-06_nested_overlap | pcaps=1 | events=39 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-06_nested_overlap.json
+[OK] Built bundle bundle_2025-12-07_nested_overlap | pcaps=4 | events=156 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-07_nested_overlap.json
+[OK] Built bundle bundle_2025-12-08_nested_overlap | pcaps=1 | events=42 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-08_nested_overlap.json
+[OK] Built bundle bundle_2025-12-09_nested_overlap | pcaps=5 | events=198 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-09_nested_overlap.json
+[OK] Built bundle bundle_2025-12-10_nested_overlap | pcaps=1 | events=30 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-10_nested_overlap.json
+[OK] Built bundle bundle_2025-12-11_nested_overlap | pcaps=3 | events=99 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-11_nested_overlap.json
+[OK] Built bundle bundle_2025-12-12_nested_overlap | pcaps=4 | events=143 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-12_nested_overlap.json
+[OK] Built bundle bundle_2025-12-13_nested_overlap | pcaps=4 | events=130 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-13_nested_overlap.json
+[OK] Built bundle bundle_2025-12-14_nested_overlap | pcaps=1 | events=38 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-14_nested_overlap.json
+[OK] Built bundle bundle_2025-12-15_nested_overlap | pcaps=4 | events=117 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-15_nested_overlap.json
+[OK] Built bundle bundle_2025-12-16_nested_overlap | pcaps=1 | events=41 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-16_nested_overlap.json
+[OK] Built bundle bundle_2025-12-17_nested_overlap | pcaps=4 | events=163 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-17_nested_overlap.json
+[OK] Built bundle bundle_2025-12-18_nested_overlap | pcaps=3 | events=113 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-18_nested_overlap.json
+[OK] Built bundle bundle_2025-12-19_nested_overlap | pcaps=4 | events=143 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-19_nested_overlap.json
+[OK] Built bundle bundle_2025-12-20_nested_overlap | pcaps=3 | events=108 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-20_nested_overlap.json
+[OK] Built bundle bundle_2025-12-21_nested_overlap | pcaps=2 | events=79 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-21_nested_overlap.json
+[OK] Built bundle bundle_2025-12-24_nested_overlap | pcaps=1 | events=39 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-24_nested_overlap.json
+[OK] Built bundle bundle_2025-12-26_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-26_nested_overlap.json
+[OK] Built bundle bundle_2025-12-27_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-27_nested_overlap.json
+[OK] Built bundle bundle_2025-12-28_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-28_nested_overlap.json
+[OK] Built bundle bundle_2025-12-31_nested_overlap | pcaps=1 | events=28 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-31_nested_overlap.json
+[OK] Built bundle bundle_2026-01-02_nested_overlap | pcaps=2 | events=84 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-02_nested_overlap.json
+[OK] Built bundle bundle_2026-01-03_nested_overlap | pcaps=1 | events=25 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-03_nested_overlap.json
+[OK] Built bundle bundle_2026-01-04_nested_overlap | pcaps=4 | events=152 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-04_nested_overlap.json
+[OK] Built bundle bundle_2026-01-05_nested_overlap | pcaps=2 | events=79 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-05_nested_overlap.json
+[OK] Built bundle bundle_2026-01-06_nested_overlap | pcaps=2 | events=80 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-06_nested_overlap.json
+[OK] Built bundle bundle_2026-01-08_nested_overlap | pcaps=2 | events=72 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-08_nested_overlap.json
+[OK] Built bundle bundle_2026-01-09_nested_overlap | pcaps=1 | events=18 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-09_nested_overlap.json
+[OK] Built bundle bundle_2026-01-10_nested_overlap | pcaps=4 | events=152 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-10_nested_overlap.json
+[OK] Built bundle bundle_2026-01-11_nested_overlap | pcaps=2 | events=69 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-11_nested_overlap.json
+[OK] Built bundle bundle_2026-01-12_nested_overlap | pcaps=1 | events=36 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-12_nested_overlap.json
+[OK] Built bundle bundle_2026-01-14_nested_overlap | pcaps=3 | events=147 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-14_nested_overlap.json
+[OK] Built bundle bundle_2026-01-15_nested_overlap | pcaps=1 | events=27 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-15_nested_overlap.json
+[OK] Built bundle bundle_2026-01-16_nested_overlap | pcaps=2 | events=80 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-16_nested_overlap.json
+[OK] Built bundle bundle_2026-01-18_nested_overlap | pcaps=4 | events=213 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-18_nested_overlap.json
+[OK] Built bundle bundle_2026-01-19_nested_overlap | pcaps=4 | events=182 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-19_nested_overlap.json
+[OK] Built bundle bundle_2026-01-21_nested_overlap | pcaps=2 | events=127 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-21_nested_overlap.json
+[OK] Built bundle bundle_2026-01-23_nested_overlap | pcaps=2 | events=132 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-23_nested_overlap.json
+[OK] Built bundle bundle_2026-01-24_nested_overlap | pcaps=1 | events=73 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-24_nested_overlap.json
+[OK] Built bundle bundle_2026-01-25_nested_overlap | pcaps=1 | events=66 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-25_nested_overlap.json
+[OK] Built bundle bundle_2026-01-26_nested_overlap | pcaps=3 | events=150 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-26_nested_overlap.json
+[OK] Built bundle bundle_2026-01-27_nested_overlap | pcaps=4 | events=285 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-27_nested_overlap.json
+[OK] Built bundle bundle_2026-01-28_nested_overlap | pcaps=1 | events=58 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-28_nested_overlap.json
+[OK] Built bundle bundle_2026-01-29_nested_overlap | pcaps=2 | events=128 | path=/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-29_nested_overlap.json
+
+=== STEP 6 COMPLETE ===
+Bundles built: 52
+✅ COMPLETED: Phase 6: Bundle Construction | elapsed=0.664s
+
+========== RUNNING: Phase 7: Summary Construction ==========
+Command: python3 -u injestion/build_preai_summaries.py --db-path evidence_registry.db --summary-dir preai_summaries --retrieval-dir preai_retrieval
+[OK] Built pre-AI summary for bundle_2025-11-18_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-11-18_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-11-18_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-11-22_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-11-22_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-11-22_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-11-23_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-11-23_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-11-23_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-11-24_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-11-24_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-11-24_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-11-28_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-11-28_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-11-28_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-03_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-03_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-03_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-04_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-04_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-04_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-05_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-05_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-05_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-06_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-06_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-06_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-07_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-07_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-07_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-08_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-08_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-08_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-09_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-09_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-09_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-10_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-10_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-10_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-11_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-11_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-11_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-12_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-12_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-12_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-13_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-13_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-13_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-14_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-14_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-14_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-15_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-15_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-15_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-16_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-16_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-16_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-17_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-17_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-17_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-18_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-18_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-18_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-19_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-19_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-19_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-20_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-20_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-20_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-21_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-21_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-21_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-24_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-24_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-24_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-26_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-26_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-26_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-27_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-27_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-27_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-28_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-28_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-28_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2025-12-31_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2025-12-31_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2025-12-31_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-02_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-02_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-02_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-03_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-03_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-03_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-04_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-04_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-04_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-05_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-05_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-05_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-06_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-06_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-06_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-08_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-08_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-08_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-09_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-09_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-09_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-10_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-10_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-10_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-11_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-11_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-11_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-12_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-12_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-12_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-14_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-14_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-14_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-15_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-15_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-15_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-16_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-16_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-16_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-18_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-18_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-18_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-19_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-19_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-19_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-21_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-21_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-21_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-23_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-23_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-23_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-24_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-24_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-24_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-25_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-25_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-25_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-26_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-26_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-26_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-27_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-27_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-27_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-28_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-28_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-28_nested_overlap_retrieval.json
+[OK] Built pre-AI summary for bundle_2026-01-29_nested_overlap | summary=/home/seed/Downloads/MJP/preai_summaries/bundle_2026-01-29_nested_overlap_summary.json | retrieval=/home/seed/Downloads/MJP/preai_retrieval/bundle_2026-01-29_nested_overlap_retrieval.json
+
+=== STEP 7 COMPLETE ===
+Pre-AI summaries built: 52
+✅ COMPLETED: Phase 7: Summary Construction | elapsed=0.309s
+
+========== RUNNING: Phase 8: Interface Validation ==========
+Command: python3 -u agent_interface_cli.py --db-path evidence_registry.db list-bundles
+[
+  {
+    "bundle_id": "bundle_2025-11-18_nested_overlap",
+    "time_bucket": "2025-11-18",
+    "parse_group": "2025-11-18_nested_overlap",
+    "pcap_count": 6,
+    "event_count": 214,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-18_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-11-22_nested_overlap",
+    "time_bucket": "2025-11-22",
+    "parse_group": "2025-11-22_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-22_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-11-23_nested_overlap",
+    "time_bucket": "2025-11-23",
+    "parse_group": "2025-11-23_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 24,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-23_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-11-24_nested_overlap",
+    "time_bucket": "2025-11-24",
+    "parse_group": "2025-11-24_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-24_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-11-28_nested_overlap",
+    "time_bucket": "2025-11-28",
+    "parse_group": "2025-11-28_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 32,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-11-28_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-03_nested_overlap",
+    "time_bucket": "2025-12-03",
+    "parse_group": "2025-12-03_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 122,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-03_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-04_nested_overlap",
+    "time_bucket": "2025-12-04",
+    "parse_group": "2025-12-04_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 147,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-04_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-05_nested_overlap",
+    "time_bucket": "2025-12-05",
+    "parse_group": "2025-12-05_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 38,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-05_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-06_nested_overlap",
+    "time_bucket": "2025-12-06",
+    "parse_group": "2025-12-06_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 39,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-06_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-07_nested_overlap",
+    "time_bucket": "2025-12-07",
+    "parse_group": "2025-12-07_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 156,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-07_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-08_nested_overlap",
+    "time_bucket": "2025-12-08",
+    "parse_group": "2025-12-08_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 42,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-08_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-09_nested_overlap",
+    "time_bucket": "2025-12-09",
+    "parse_group": "2025-12-09_nested_overlap",
+    "pcap_count": 5,
+    "event_count": 198,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-09_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-10_nested_overlap",
+    "time_bucket": "2025-12-10",
+    "parse_group": "2025-12-10_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 30,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-10_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-11_nested_overlap",
+    "time_bucket": "2025-12-11",
+    "parse_group": "2025-12-11_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 99,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-11_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-12_nested_overlap",
+    "time_bucket": "2025-12-12",
+    "parse_group": "2025-12-12_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 143,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-12_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-13_nested_overlap",
+    "time_bucket": "2025-12-13",
+    "parse_group": "2025-12-13_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 130,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-13_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-14_nested_overlap",
+    "time_bucket": "2025-12-14",
+    "parse_group": "2025-12-14_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 38,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-14_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-15_nested_overlap",
+    "time_bucket": "2025-12-15",
+    "parse_group": "2025-12-15_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 117,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-15_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-16_nested_overlap",
+    "time_bucket": "2025-12-16",
+    "parse_group": "2025-12-16_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 41,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-16_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-17_nested_overlap",
+    "time_bucket": "2025-12-17",
+    "parse_group": "2025-12-17_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 163,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-17_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-18_nested_overlap",
+    "time_bucket": "2025-12-18",
+    "parse_group": "2025-12-18_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 113,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-18_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-19_nested_overlap",
+    "time_bucket": "2025-12-19",
+    "parse_group": "2025-12-19_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 143,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-19_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-20_nested_overlap",
+    "time_bucket": "2025-12-20",
+    "parse_group": "2025-12-20_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 108,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-20_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-21_nested_overlap",
+    "time_bucket": "2025-12-21",
+    "parse_group": "2025-12-21_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 79,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-21_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-24_nested_overlap",
+    "time_bucket": "2025-12-24",
+    "parse_group": "2025-12-24_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 39,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-24_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-26_nested_overlap",
+    "time_bucket": "2025-12-26",
+    "parse_group": "2025-12-26_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-26_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-27_nested_overlap",
+    "time_bucket": "2025-12-27",
+    "parse_group": "2025-12-27_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-27_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-28_nested_overlap",
+    "time_bucket": "2025-12-28",
+    "parse_group": "2025-12-28_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-28_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2025-12-31_nested_overlap",
+    "time_bucket": "2025-12-31",
+    "parse_group": "2025-12-31_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 28,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2025-12-31_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-02_nested_overlap",
+    "time_bucket": "2026-01-02",
+    "parse_group": "2026-01-02_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 84,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-02_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-03_nested_overlap",
+    "time_bucket": "2026-01-03",
+    "parse_group": "2026-01-03_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 25,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-03_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-04_nested_overlap",
+    "time_bucket": "2026-01-04",
+    "parse_group": "2026-01-04_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 152,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-04_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-05_nested_overlap",
+    "time_bucket": "2026-01-05",
+    "parse_group": "2026-01-05_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 79,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-05_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-06_nested_overlap",
+    "time_bucket": "2026-01-06",
+    "parse_group": "2026-01-06_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 80,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-06_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-08_nested_overlap",
+    "time_bucket": "2026-01-08",
+    "parse_group": "2026-01-08_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 72,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-08_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-09_nested_overlap",
+    "time_bucket": "2026-01-09",
+    "parse_group": "2026-01-09_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 18,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-09_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-10_nested_overlap",
+    "time_bucket": "2026-01-10",
+    "parse_group": "2026-01-10_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 152,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-10_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-11_nested_overlap",
+    "time_bucket": "2026-01-11",
+    "parse_group": "2026-01-11_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 69,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-11_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-12_nested_overlap",
+    "time_bucket": "2026-01-12",
+    "parse_group": "2026-01-12_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 36,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-12_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-14_nested_overlap",
+    "time_bucket": "2026-01-14",
+    "parse_group": "2026-01-14_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 147,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-14_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-15_nested_overlap",
+    "time_bucket": "2026-01-15",
+    "parse_group": "2026-01-15_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 27,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-15_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-16_nested_overlap",
+    "time_bucket": "2026-01-16",
+    "parse_group": "2026-01-16_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 80,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-16_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-18_nested_overlap",
+    "time_bucket": "2026-01-18",
+    "parse_group": "2026-01-18_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 213,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-18_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-19_nested_overlap",
+    "time_bucket": "2026-01-19",
+    "parse_group": "2026-01-19_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 182,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-19_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-21_nested_overlap",
+    "time_bucket": "2026-01-21",
+    "parse_group": "2026-01-21_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 127,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-21_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-23_nested_overlap",
+    "time_bucket": "2026-01-23",
+    "parse_group": "2026-01-23_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 132,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-23_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-24_nested_overlap",
+    "time_bucket": "2026-01-24",
+    "parse_group": "2026-01-24_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 73,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-24_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-25_nested_overlap",
+    "time_bucket": "2026-01-25",
+    "parse_group": "2026-01-25_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 66,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-25_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-26_nested_overlap",
+    "time_bucket": "2026-01-26",
+    "parse_group": "2026-01-26_nested_overlap",
+    "pcap_count": 3,
+    "event_count": 150,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-26_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-27_nested_overlap",
+    "time_bucket": "2026-01-27",
+    "parse_group": "2026-01-27_nested_overlap",
+    "pcap_count": 4,
+    "event_count": 285,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-27_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-28_nested_overlap",
+    "time_bucket": "2026-01-28",
+    "parse_group": "2026-01-28_nested_overlap",
+    "pcap_count": 1,
+    "event_count": 58,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-28_nested_overlap.json"
+  },
+  {
+    "bundle_id": "bundle_2026-01-29_nested_overlap",
+    "time_bucket": "2026-01-29",
+    "parse_group": "2026-01-29_nested_overlap",
+    "pcap_count": 2,
+    "event_count": 128,
+    "bundle_status": "READY",
+    "bundle_path": "/home/seed/Downloads/MJP/ai_handoff_bundles/bundle_2026-01-29_nested_overlap.json"
+  }
+]
+✅ COMPLETED: Phase 8: Interface Validation | elapsed=0.172s
+
+========== RUNNING: Phase 9: Agent Investigation ==========
+Command: python3 -u agent_interface_cli.py --db-path evidence_registry.db investigate-all --outdir agent_outputs --max-events 50000
+{
+  "status": "ok",
+  "bundle_count": 52,
+  "results": [
+    {
+      "bundle_id": "bundle_2025-11-18_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-11-18_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-11-22_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-11-22_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-11-23_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-11-23_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2025-11-24_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-11-24_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-11-28_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-11-28_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-12-03_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-03_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-12-04_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-04_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-05_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-05_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-12-06_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-06_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2025-12-07_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-07_nested_overlap",
+      "finding_count": 4,
+      "hypothesis_count": 5
+    },
+    {
+      "bundle_id": "bundle_2025-12-08_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-08_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-12-09_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-09_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-10_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-10_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2025-12-11_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-11_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-12-12_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-12_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-13_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-13_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2025-12-14_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-14_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2025-12-15_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-15_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-16_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-16_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-17_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-17_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-18_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-18_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-19_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-19_nested_overlap",
+      "finding_count": 4,
+      "hypothesis_count": 5
+    },
+    {
+      "bundle_id": "bundle_2025-12-20_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-20_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-21_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-21_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2025-12-24_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-24_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2025-12-26_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-26_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-12-27_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-27_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-12-28_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-28_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2025-12-31_nested_overlap",
+      "outdir": "agent_outputs/bundle_2025-12-31_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2026-01-02_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-02_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-03_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-03_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2026-01-04_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-04_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-05_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-05_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-06_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-06_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2026-01-08_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-08_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-09_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-09_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2026-01-10_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-10_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-11_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-11_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-12_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-12_nested_overlap",
+      "finding_count": 0,
+      "hypothesis_count": 0
+    },
+    {
+      "bundle_id": "bundle_2026-01-14_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-14_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-15_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-15_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 1
+    },
+    {
+      "bundle_id": "bundle_2026-01-16_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-16_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-18_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-18_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-19_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-19_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-21_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-21_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-23_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-23_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-24_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-24_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-25_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-25_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2026-01-26_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-26_nested_overlap",
+      "finding_count": 2,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-27_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-27_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    },
+    {
+      "bundle_id": "bundle_2026-01-28_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-28_nested_overlap",
+      "finding_count": 1,
+      "hypothesis_count": 2
+    },
+    {
+      "bundle_id": "bundle_2026-01-29_nested_overlap",
+      "outdir": "agent_outputs/bundle_2026-01-29_nested_overlap",
+      "finding_count": 3,
+      "hypothesis_count": 4
+    }
+  ]
+}
+✅ COMPLETED: Phase 9: Agent Investigation | elapsed=0.489s
+
+========== RUNNING: Phase 10: Campaign Investigation ==========
+Command: python3 -u agent_interface_cli.py --db-path evidence_registry.db campaign-investigate --outdir agent_outputs --max-events 50000
+{
+  "status": "ok",
+  "bundle_count": 52,
+  "campaign_finding_count": 10,
+  "outdir": "agent_outputs/campaign"
+}
+✅ COMPLETED: Phase 10: Campaign Investigation | elapsed=0.462s
+
+========== RUNNING: Phase 11: Master Findings Synthesis ==========
+Command: python3 -u master_report_synthesizer.py --agent-outdir agent_outputs --master-subdir master
+{
+  "status": "ok",
+  "bundle_reports_loaded": 52,
+  "campaign_report_loaded": true,
+  "outdir": "agent_outputs/master",
+  "used_llm_summary": false
+}
+✅ COMPLETED: Phase 11: Master Findings Synthesis | elapsed=0.059s
+
+Run metrics written to: /home/seed/Downloads/MJP/pipeline_run_metrics.json
+
+🎉 RUN COMPLETED SUCCESSFULLY

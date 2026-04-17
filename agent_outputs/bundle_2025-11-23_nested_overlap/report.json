@@ -3,16 +3,18 @@
   "metrics": {
     "event_count": 24,
     "pcap_count": 1,
-    "analysis_runtime_seconds": 0.0,
-    "hypothesis_count": 0,
+    "analysis_runtime_seconds": 0.001,
+    "hypothesis_count": 1,
     "finding_count": 0,
     "estimated_analysis_cost": 0.0,
     "human_review_required_count": 0,
-    "guardrailed_hypothesis_count": 0,
+    "guardrailed_hypothesis_count": 1,
     "finding_with_false_positive_risk_count": 0,
     "finding_with_missed_detection_risk_count": 0
   },
-  "notes": [],
+  "notes": [
+    "Guardrail applied to HYP-001 (Potential Data Exfiltration): insufficient corroborating evidence."
+  ],
   "safety_controls": [
     {
       "control": "minimum_evidence_requirement",
@@ -39,42 +41,57 @@
   ],
   "timeline": [
     {
-      "timestamp": "2026-04-12T14:54:40.905773Z",
+      "timestamp": "2026-04-16T18:55:06.670746Z",
       "step": "review_summary",
       "summary": "Started summary-first investigation"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905829Z",
+      "timestamp": "2026-04-16T18:55:06.671230Z",
       "step": "analyze_beaconing",
       "summary": "Completed beaconing analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905841Z",
+      "timestamp": "2026-04-16T18:55:06.671242Z",
       "step": "analyze_dns",
       "summary": "Completed DNS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905843Z",
+      "timestamp": "2026-04-16T18:55:06.671244Z",
       "step": "analyze_http",
       "summary": "Completed HTTP analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905845Z",
+      "timestamp": "2026-04-16T18:55:06.671247Z",
       "step": "analyze_tls",
       "summary": "Completed TLS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905849Z",
+      "timestamp": "2026-04-16T18:55:06.671251Z",
       "step": "analyze_bad_ip_reputation",
       "summary": "Completed IP reputation analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905852Z",
+      "timestamp": "2026-04-16T18:55:06.671259Z",
+      "step": "analyze_smb",
+      "summary": "Completed SMB analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.671266Z",
+      "step": "analyze_external_access",
+      "summary": "Completed external access analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.671335Z",
+      "step": "analyze_volumetric",
+      "summary": "Completed volumetric analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.671340Z",
       "step": "cross_signal_correlation",
       "summary": "Completed cross-signal correlation"
     },
     {
-      "timestamp": "2026-04-12T14:54:40.905860Z",
+      "timestamp": "2026-04-16T18:55:06.671360Z",
       "step": "materialize_findings",
       "summary": "Generated 0 final findings"
     }
@@ -86,9 +103,68 @@
     "analyze_http",
     "analyze_tls",
     "analyze_bad_ip_reputation",
+    "analyze_smb",
+    "analyze_external_access",
+    "analyze_volumetric",
     "cross_signal_correlation",
     "materialize_findings"
   ],
-  "hypotheses": [],
+  "hypotheses": [
+    {
+      "hypothesis_id": "HYP-001",
+      "title": "Potential Data Exfiltration",
+      "description": "Large or frequent outbound transfers to external host suggest data exfiltration.",
+      "severity": "HIGH",
+      "confidence": 0.49,
+      "mitre_techniques": [
+        "T1048",
+        "T1041",
+        "T1567"
+      ],
+      "entities": [
+        "10.128.239.21->50.148.81.154"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "insufficient_evidence",
+        "limited_source_diversity",
+        "below_reporting_threshold"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "Large legitimate uploads (backups, cloud sync, CI/CD) may trigger volumetric thresholds."
+      ],
+      "missed_detection_risks": [
+        "Slow, low-volume exfiltration may stay below detection thresholds.",
+        "Encrypted exfiltration via legitimate services may not be flagged."
+      ],
+      "limitations": [
+        "Volumetric analysis detects transfer patterns, not content \u2014 payload inspection requires decryption."
+      ],
+      "evidence": [
+        {
+          "source": "volumetric_analysis",
+          "indicator": "volumetric_anomaly",
+          "value": "10.128.239.21->50.148.81.154",
+          "score": 0.5,
+          "details": {
+            "entity": "10.128.239.21->50.148.81.154",
+            "src_ip": "10.128.239.21",
+            "dst_ip": "50.148.81.154",
+            "session_count": 14,
+            "total_bytes": 0,
+            "ports_used": [
+              80
+            ],
+            "reasons": [
+              "high_session_count",
+              "very_high_session_count"
+            ],
+            "event_timestamp": "Nov 23, 2025 11:41:04.786253000 +08"
+          }
+        }
+      ]
+    }
+  ],
   "findings": []
 }

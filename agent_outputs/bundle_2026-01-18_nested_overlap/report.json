@@ -3,17 +3,18 @@
   "metrics": {
     "event_count": 213,
     "pcap_count": 4,
-    "analysis_runtime_seconds": 0.001,
-    "hypothesis_count": 2,
-    "finding_count": 1,
+    "analysis_runtime_seconds": 0.003,
+    "hypothesis_count": 4,
+    "finding_count": 2,
     "estimated_analysis_cost": 0.0,
     "human_review_required_count": 0,
-    "guardrailed_hypothesis_count": 2,
-    "finding_with_false_positive_risk_count": 1,
-    "finding_with_missed_detection_risk_count": 1
+    "guardrailed_hypothesis_count": 4,
+    "finding_with_false_positive_risk_count": 2,
+    "finding_with_missed_detection_risk_count": 2
   },
   "notes": [
-    "Guardrail applied to HYP-001 (Suspicious DNS Activity): insufficient corroborating evidence."
+    "Guardrail applied to HYP-003 (Potential Data Exfiltration): insufficient corroborating evidence.",
+    "Guardrail applied to HYP-004 (Multi-Signal Threat): insufficient corroborating evidence."
   ],
   "safety_controls": [
     {
@@ -41,44 +42,59 @@
   ],
   "timeline": [
     {
-      "timestamp": "2026-04-12T14:54:41.185864Z",
+      "timestamp": "2026-04-16T18:55:06.973741Z",
       "step": "review_summary",
       "summary": "Started summary-first investigation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186313Z",
+      "timestamp": "2026-04-16T18:55:06.976342Z",
       "step": "analyze_beaconing",
       "summary": "Completed beaconing analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186405Z",
+      "timestamp": "2026-04-16T18:55:06.976449Z",
       "step": "analyze_dns",
       "summary": "Completed DNS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186407Z",
+      "timestamp": "2026-04-16T18:55:06.976452Z",
       "step": "analyze_http",
       "summary": "Completed HTTP analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186469Z",
+      "timestamp": "2026-04-16T18:55:06.976520Z",
       "step": "analyze_tls",
       "summary": "Completed TLS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186488Z",
+      "timestamp": "2026-04-16T18:55:06.976536Z",
       "step": "analyze_bad_ip_reputation",
       "summary": "Completed IP reputation analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186494Z",
+      "timestamp": "2026-04-16T18:55:06.976585Z",
+      "step": "analyze_smb",
+      "summary": "Completed SMB analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.976809Z",
+      "step": "analyze_external_access",
+      "summary": "Completed external access analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.977152Z",
+      "step": "analyze_volumetric",
+      "summary": "Completed volumetric analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.977175Z",
       "step": "cross_signal_correlation",
       "summary": "Completed cross-signal correlation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.186515Z",
+      "timestamp": "2026-04-16T18:55:06.977209Z",
       "step": "materialize_findings",
-      "summary": "Generated 1 final findings"
+      "summary": "Generated 2 final findings"
     }
   ],
   "executed_steps": [
@@ -88,68 +104,15 @@
     "analyze_http",
     "analyze_tls",
     "analyze_bad_ip_reputation",
+    "analyze_smb",
+    "analyze_external_access",
+    "analyze_volumetric",
     "cross_signal_correlation",
     "materialize_findings"
   ],
   "hypotheses": [
     {
       "hypothesis_id": "HYP-001",
-      "title": "Suspicious DNS Activity",
-      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
-      "severity": "MEDIUM",
-      "confidence": 0.49,
-      "mitre_techniques": [
-        "T1071.004"
-      ],
-      "entities": [
-        "10.128.239.20:md-prod-simcon-ip129.eastus2.cloudapp.azure.com"
-      ],
-      "status": "OPEN",
-      "guardrail_flags": [
-        "insufficient_evidence",
-        "limited_source_diversity",
-        "below_reporting_threshold"
-      ],
-      "human_review_required": true,
-      "false_positive_risks": [
-        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
-        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
-      ],
-      "missed_detection_risks": [
-        "Low-volume DNS covert channels may stay below threshold.",
-        "Benign-looking domains used by attackers may evade entropy-based heuristics."
-      ],
-      "limitations": [
-        "DNS classification relies on metadata and naming patterns rather than payload semantics."
-      ],
-      "evidence": [
-        {
-          "source": "dns_analysis",
-          "indicator": "high_entropy_dns",
-          "value": "md-prod-simcon-ip129.eastus2.cloudapp.azure.com",
-          "score": 0.5,
-          "details": {
-            "entity": "10.128.239.20:md-prod-simcon-ip129.eastus2.cloudapp.azure.com",
-            "src_ip": "10.128.239.20",
-            "query": "md-prod-simcon-ip129.eastus2.cloudapp.azure.com",
-            "base_domain": "azure.com",
-            "qtype": "1",
-            "entropy": 4.094,
-            "query_count": 1,
-            "base_domain_count": 1,
-            "host_count_for_query": 1,
-            "host_count_for_base_domain": 1,
-            "varying_subdomain_count": 1,
-            "reasons": [
-              "high_entropy"
-            ],
-            "event_timestamp": "Jan 18, 2026 01:42:23.593357000 +08"
-          }
-        }
-      ]
-    },
-    {
-      "hypothesis_id": "HYP-002",
       "title": "Suspicious TLS Session",
       "description": "Suspicious TLS metadata suggests encrypted malicious communication.",
       "severity": "MEDIUM",
@@ -386,9 +349,795 @@
           }
         }
       ]
+    },
+    {
+      "hypothesis_id": "HYP-002",
+      "title": "External Sensitive Access",
+      "description": "External IP accessed internal host on sensitive port, suggesting unauthorized remote access.",
+      "severity": "HIGH",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1133",
+        "T1078",
+        "T1021.001"
+      ],
+      "entities": [
+        "194.165.17.11->10.128.239.57:3389",
+        "91.238.181.91->10.128.239.57:3389",
+        "88.214.25.123->10.128.239.57:3389",
+        "194.165.16.163->10.128.239.57:3389",
+        "179.60.146.37->10.128.239.57:3389",
+        "147.45.112.185->10.128.239.57:3389",
+        "147.45.112.186->10.128.239.57:3389",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.238.181.6->10.128.239.57:3389",
+        "57.129.133.249->10.128.239.57:3389",
+        "194.165.16.162->10.128.239.57:3389",
+        "45.141.87.87->10.128.239.57:3389",
+        "45.141.84.95->10.128.239.57:3389",
+        "193.141.60.147->10.128.239.57:3389",
+        "179.60.146.34->10.128.239.57:3389"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Legitimate remote administration via RDP or SSH from authorized external IPs.",
+        "VPN or jump-host traffic may appear as external access."
+      ],
+      "missed_detection_risks": [
+        "Access via VPN tunnels that terminate internally will not appear as external."
+      ],
+      "limitations": [
+        "Cannot distinguish between authorized and unauthorized remote access without credential context."
+      ],
+      "evidence": [
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 6,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.197892000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.91->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.91->10.128.239.57:3389",
+            "src_ip": "91.238.181.91",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.278975000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "88.214.25.123->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "88.214.25.123->10.128.239.57:3389",
+            "src_ip": "88.214.25.123",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.359923000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.16.163->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.16.163->10.128.239.57:3389",
+            "src_ip": "194.165.16.163",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:24.951046000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.37->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "179.60.146.37->10.128.239.57:3389",
+            "src_ip": "179.60.146.37",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.375210000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "147.45.112.185->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "147.45.112.185->10.128.239.57:3389",
+            "src_ip": "147.45.112.185",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 7,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.487858000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "147.45.112.186->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "147.45.112.186->10.128.239.57:3389",
+            "src_ip": "147.45.112.186",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.726780000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.860291000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.6->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.6->10.128.239.57:3389",
+            "src_ip": "91.238.181.6",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.727995000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "57.129.133.249->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "57.129.133.249->10.128.239.57:3389",
+            "src_ip": "57.129.133.249",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.758998000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.16.162->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.16.162->10.128.239.57:3389",
+            "src_ip": "194.165.16.162",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 5,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.916593000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.87->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.87->10.128.239.57:3389",
+            "src_ip": "45.141.87.87",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 8,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.947944000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.84.95->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.84.95->10.128.239.57:3389",
+            "src_ip": "45.141.84.95",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 6,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.036976000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "193.141.60.147->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "193.141.60.147->10.128.239.57:3389",
+            "src_ip": "193.141.60.147",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.460639000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.34->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "179.60.146.34->10.128.239.57:3389",
+            "src_ip": "179.60.146.34",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.523322000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-003",
+      "title": "Potential Data Exfiltration",
+      "description": "Large or frequent outbound transfers to external host suggest data exfiltration.",
+      "severity": "HIGH",
+      "confidence": 0.45,
+      "mitre_techniques": [
+        "T1048",
+        "T1041",
+        "T1567"
+      ],
+      "entities": [
+        "10.128.239.57->91.238.181.6"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "insufficient_evidence",
+        "limited_source_diversity",
+        "below_reporting_threshold"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "Large legitimate uploads (backups, cloud sync, CI/CD) may trigger volumetric thresholds."
+      ],
+      "missed_detection_risks": [
+        "Slow, low-volume exfiltration may stay below detection thresholds.",
+        "Encrypted exfiltration via legitimate services may not be flagged."
+      ],
+      "limitations": [
+        "Volumetric analysis detects transfer patterns, not content \u2014 payload inspection requires decryption."
+      ],
+      "evidence": [
+        {
+          "source": "volumetric_analysis",
+          "indicator": "volumetric_anomaly",
+          "value": "10.128.239.57->91.238.181.6",
+          "score": 0.4,
+          "details": {
+            "entity": "10.128.239.57->91.238.181.6",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "91.238.181.6",
+            "session_count": 5,
+            "total_bytes": 0,
+            "ports_used": [
+              2139,
+              16036
+            ],
+            "reasons": [
+              "high_session_count",
+              "high_port_usage"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.853804000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-004",
+      "title": "Multi-Signal Threat",
+      "description": "Multiple suspicious communication patterns from the same host suggest coordinated malicious activity.",
+      "severity": "HIGH",
+      "confidence": 0.49,
+      "mitre_techniques": [
+        "T1071",
+        "T1048",
+        "T1573"
+      ],
+      "entities": [
+        "10.128.239.57"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "insufficient_evidence",
+        "limited_source_diversity",
+        "below_reporting_threshold"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "A host with multiple benign anomalies may still be flagged by correlation."
+      ],
+      "missed_detection_risks": [
+        "Attacks using only one communication channel will not trigger multi-signal correlation."
+      ],
+      "limitations": [
+        "Correlation strength depends on the quality and coverage of upstream analyzers."
+      ],
+      "evidence": [
+        {
+          "source": "cross_signal_correlation",
+          "indicator": "multi_signal_host",
+          "value": "10.128.239.57",
+          "score": 1.0,
+          "details": {
+            "entity": "10.128.239.57",
+            "src_ip": "10.128.239.57",
+            "signals": [
+              "tls",
+              "volumetric"
+            ]
+          }
+        }
+      ]
     }
   ],
   "findings": [
+    {
+      "title": "External Sensitive Access",
+      "description": "External IP accessed internal host on sensitive port, suggesting unauthorized remote access.",
+      "severity": "HIGH",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1133",
+        "T1078",
+        "T1021.001"
+      ],
+      "recommendation": "Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.",
+      "affected_entities": [
+        "194.165.17.11->10.128.239.57:3389",
+        "91.238.181.91->10.128.239.57:3389",
+        "88.214.25.123->10.128.239.57:3389",
+        "194.165.16.163->10.128.239.57:3389",
+        "179.60.146.37->10.128.239.57:3389",
+        "147.45.112.185->10.128.239.57:3389",
+        "147.45.112.186->10.128.239.57:3389",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.238.181.6->10.128.239.57:3389",
+        "57.129.133.249->10.128.239.57:3389",
+        "194.165.16.162->10.128.239.57:3389",
+        "45.141.87.87->10.128.239.57:3389",
+        "45.141.84.95->10.128.239.57:3389",
+        "193.141.60.147->10.128.239.57:3389",
+        "179.60.146.34->10.128.239.57:3389"
+      ],
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Legitimate remote administration via RDP or SSH from authorized external IPs.",
+        "VPN or jump-host traffic may appear as external access."
+      ],
+      "missed_detection_risks": [
+        "Access via VPN tunnels that terminate internally will not appear as external."
+      ],
+      "limitations": [
+        "Cannot distinguish between authorized and unauthorized remote access without credential context."
+      ],
+      "evidence": [
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 6,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.197892000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.91->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.91->10.128.239.57:3389",
+            "src_ip": "91.238.181.91",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.278975000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "88.214.25.123->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "88.214.25.123->10.128.239.57:3389",
+            "src_ip": "88.214.25.123",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 01:42:23.359923000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.16.163->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.16.163->10.128.239.57:3389",
+            "src_ip": "194.165.16.163",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:24.951046000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.37->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "179.60.146.37->10.128.239.57:3389",
+            "src_ip": "179.60.146.37",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.375210000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "147.45.112.185->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "147.45.112.185->10.128.239.57:3389",
+            "src_ip": "147.45.112.185",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 7,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.487858000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "147.45.112.186->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "147.45.112.186->10.128.239.57:3389",
+            "src_ip": "147.45.112.186",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.726780000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 03:59:25.860291000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.6->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.6->10.128.239.57:3389",
+            "src_ip": "91.238.181.6",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.727995000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "57.129.133.249->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "57.129.133.249->10.128.239.57:3389",
+            "src_ip": "57.129.133.249",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.758998000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.16.162->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.16.162->10.128.239.57:3389",
+            "src_ip": "194.165.16.162",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 5,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.916593000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.87->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.87->10.128.239.57:3389",
+            "src_ip": "45.141.87.87",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 8,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:11.947944000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.84.95->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.84.95->10.128.239.57:3389",
+            "src_ip": "45.141.84.95",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 6,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.036976000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "193.141.60.147->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "193.141.60.147->10.128.239.57:3389",
+            "src_ip": "193.141.60.147",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.460639000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.34->10.128.239.57:3389",
+          "score": 0.8,
+          "details": {
+            "entity": "179.60.146.34->10.128.239.57:3389",
+            "src_ip": "179.60.146.34",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 2,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound"
+            ],
+            "event_timestamp": "Jan 18, 2026 08:13:12.523322000 +08"
+          }
+        }
+      ]
+    },
     {
       "title": "Suspicious TLS Session",
       "description": "Suspicious TLS metadata suggests encrypted malicious communication.",

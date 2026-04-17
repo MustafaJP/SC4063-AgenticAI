@@ -3,16 +3,18 @@
   "metrics": {
     "event_count": 147,
     "pcap_count": 3,
-    "analysis_runtime_seconds": 0.001,
-    "hypothesis_count": 2,
+    "analysis_runtime_seconds": 0.003,
+    "hypothesis_count": 4,
     "finding_count": 2,
     "estimated_analysis_cost": 0.0,
-    "human_review_required_count": 1,
-    "guardrailed_hypothesis_count": 2,
+    "human_review_required_count": 0,
+    "guardrailed_hypothesis_count": 4,
     "finding_with_false_positive_risk_count": 2,
     "finding_with_missed_detection_risk_count": 2
   },
-  "notes": [],
+  "notes": [
+    "Guardrail applied to HYP-004 (Multi-Signal Threat): insufficient corroborating evidence."
+  ],
   "safety_controls": [
     {
       "control": "minimum_evidence_requirement",
@@ -39,42 +41,57 @@
   ],
   "timeline": [
     {
-      "timestamp": "2026-04-12T14:54:41.163776Z",
+      "timestamp": "2026-04-16T18:55:06.949937Z",
       "step": "review_summary",
       "summary": "Started summary-first investigation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164111Z",
+      "timestamp": "2026-04-16T18:55:06.951808Z",
       "step": "analyze_beaconing",
       "summary": "Completed beaconing analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164182Z",
+      "timestamp": "2026-04-16T18:55:06.951836Z",
       "step": "analyze_dns",
       "summary": "Completed DNS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164185Z",
+      "timestamp": "2026-04-16T18:55:06.951838Z",
       "step": "analyze_http",
       "summary": "Completed HTTP analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164277Z",
+      "timestamp": "2026-04-16T18:55:06.951917Z",
       "step": "analyze_tls",
       "summary": "Completed TLS analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164291Z",
+      "timestamp": "2026-04-16T18:55:06.951929Z",
       "step": "analyze_bad_ip_reputation",
       "summary": "Completed IP reputation analysis"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164302Z",
+      "timestamp": "2026-04-16T18:55:06.951958Z",
+      "step": "analyze_smb",
+      "summary": "Completed SMB analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.952181Z",
+      "step": "analyze_external_access",
+      "summary": "Completed external access analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.952451Z",
+      "step": "analyze_volumetric",
+      "summary": "Completed volumetric analysis"
+    },
+    {
+      "timestamp": "2026-04-16T18:55:06.952473Z",
       "step": "cross_signal_correlation",
       "summary": "Completed cross-signal correlation"
     },
     {
-      "timestamp": "2026-04-12T14:54:41.164326Z",
+      "timestamp": "2026-04-16T18:55:06.952507Z",
       "step": "materialize_findings",
       "summary": "Generated 2 final findings"
     }
@@ -86,116 +103,33 @@
     "analyze_http",
     "analyze_tls",
     "analyze_bad_ip_reputation",
+    "analyze_smb",
+    "analyze_external_access",
+    "analyze_volumetric",
     "cross_signal_correlation",
     "materialize_findings"
   ],
   "hypotheses": [
     {
       "hypothesis_id": "HYP-001",
-      "title": "Suspicious DNS Activity",
-      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
-      "severity": "MEDIUM",
-      "confidence": 0.78,
-      "mitre_techniques": [
-        "T1071.004"
-      ],
-      "entities": [
-        "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
-        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com"
-      ],
-      "status": "OPEN",
-      "guardrail_flags": [
-        "limited_source_diversity",
-        "reportable_but_thin_evidence"
-      ],
-      "human_review_required": true,
-      "false_positive_risks": [
-        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
-        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
-      ],
-      "missed_detection_risks": [
-        "Low-volume DNS covert channels may stay below threshold.",
-        "Benign-looking domains used by attackers may evade entropy-based heuristics."
-      ],
-      "limitations": [
-        "DNS classification relies on metadata and naming patterns rather than payload semantics."
-      ],
-      "evidence": [
-        {
-          "source": "dns_analysis",
-          "indicator": "high_entropy_dns",
-          "value": "us-v20.events.endpoint.security.microsoft.com",
-          "score": 0.7,
-          "details": {
-            "entity": "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
-            "src_ip": "10.128.239.44",
-            "query": "us-v20.events.endpoint.security.microsoft.com",
-            "base_domain": "microsoft.com",
-            "qtype": "1",
-            "entropy": 3.965,
-            "query_count": 2,
-            "base_domain_count": 2,
-            "host_count_for_query": 2,
-            "host_count_for_base_domain": 2,
-            "varying_subdomain_count": 1,
-            "reasons": [
-              "high_entropy",
-              "multi_host_domain"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.728728000 +08"
-          }
-        },
-        {
-          "source": "dns_analysis",
-          "indicator": "high_entropy_dns",
-          "value": "us-v20.events.endpoint.security.microsoft.com",
-          "score": 0.7,
-          "details": {
-            "entity": "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
-            "src_ip": "10.128.239.20",
-            "query": "us-v20.events.endpoint.security.microsoft.com",
-            "base_domain": "microsoft.com",
-            "qtype": "1",
-            "entropy": 3.965,
-            "query_count": 2,
-            "base_domain_count": 2,
-            "host_count_for_query": 2,
-            "host_count_for_base_domain": 2,
-            "varying_subdomain_count": 1,
-            "reasons": [
-              "high_entropy",
-              "multi_host_domain"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.802369000 +08"
-          }
-        }
-      ]
-    },
-    {
-      "hypothesis_id": "HYP-002",
       "title": "Suspicious TLS Session",
       "description": "Suspicious TLS metadata suggests encrypted malicious communication.",
       "severity": "MEDIUM",
-      "confidence": 0.808,
+      "confidence": 0.83,
       "mitre_techniques": [
         "T1573",
         "T1071"
       ],
       "entities": [
-        "85.237.194.86->10.128.239.57:3389",
         "10.128.239.57->85.237.194.86:2626",
         "10.128.239.57->194.165.17.11:6784",
-        "194.165.17.11->10.128.239.57:3389",
         "10.128.239.57->194.165.17.11:18265",
         "10.128.239.57->88.214.25.115:19941",
         "10.128.239.57->45.141.87.201:31139",
         "10.128.239.57->45.141.87.46:34889",
         "10.128.239.57->45.135.232.20:5958",
-        "179.60.146.32->10.128.239.57:3389",
-        "91.199.163.12->10.128.239.57:3389",
         "10.128.239.57->179.60.146.32:53769",
-        "10.128.239.57->91.199.163.12:30900",
-        "45.141.87.151->10.128.239.57:3389"
+        "10.128.239.57->91.199.163.12:30900"
       ],
       "status": "OPEN",
       "guardrail_flags": [
@@ -214,31 +148,6 @@
         "TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata."
       ],
       "evidence": [
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "85.237.194.86->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "85.237.194.86->10.128.239.57:3389",
-            "src_ip": "85.237.194.86",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 2,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.457764000 +08"
-          }
-        },
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
@@ -317,81 +226,6 @@
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:25.801680000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:26.324687000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
           "value": "10.128.239.57->194.165.17.11:18265",
           "score": 0.6,
           "details": {
@@ -437,31 +271,6 @@
               "low_metadata_visibility"
             ],
             "event_timestamp": "Jan 14, 2026 05:11:26.502307000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "1",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:26.568959000 +08"
           }
         },
         {
@@ -542,56 +351,6 @@
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
-          "value": "179.60.146.32->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "179.60.146.32->10.128.239.57:3389",
-            "src_ip": "179.60.146.32",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 1,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "91.199.163.12->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "91.199.163.12->10.128.239.57:3389",
-            "src_ip": "91.199.163.12",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 1,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
           "value": "10.128.239.57->179.60.146.32:53769",
           "score": 0.6,
           "details": {
@@ -638,30 +397,434 @@
             ],
             "event_timestamp": "Jan 14, 2026 05:44:50.356233000 +08"
           }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-002",
+      "title": "External Sensitive Access",
+      "description": "External IP accessed internal host on sensitive port, suggesting unauthorized remote access.",
+      "severity": "HIGH",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1133",
+        "T1078",
+        "T1021.001"
+      ],
+      "entities": [
+        "91.238.181.10->10.128.239.57:3389",
+        "85.237.194.86->10.128.239.57:3389",
+        "141.98.11.118->10.128.239.57:3389",
+        "194.165.17.11->10.128.239.57:3389",
+        "88.214.25.115->10.128.239.57:3389",
+        "45.141.87.46->10.128.239.57:3389",
+        "45.141.87.151->10.128.239.57:3389",
+        "45.141.87.105->10.128.239.57:3389",
+        "45.135.232.20->10.128.239.57:3389",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.199.163.12->10.128.239.57:3389",
+        "45.141.87.201->10.128.239.57:3389"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Legitimate remote administration via RDP or SSH from authorized external IPs.",
+        "VPN or jump-host traffic may appear as external access."
+      ],
+      "missed_detection_risks": [
+        "Access via VPN tunnels that terminate internally will not appear as external."
+      ],
+      "limitations": [
+        "Cannot distinguish between authorized and unauthorized remote access without credential context."
+      ],
+      "evidence": [
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.10->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.10->10.128.239.57:3389",
+            "src_ip": "91.238.181.10",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:42.857787000 +08"
+          }
         },
         {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "85.237.194.86->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "85.237.194.86->10.128.239.57:3389",
+            "src_ip": "85.237.194.86",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 8,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:42.914074000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "141.98.11.118->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "141.98.11.118->10.128.239.57:3389",
+            "src_ip": "141.98.11.118",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.279287000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 20,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "88.214.25.115->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "88.214.25.115->10.128.239.57:3389",
+            "src_ip": "88.214.25.115",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 5,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.089680000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.46->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.46->10.128.239.57:3389",
+            "src_ip": "45.141.87.46",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.752947000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
           "value": "45.141.87.151->10.128.239.57:3389",
-          "score": 0.5,
+          "score": 0.9,
           "details": {
             "entity": "45.141.87.151->10.128.239.57:3389",
             "src_ip": "45.141.87.151",
             "dst_ip": "10.128.239.57",
             "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 2,
+            "service": "RDP",
+            "connection_count": 6,
             "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
             ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.607050000 +08"
+            "event_timestamp": "Jan 14, 2026 05:44:49.886541000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.105->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.105->10.128.239.57:3389",
+            "src_ip": "45.141.87.105",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 14,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.976763000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.135.232.20->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.135.232.20->10.128.239.57:3389",
+            "src_ip": "45.135.232.20",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.171918000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.199.163.12->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.199.163.12->10.128.239.57:3389",
+            "src_ip": "91.199.163.12",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.201->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.201->10.128.239.57:3389",
+            "src_ip": "45.141.87.201",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.392586000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-003",
+      "title": "Potential Data Exfiltration",
+      "description": "Large or frequent outbound transfers to external host suggest data exfiltration.",
+      "severity": "HIGH",
+      "confidence": 0.583,
+      "mitre_techniques": [
+        "T1048",
+        "T1041",
+        "T1567"
+      ],
+      "entities": [
+        "10.128.239.57->85.237.194.86",
+        "10.128.239.57->194.165.17.11",
+        "10.128.239.57->88.214.25.115"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "limited_source_diversity",
+        "below_reporting_threshold"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Large legitimate uploads (backups, cloud sync, CI/CD) may trigger volumetric thresholds."
+      ],
+      "missed_detection_risks": [
+        "Slow, low-volume exfiltration may stay below detection thresholds.",
+        "Encrypted exfiltration via legitimate services may not be flagged."
+      ],
+      "limitations": [
+        "Volumetric analysis detects transfer patterns, not content \u2014 payload inspection requires decryption."
+      ],
+      "evidence": [
+        {
+          "source": "volumetric_analysis",
+          "indicator": "volumetric_anomaly",
+          "value": "10.128.239.57->85.237.194.86",
+          "score": 0.3,
+          "details": {
+            "entity": "10.128.239.57->85.237.194.86",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "85.237.194.86",
+            "session_count": 6,
+            "total_bytes": 0,
+            "ports_used": [
+              2626
+            ],
+            "reasons": [
+              "high_session_count"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.519919000 +08"
+          }
+        },
+        {
+          "source": "volumetric_analysis",
+          "indicator": "volumetric_anomaly",
+          "value": "10.128.239.57->194.165.17.11",
+          "score": 0.6,
+          "details": {
+            "entity": "10.128.239.57->194.165.17.11",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "194.165.17.11",
+            "session_count": 10,
+            "total_bytes": 0,
+            "ports_used": [
+              6784,
+              18265
+            ],
+            "reasons": [
+              "high_session_count",
+              "very_high_session_count",
+              "high_port_usage"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.679175000 +08"
+          }
+        },
+        {
+          "source": "volumetric_analysis",
+          "indicator": "volumetric_anomaly",
+          "value": "10.128.239.57->88.214.25.115",
+          "score": 0.4,
+          "details": {
+            "entity": "10.128.239.57->88.214.25.115",
+            "src_ip": "10.128.239.57",
+            "dst_ip": "88.214.25.115",
+            "session_count": 5,
+            "total_bytes": 0,
+            "ports_used": [
+              19941
+            ],
+            "reasons": [
+              "high_session_count",
+              "high_port_usage"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.148765000 +08"
+          }
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "HYP-004",
+      "title": "Multi-Signal Threat",
+      "description": "Multiple suspicious communication patterns from the same host suggest coordinated malicious activity.",
+      "severity": "HIGH",
+      "confidence": 0.49,
+      "mitre_techniques": [
+        "T1071",
+        "T1048",
+        "T1573"
+      ],
+      "entities": [
+        "10.128.239.57"
+      ],
+      "status": "OPEN",
+      "guardrail_flags": [
+        "insufficient_evidence",
+        "limited_source_diversity",
+        "below_reporting_threshold"
+      ],
+      "human_review_required": true,
+      "false_positive_risks": [
+        "A host with multiple benign anomalies may still be flagged by correlation."
+      ],
+      "missed_detection_risks": [
+        "Attacks using only one communication channel will not trigger multi-signal correlation."
+      ],
+      "limitations": [
+        "Correlation strength depends on the quality and coverage of upstream analyzers."
+      ],
+      "evidence": [
+        {
+          "source": "cross_signal_correlation",
+          "indicator": "multi_signal_host",
+          "value": "10.128.239.57",
+          "score": 1.0,
+          "details": {
+            "entity": "10.128.239.57",
+            "src_ip": "10.128.239.57",
+            "signals": [
+              "tls",
+              "volumetric"
+            ]
           }
         }
       ]
@@ -669,30 +832,307 @@
   ],
   "findings": [
     {
+      "title": "External Sensitive Access",
+      "description": "External IP accessed internal host on sensitive port, suggesting unauthorized remote access.",
+      "severity": "HIGH",
+      "confidence": 1.0,
+      "mitre_techniques": [
+        "T1133",
+        "T1078",
+        "T1021.001"
+      ],
+      "recommendation": "Verify authorization of external access, reset credentials on accessed hosts, and review for signs of post-exploitation activity.",
+      "affected_entities": [
+        "91.238.181.10->10.128.239.57:3389",
+        "85.237.194.86->10.128.239.57:3389",
+        "141.98.11.118->10.128.239.57:3389",
+        "194.165.17.11->10.128.239.57:3389",
+        "88.214.25.115->10.128.239.57:3389",
+        "45.141.87.46->10.128.239.57:3389",
+        "45.141.87.151->10.128.239.57:3389",
+        "45.141.87.105->10.128.239.57:3389",
+        "45.135.232.20->10.128.239.57:3389",
+        "179.60.146.32->10.128.239.57:3389",
+        "91.199.163.12->10.128.239.57:3389",
+        "45.141.87.201->10.128.239.57:3389"
+      ],
+      "guardrail_flags": [
+        "limited_source_diversity"
+      ],
+      "human_review_required": false,
+      "false_positive_risks": [
+        "Legitimate remote administration via RDP or SSH from authorized external IPs.",
+        "VPN or jump-host traffic may appear as external access."
+      ],
+      "missed_detection_risks": [
+        "Access via VPN tunnels that terminate internally will not appear as external."
+      ],
+      "limitations": [
+        "Cannot distinguish between authorized and unauthorized remote access without credential context."
+      ],
+      "evidence": [
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.238.181.10->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.238.181.10->10.128.239.57:3389",
+            "src_ip": "91.238.181.10",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:42.857787000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "85.237.194.86->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "85.237.194.86->10.128.239.57:3389",
+            "src_ip": "85.237.194.86",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 8,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:42.914074000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "141.98.11.118->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "141.98.11.118->10.128.239.57:3389",
+            "src_ip": "141.98.11.118",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 01:21:43.279287000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "194.165.17.11->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "194.165.17.11->10.128.239.57:3389",
+            "src_ip": "194.165.17.11",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 20,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "88.214.25.115->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "88.214.25.115->10.128.239.57:3389",
+            "src_ip": "88.214.25.115",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 5,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:11:26.089680000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.46->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.46->10.128.239.57:3389",
+            "src_ip": "45.141.87.46",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 10,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.752947000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.151->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.151->10.128.239.57:3389",
+            "src_ip": "45.141.87.151",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 6,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.886541000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.105->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.105->10.128.239.57:3389",
+            "src_ip": "45.141.87.105",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 14,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:49.976763000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.135.232.20->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.135.232.20->10.128.239.57:3389",
+            "src_ip": "45.135.232.20",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.171918000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "179.60.146.32->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "179.60.146.32->10.128.239.57:3389",
+            "src_ip": "179.60.146.32",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "91.199.163.12->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "91.199.163.12->10.128.239.57:3389",
+            "src_ip": "91.199.163.12",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
+          }
+        },
+        {
+          "source": "external_access_analysis",
+          "indicator": "external_sensitive_access",
+          "value": "45.141.87.201->10.128.239.57:3389",
+          "score": 0.9,
+          "details": {
+            "entity": "45.141.87.201->10.128.239.57:3389",
+            "src_ip": "45.141.87.201",
+            "dst_ip": "10.128.239.57",
+            "dst_port": 3389,
+            "service": "RDP",
+            "connection_count": 3,
+            "reasons": [
+              "external_rdp_access",
+              "external_rdp_inbound",
+              "repeated_access"
+            ],
+            "event_timestamp": "Jan 14, 2026 05:44:50.392586000 +08"
+          }
+        }
+      ]
+    },
+    {
       "title": "Suspicious TLS Session",
       "description": "Suspicious TLS metadata suggests encrypted malicious communication.",
       "severity": "MEDIUM",
-      "confidence": 0.808,
+      "confidence": 0.83,
       "mitre_techniques": [
         "T1573",
         "T1071"
       ],
       "recommendation": "Review certificate, SNI, JA3, and destination context; block suspicious encrypted channels pending verification.",
       "affected_entities": [
-        "85.237.194.86->10.128.239.57:3389",
         "10.128.239.57->85.237.194.86:2626",
         "10.128.239.57->194.165.17.11:6784",
-        "194.165.17.11->10.128.239.57:3389",
         "10.128.239.57->194.165.17.11:18265",
         "10.128.239.57->88.214.25.115:19941",
         "10.128.239.57->45.141.87.201:31139",
         "10.128.239.57->45.141.87.46:34889",
         "10.128.239.57->45.135.232.20:5958",
-        "179.60.146.32->10.128.239.57:3389",
-        "91.199.163.12->10.128.239.57:3389",
         "10.128.239.57->179.60.146.32:53769",
-        "10.128.239.57->91.199.163.12:30900",
-        "45.141.87.151->10.128.239.57:3389"
+        "10.128.239.57->91.199.163.12:30900"
       ],
       "guardrail_flags": [
         "limited_source_diversity"
@@ -710,31 +1150,6 @@
         "TLS analysis may be constrained by unavailable JA3, limited SNI visibility, or incomplete handshake metadata."
       ],
       "evidence": [
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "85.237.194.86->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "85.237.194.86->10.128.239.57:3389",
-            "src_ip": "85.237.194.86",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 2,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.457764000 +08"
-          }
-        },
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
@@ -813,81 +1228,6 @@
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:25.741237000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:25.801680000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:26.324687000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
           "value": "10.128.239.57->194.165.17.11:18265",
           "score": 0.6,
           "details": {
@@ -933,31 +1273,6 @@
               "low_metadata_visibility"
             ],
             "event_timestamp": "Jan 14, 2026 05:11:26.502307000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "194.165.17.11->10.128.239.57:3389",
-          "score": 0.6,
-          "details": {
-            "entity": "194.165.17.11->10.128.239.57:3389",
-            "src_ip": "194.165.17.11",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "1",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 4,
-            "reasons": [
-              "missing_sni",
-              "repeated_missing_sni_from_source",
-              "tls_on_nonstandard_port",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:11:26.568959000 +08"
           }
         },
         {
@@ -1038,56 +1353,6 @@
         {
           "source": "tls_analysis",
           "indicator": "suspicious_tls",
-          "value": "179.60.146.32->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "179.60.146.32->10.128.239.57:3389",
-            "src_ip": "179.60.146.32",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 1,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.253194000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "91.199.163.12->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "91.199.163.12->10.128.239.57:3389",
-            "src_ip": "91.199.163.12",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 1,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.290165000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
           "value": "10.128.239.57->179.60.146.32:53769",
           "score": 0.6,
           "details": {
@@ -1133,111 +1398,6 @@
               "low_metadata_visibility"
             ],
             "event_timestamp": "Jan 14, 2026 05:44:50.356233000 +08"
-          }
-        },
-        {
-          "source": "tls_analysis",
-          "indicator": "suspicious_tls",
-          "value": "45.141.87.151->10.128.239.57:3389",
-          "score": 0.5,
-          "details": {
-            "entity": "45.141.87.151->10.128.239.57:3389",
-            "src_ip": "45.141.87.151",
-            "dst_ip": "10.128.239.57",
-            "dst_port": 3389,
-            "ja3": "",
-            "sni": "",
-            "handshake_type": "16",
-            "handshake_version": "",
-            "record_version": "",
-            "missing_sni_count_for_src": 2,
-            "reasons": [
-              "missing_sni",
-              "tls_on_nonstandard_port",
-              "unusual_handshake_type",
-              "low_metadata_visibility"
-            ],
-            "event_timestamp": "Jan 14, 2026 05:44:50.607050000 +08"
-          }
-        }
-      ]
-    },
-    {
-      "title": "Suspicious DNS Activity",
-      "description": "High-entropy or unusually structured DNS queries suggest possible algorithmic domains, covert DNS use, or DNS-based command-and-control. Additional corroboration is required before classifying as tunneling.",
-      "severity": "MEDIUM",
-      "confidence": 0.78,
-      "mitre_techniques": [
-        "T1071.004"
-      ],
-      "recommendation": "Perform additional containment and validation in accordance with incident response procedures.",
-      "affected_entities": [
-        "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
-        "10.128.239.20:us-v20.events.endpoint.security.microsoft.com"
-      ],
-      "guardrail_flags": [
-        "limited_source_diversity",
-        "reportable_but_thin_evidence"
-      ],
-      "human_review_required": true,
-      "false_positive_risks": [
-        "High-entropy DNS can also appear in CDNs, telemetry, security products, and benign service-generated domains.",
-        "Repeated subdomain variation is suspicious but does not alone prove DNS tunneling."
-      ],
-      "missed_detection_risks": [
-        "Low-volume DNS covert channels may stay below threshold.",
-        "Benign-looking domains used by attackers may evade entropy-based heuristics."
-      ],
-      "limitations": [
-        "DNS classification relies on metadata and naming patterns rather than payload semantics."
-      ],
-      "evidence": [
-        {
-          "source": "dns_analysis",
-          "indicator": "high_entropy_dns",
-          "value": "us-v20.events.endpoint.security.microsoft.com",
-          "score": 0.7,
-          "details": {
-            "entity": "10.128.239.44:us-v20.events.endpoint.security.microsoft.com",
-            "src_ip": "10.128.239.44",
-            "query": "us-v20.events.endpoint.security.microsoft.com",
-            "base_domain": "microsoft.com",
-            "qtype": "1",
-            "entropy": 3.965,
-            "query_count": 2,
-            "base_domain_count": 2,
-            "host_count_for_query": 2,
-            "host_count_for_base_domain": 2,
-            "varying_subdomain_count": 1,
-            "reasons": [
-              "high_entropy",
-              "multi_host_domain"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.728728000 +08"
-          }
-        },
-        {
-          "source": "dns_analysis",
-          "indicator": "high_entropy_dns",
-          "value": "us-v20.events.endpoint.security.microsoft.com",
-          "score": 0.7,
-          "details": {
-            "entity": "10.128.239.20:us-v20.events.endpoint.security.microsoft.com",
-            "src_ip": "10.128.239.20",
-            "query": "us-v20.events.endpoint.security.microsoft.com",
-            "base_domain": "microsoft.com",
-            "qtype": "1",
-            "entropy": 3.965,
-            "query_count": 2,
-            "base_domain_count": 2,
-            "host_count_for_query": 2,
-            "host_count_for_base_domain": 2,
-            "varying_subdomain_count": 1,
-            "reasons": [
-              "high_entropy",
-              "multi_host_domain"
-            ],
-            "event_timestamp": "Jan 14, 2026 01:21:43.802369000 +08"
           }
         }
       ]
