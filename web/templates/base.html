@@ -25,6 +25,9 @@
       <li><a href="{{ url_for('results_page') }}" class="{% if request.endpoint in ('results_page', 'result_detail_page') %}active{% endif %}">
         <span>&#128220;</span> Results
       </a></li>
+      <li><a href="{{ url_for('master_page') }}" class="{% if request.endpoint == 'master_page' %}active{% endif %}">
+        <span>&#128736;</span> Master Report
+      </a></li>
     </ul>
   </nav>
 

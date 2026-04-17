@@ -356,6 +356,56 @@ a:hover { text-decoration: underline; }
 .alert-warn { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); color: var(--warning); }
 .alert-info { background: rgba(79,156,249,.08); border: 1px solid rgba(79,156,249,.2); color: var(--text-muted); }
 
+/* ── Master report page ───────────────────────────────────────────────────── */
+.exec-summary {
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--text);
+  padding: .5rem 0;
+}
+.finding-sub { font-size: .82rem; color: var(--text-muted); margin-top: .25rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.finding-sub a { font-family: var(--mono); }
+
+.ranking-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.rank-list { list-style: none; padding: 0; margin: 0; }
+.rank-item {
+  display: grid;
+  grid-template-columns: 1fr 80px 40px;
+  gap: .6rem;
+  align-items: center;
+  padding: .35rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: .85rem;
+}
+.rank-item:last-child { border-bottom: none; }
+.rank-label {
+  font-family: var(--mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-bar-wrap { background: var(--bg); border-radius: 3px; height: 6px; overflow: hidden; }
+.rank-bar      { background: var(--accent); height: 100%; border-radius: 3px; }
+.rank-count    { text-align: right; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+
+/* Flowchart */
+.flowchart-wrap {
+  overflow: auto;
+  background: #0a0d14;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 1rem;
+  max-height: 700px;
+  text-align: center;
+}
+.mermaid { display: inline-block; transform-origin: top left; transition: transform .2s; }
+.mermaid svg { max-width: none !important; background: transparent !important; }
+
 /* ── Utility ──────────────────────────────────────────────────────────────── */
 .text-success { color: var(--success) !important; }
 .text-danger  { color: var(--danger)  !important; }

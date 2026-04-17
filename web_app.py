@@ -378,6 +378,48 @@ def api_result_markdown(bundle_id):
     return Response(md_path.read_text(), mimetype="text/plain")
 
 
+# ── Routes: Master Report (aggregated across all bundles) ─────────────────────
+
+@app.route("/master")
+def master_page():
+    return render_template("master.html")
+
+
+@app.route("/api/master")
+def api_master():
+    path = OUTPUT_DIR / "master" / "master_report.json"
+    if not path.exists():
+        return jsonify({"error": "Master report not found. Run Phase 11 first."}), 404
+    with path.open() as f:
+        return jsonify(json.load(f))
+
+
+@app.route("/api/master/markdown")
+def api_master_markdown():
+    path = OUTPUT_DIR / "master" / "master_report.md"
+    if not path.exists():
+        return jsonify({"error": "Master markdown not found"}), 404
+    return Response(path.read_text(), mimetype="text/plain")
+
+
+@app.route("/api/master/flowchart")
+def api_master_flowchart():
+    """Return the Mermaid flowchart source (.mmd) for client-side rendering."""
+    path = OUTPUT_DIR / "master" / "findings_flowchart.mmd"
+    if not path.exists():
+        return jsonify({"error": "Flowchart not found"}), 404
+    return Response(path.read_text(), mimetype="text/plain")
+
+
+@app.route("/api/campaign")
+def api_campaign():
+    path = OUTPUT_DIR / "campaign" / "campaign_report.json"
+    if not path.exists():
+        return jsonify({"error": "Campaign report not found"}), 404
+    with path.open() as f:
+        return jsonify(json.load(f))
+
+
 # ── Entry point ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":

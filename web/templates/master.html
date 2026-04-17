@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block title %}Master Report — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Master Investigation Report</h1>
+  <p class="page-subtitle">Aggregated findings across all bundles</p>
+</div>
+
+<div id="masterError" class="alert alert-warn" style="display:none"></div>
+
+<!-- Summary cards -->
+<div id="masterSummary" class="metrics-summary-grid" style="display:none">
+  <div class="metric-card">
+    <div class="metric-value" id="mBundles">—</div>
+    <div class="metric-label">Bundles</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value text-danger" id="mFindings">—</div>
+    <div class="metric-label">Bundle Findings</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value text-danger" id="mCampaign">—</div>
+    <div class="metric-label">Campaign Findings</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="mHumanReview">—</div>
+    <div class="metric-label">Human Review</div>
+  </div>
+</div>
+
+<!-- Executive summary -->
+<div class="card" id="summaryCard" style="display:none">
+  <h2>Executive Summary</h2>
+  <p id="execSummary" class="exec-summary"></p>
+  <p id="investWindow" class="text-muted"></p>
+</div>
+
+<!-- Flowchart -->
+<div class="card" id="flowchartCard" style="display:none">
+  <div class="card-header-row">
+    <h2>Findings Flowchart</h2>
+    <div class="log-controls">
+      <button class="btn btn-sm btn-ghost" onclick="zoomFlowchart(0.2)">+ Zoom</button>
+      <button class="btn btn-sm btn-ghost" onclick="zoomFlowchart(-0.2)">− Zoom</button>
+      <button class="btn btn-sm btn-ghost" onclick="resetZoom()">Reset</button>
+      <button class="btn btn-sm btn-ghost" onclick="downloadMmd()">Download .mmd</button>
+    </div>
+  </div>
+  <div id="flowchartWrap" class="flowchart-wrap">
+    <div id="flowchart" class="mermaid"></div>
+  </div>
+</div>
+
+<!-- Top findings -->
+<div class="card" id="topFindingsCard" style="display:none">
+  <h2>Top Findings</h2>
+  <div id="topFindingsList"></div>
+</div>
+
+<!-- Campaign findings -->
+<div class="card" id="campaignCard" style="display:none">
+  <h2>Campaign-Level Findings</h2>
+  <p class="text-muted" style="margin-bottom:1rem">Threats that persist across multiple bundles</p>
+  <div id="campaignFindingsList"></div>
+</div>
+
+<!-- Rankings grid -->
+<div class="ranking-grid" id="rankingGrid" style="display:none">
+  <div class="card">
+    <h2>Top Finding Types</h2>
+    <ul class="rank-list" id="topTitles"></ul>
+  </div>
+  <div class="card">
+    <h2>Top MITRE Techniques</h2>
+    <ul class="rank-list" id="topMitre"></ul>
+  </div>
+  <div class="card">
+    <h2>Top Entities</h2>
+    <ul class="rank-list" id="topEntities"></ul>
+  </div>
+  <div class="card">
+    <h2>Top Source Hosts</h2>
+    <ul class="rank-list" id="topSources"></ul>
+  </div>
+  <div class="card">
+    <h2>Top Destination Hosts</h2>
+    <ul class="rank-list" id="topDests"></ul>
+  </div>
+  <div class="card">
+    <h2>Severity Distribution</h2>
+    <ul class="rank-list" id="sevDist"></ul>
+  </div>
+</div>
+
+<!-- Markdown -->
+<div class="card" id="mdCard" style="display:none">
+  <div class="card-header-row">
+    <h2>Full Markdown Report</h2>
+    <button class="btn btn-sm btn-ghost" id="mdToggleBtn" onclick="toggleMd()">Show</button>
+  </div>
+  <pre id="mdContent" class="log-output md-output" style="display:none"></pre>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: { useMaxWidth: false, htmlLabels: true }
+  });
+
+  let mdLoaded = false;
+  let flowchartZoom = 1.0;
+
+  async function loadMaster() {
+    const res = await fetch('/api/master');
+    if (!res.ok) {
+      const d = await res.json();
+      document.getElementById('masterError').textContent =
+        d.error || 'Master report not available. Run Phase 11 first.';
+      document.getElementById('masterError').style.display = '';
+      return;
+    }
+    const m = await res.json();
+
+    // Summary cards
+    document.getElementById('masterSummary').style.display = '';
+    document.getElementById('mBundles').textContent  = m.bundle_count ?? '—';
+    document.getElementById('mFindings').textContent = m.total_bundle_findings ?? '—';
+    document.getElementById('mCampaign').textContent = m.campaign_finding_count ?? '—';
+    document.getElementById('mHumanReview').textContent = m.human_review_required_count ?? '—';
+
+    // Executive summary
+    if (m.executive_summary) {
+      document.getElementById('summaryCard').style.display = '';
+      document.getElementById('execSummary').textContent = m.executive_summary;
+      const w = m.investigation_window || {};
+      if (w.first_seen || w.last_seen) {
+        document.getElementById('investWindow').textContent =
+          `Investigation window: ${w.first_seen || '—'}  →  ${w.last_seen || '—'}`;
+      }
+    }
+
+    // Top findings
+    const topFindings = m.top_findings || [];
+    if (topFindings.length) {
+      document.getElementById('topFindingsCard').style.display = '';
+      document.getElementById('topFindingsList').innerHTML = topFindings.map(f => `
+        <div class="finding-item ${sevClass(f.severity)}">
+          <div class="finding-header">
+            <span class="finding-title">${escapeHtml(f.title || '')}</span>
+            <span class="finding-severity badge badge-${sevClass(f.severity)}">${f.severity || 'UNKNOWN'}</span>
+            <span class="finding-score">conf: ${((f.confidence || 0) * 100).toFixed(0)}%</span>
+          </div>
+          <div class="finding-sub">
+            <a href="/results/${encodeURIComponent(f.bundle_id)}">${f.bundle_id}</a>
+            ${f.human_review_required ? '<span class="badge badge-medium">Human Review</span>' : ''}
+          </div>
+          ${(f.mitre_techniques || []).length ? `<div class="finding-mitre">${f.mitre_techniques.map(t => `<span class="mitre-tag">${t}</span>`).join('')}</div>` : ''}
+          ${(f.affected_entities || []).length ? `<p class="finding-desc"><strong>Entities:</strong> ${f.affected_entities.slice(0,5).map(escapeHtml).join(', ')}</p>` : ''}
+          ${f.recommendation ? `<p class="finding-desc"><strong>Recommendation:</strong> ${escapeHtml(f.recommendation)}</p>` : ''}
+        </div>`).join('');
+    }
+
+    // Campaign findings
+    const campaignFindings = (m.campaign_report && m.campaign_report.campaign_findings) || [];
+    if (campaignFindings.length) {
+      document.getElementById('campaignCard').style.display = '';
+      document.getElementById('campaignFindingsList').innerHTML = campaignFindings.map(f => `
+        <div class="finding-item ${sevClass(f.severity)}">
+          <div class="finding-header">
+            <span class="finding-title">${escapeHtml(f.title || '')}</span>
+            <span class="finding-severity badge badge-${sevClass(f.severity)}">${f.severity || 'UNKNOWN'}</span>
+            <span class="finding-score">conf: ${((f.confidence || 0) * 100).toFixed(0)}%</span>
+          </div>
+          ${f.description ? `<p class="finding-desc">${escapeHtml(f.description)}</p>` : ''}
+          ${(f.bundle_ids || []).length ? `<p class="finding-desc text-muted"><strong>${f.bundle_ids.length} bundles:</strong> ${f.bundle_ids.slice(0,8).join(', ')}${f.bundle_ids.length > 8 ? '…' : ''}</p>` : ''}
+        </div>`).join('');
+    }
+
+    // Rankings
+    document.getElementById('rankingGrid').style.display = '';
+    fillRankList('topTitles',  m.top_finding_titles || [],   x => x.title,     x => x.count);
+    fillRankList('topMitre',   m.top_mitre_techniques || [], x => x.technique, x => x.count);
+    fillRankList('topEntities',m.top_entities || [],         x => x.entity,    x => x.count);
+    fillRankList('topSources', m.top_source_hosts || [],     x => x.host,      x => x.count);
+    fillRankList('topDests',   m.top_destination_hosts || [],x => x.host,      x => x.count);
+    const sev = m.severity_distribution || {};
+    fillRankList('sevDist',
+      Object.keys(sev).map(k => ({ k, v: sev[k] })),
+      x => x.k, x => x.v);
+
+    // Markdown card
+    document.getElementById('mdCard').style.display = '';
+
+    // Flowchart
+    loadFlowchart();
+  }
+
+  async function loadFlowchart() {
+    const res = await fetch('/api/master/flowchart');
+    if (!res.ok) return;
+    const text = await res.text();
+    document.getElementById('flowchartCard').style.display = '';
+    const el = document.getElementById('flowchart');
+    try {
+      const { svg } = await mermaid.render('flowchart-svg', text);
+      el.innerHTML = svg;
+    } catch (err) {
+      el.innerHTML = '<pre class="log-output">Render failed. Raw source:\n\n' + escapeHtml(text) + '</pre>';
+    }
+  }
+
+  function fillRankList(id, items, getLabel, getVal) {
+    const el = document.getElementById(id);
+    if (!items.length) { el.innerHTML = '<li class="text-muted">No data</li>'; return; }
+    const max = Math.max(...items.map(getVal));
+    el.innerHTML = items.map(it => {
+      const pct = Math.round((getVal(it) / max) * 100);
+      return `
+        <li class="rank-item">
+          <span class="rank-label" title="${escapeHtml(String(getLabel(it)))}">${escapeHtml(String(getLabel(it)))}</span>
+          <span class="rank-bar-wrap"><span class="rank-bar" style="width:${pct}%"></span></span>
+          <span class="rank-count">${getVal(it)}</span>
+        </li>`;
+    }).join('');
+  }
+
+  async function toggleMd() {
+    const content = document.getElementById('mdContent');
+    const btn = document.getElementById('mdToggleBtn');
+    if (content.style.display === 'none') {
+      if (!mdLoaded) {
+        const res = await fetch('/api/master/markdown');
+        content.textContent = res.ok ? await res.text() : 'No markdown report.';
+        mdLoaded = true;
+      }
+      content.style.display = '';
+      btn.textContent = 'Hide';
+    } else {
+      content.style.display = 'none';
+      btn.textContent = 'Show';
+    }
+  }
+
+  function zoomFlowchart(delta) {
+    flowchartZoom = Math.max(0.3, Math.min(3, flowchartZoom + delta));
+    document.getElementById('flowchart').style.transform = `scale(${flowchartZoom})`;
+  }
+  function resetZoom() {
+    flowchartZoom = 1;
+    document.getElementById('flowchart').style.transform = 'scale(1)';
+  }
+
+  async function downloadMmd() {
+    const res = await fetch('/api/master/flowchart');
+    const text = await res.text();
+    const blob = new Blob([text], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'findings_flowchart.mmd';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function sevClass(sev) {
+    switch ((sev || '').toUpperCase()) {
+      case 'CRITICAL': return 'critical';
+      case 'HIGH':     return 'high';
+      case 'MEDIUM':   return 'medium';
+      case 'LOW':      return 'low';
+      default:         return 'info';
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  loadMaster();
+</script>
+{% endblock %}
