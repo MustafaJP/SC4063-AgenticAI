@@ -1,0 +1,8 @@
+# Web interface
+flask>=3.0
+
+# All other dependencies are Python stdlib or external tools:
+#   tshark  — install via:  sudo apt install tshark   (Ubuntu/Debian)
+#                            sudo yum install wireshark-cli  (RHEL/CentOS)
+#   sqlite3 — bundled with Python
+#   ollama  — install from https://ollama.ai  (only needed for agentic/LLM mode)

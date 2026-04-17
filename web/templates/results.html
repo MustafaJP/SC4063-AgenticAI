@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Results — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Investigation Results</h1>
+  <p class="page-subtitle">Browse analysis bundles produced by the agent</p>
+</div>
+
+<div id="resultsEmpty" class="alert alert-info" style="display:none">
+  No results yet. Run the pipeline (Phases 1–9) first.
+</div>
+
+<div id="resultsGrid" class="results-grid"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  async function loadResults() {
+    const res = await fetch('/api/results');
+    const bundles = await res.json();
+    if (!bundles.length) {
+      document.getElementById('resultsEmpty').style.display = '';
+      return;
+    }
+    const grid = document.getElementById('resultsGrid');
+    grid.innerHTML = bundles.map(b => `
+      <a class="result-card" href="/results/${encodeURIComponent(b.bundle_id)}">
+        <div class="result-card-header">
+          <span class="bundle-id">${b.bundle_id}</span>
+          ${b.agentic_mode ? '<span class="badge badge-agentic">LLM</span>' : '<span class="badge badge-rule">Rule</span>'}
+        </div>
+        <div class="result-stats">
+          <div class="result-stat">
+            <span class="stat-value ${b.finding_count > 0 ? 'text-danger' : 'text-success'}">${b.finding_count}</span>
+            <span class="stat-label">Findings</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-value">${b.hypothesis_count}</span>
+            <span class="stat-label">Hypotheses</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-value">${b.event_count.toLocaleString()}</span>
+            <span class="stat-label">Events</span>
+          </div>
+          <div class="result-stat">
+            <span class="stat-value">${b.pcap_count}</span>
+            <span class="stat-label">PCAPs</span>
+          </div>
+        </div>
+        <div class="result-footer">
+          Runtime: ${formatDuration(b.runtime_seconds)}
+        </div>
+      </a>`).join('');
+  }
+
+  function formatDuration(sec) {
+    if (!sec) return '—';
+    if (sec < 60) return sec.toFixed(1) + 's';
+    const m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    return m + 'm ' + s + 's';
+  }
+
+  loadResults();
+</script>
+{% endblock %}

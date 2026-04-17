@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+{% block title %}Report: {{ bundle_id }} — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <a href="{{ url_for('results_page') }}" class="back-link">&#8592; All Results</a>
+  <h1 id="reportTitle">Loading report…</h1>
+  <p class="page-subtitle" id="reportSubtitle"></p>
+</div>
+
+<div id="reportError" class="alert alert-warn" style="display:none"></div>
+
+<!-- Summary cards -->
+<div class="metrics-summary-grid" id="reportSummary" style="display:none">
+  <div class="metric-card">
+    <div class="metric-value text-danger" id="rFindings">—</div>
+    <div class="metric-label">Findings</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="rHypotheses">—</div>
+    <div class="metric-label">Hypotheses</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="rEvents">—</div>
+    <div class="metric-label">Events Analysed</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="rRuntime">—</div>
+    <div class="metric-label">Analysis Runtime</div>
+  </div>
+</div>
+
+<!-- Findings -->
+<div class="card" id="findingsCard" style="display:none">
+  <h2>Findings</h2>
+  <div id="findingsList"></div>
+</div>
+
+<!-- Hypotheses -->
+<div class="card" id="hypothesesCard" style="display:none">
+  <h2>Hypotheses</h2>
+  <div id="hypothesesList"></div>
+</div>
+
+<!-- LLM Reasoning -->
+<div class="card" id="llmCard" style="display:none">
+  <h2>LLM Reasoning</h2>
+  <pre id="llmReasoning" class="log-output reasoning-output"></pre>
+</div>
+
+<!-- Markdown report -->
+<div class="card" id="mdCard" style="display:none">
+  <div class="card-header-row">
+    <h2>Full Report (Markdown)</h2>
+    <button class="btn btn-sm btn-ghost" id="mdToggleBtn" onclick="toggleMd()">Show</button>
+  </div>
+  <pre id="mdContent" class="log-output md-output" style="display:none"></pre>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const bundleId = {{ bundle_id | tojson }};
+  let mdLoaded = false;
+
+  async function loadReport() {
+    const res = await fetch(`/api/results/${encodeURIComponent(bundleId)}`);
+    if (!res.ok) {
+      document.getElementById('reportError').textContent = 'Report not found.';
+      document.getElementById('reportError').style.display = '';
+      document.getElementById('reportTitle').textContent = bundleId;
+      return;
+    }
+    const r = await res.json();
+    const m = r.metrics || {};
+
+    document.getElementById('reportTitle').textContent = r.bundle_id || bundleId;
+    document.getElementById('reportSubtitle').textContent =
+      (m.agentic_mode ? 'Agentic (LLM) mode' : 'Rule-based mode') +
+      (m.analysis_started_at ? '  ·  ' + m.analysis_started_at.replace('T',' ').slice(0,19) + ' UTC' : '');
+
+    document.getElementById('reportSummary').style.display = '';
+    document.getElementById('rFindings').textContent = m.finding_count ?? '—';
+    document.getElementById('rHypotheses').textContent = m.hypothesis_count ?? '—';
+    document.getElementById('rEvents').textContent = (m.event_count ?? 0).toLocaleString();
+    document.getElementById('rRuntime').textContent = formatDuration(m.analysis_runtime_seconds);
+
+    // Findings
+    const findings = r.findings || [];
+    if (findings.length) {
+      document.getElementById('findingsCard').style.display = '';
+      document.getElementById('findingsList').innerHTML = findings.map(f => `
+        <div class="finding-item ${severityClass(f.severity)}">
+          <div class="finding-header">
+            <span class="finding-title">${f.title || f.type}</span>
+            <span class="finding-severity badge badge-${severityClass(f.severity)}">${f.severity || 'UNKNOWN'}</span>
+            <span class="finding-score">score: ${(f.score || 0).toFixed(2)}</span>
+          </div>
+          ${f.description ? `<p class="finding-desc">${f.description}</p>` : ''}
+          ${(f.mitre_techniques || []).length ? `<div class="finding-mitre">${f.mitre_techniques.map(t => `<span class="mitre-tag">${t}</span>`).join('')}</div>` : ''}
+        </div>`).join('');
+    }
+
+    // Hypotheses
+    const hypotheses = r.hypotheses || [];
+    if (hypotheses.length) {
+      document.getElementById('hypothesesCard').style.display = '';
+      document.getElementById('hypothesesList').innerHTML = hypotheses.map(h => `
+        <div class="hypothesis-item">
+          <div class="hypothesis-header">
+            <span class="hypothesis-label">${h.label || h.title || 'Hypothesis'}</span>
+            <span class="confidence-bar-wrap">
+              <span class="confidence-bar" style="width:${Math.round((h.confidence||0)*100)}%"></span>
+            </span>
+            <span class="confidence-val">${Math.round((h.confidence||0)*100)}%</span>
+          </div>
+          ${h.reasoning ? `<p class="hypothesis-reasoning">${h.reasoning}</p>` : ''}
+        </div>`).join('');
+    }
+
+    // LLM reasoning
+    const llmReasoning = m.llm_final_reasoning;
+    if (llmReasoning) {
+      document.getElementById('llmCard').style.display = '';
+      document.getElementById('llmReasoning').textContent = llmReasoning;
+    }
+
+    // Markdown card always shown
+    document.getElementById('mdCard').style.display = '';
+  }
+
+  async function toggleMd() {
+    const content = document.getElementById('mdContent');
+    const btn = document.getElementById('mdToggleBtn');
+    if (content.style.display === 'none') {
+      if (!mdLoaded) {
+        const res = await fetch(`/api/results/${encodeURIComponent(bundleId)}/markdown`);
+        content.textContent = res.ok ? await res.text() : 'No markdown report available.';
+        mdLoaded = true;
+      }
+      content.style.display = '';
+      btn.textContent = 'Hide';
+    } else {
+      content.style.display = 'none';
+      btn.textContent = 'Show';
+    }
+  }
+
+  function severityClass(sev) {
+    switch ((sev || '').toUpperCase()) {
+      case 'CRITICAL': return 'critical';
+      case 'HIGH':     return 'high';
+      case 'MEDIUM':   return 'medium';
+      case 'LOW':      return 'low';
+      default:         return 'info';
+    }
+  }
+
+  function formatDuration(sec) {
+    if (!sec) return '—';
+    if (sec < 60) return sec.toFixed(1) + 's';
+    const m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    return m + 'm ' + s + 's';
+  }
+
+  loadReport();
+</script>
+{% endblock %}

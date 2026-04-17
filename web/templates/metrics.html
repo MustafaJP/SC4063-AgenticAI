@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Metrics — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Pipeline Metrics</h1>
+  <p class="page-subtitle">Performance breakdown from the last pipeline run</p>
+</div>
+
+<div id="metricsError" class="alert alert-warn" style="display:none"></div>
+
+<div id="metricsSummary" class="metrics-summary-grid" style="display:none">
+  <div class="metric-card">
+    <div class="metric-value" id="mStatus">—</div>
+    <div class="metric-label">Status</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="mElapsed">—</div>
+    <div class="metric-label">Total Runtime</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="mPhases">—</div>
+    <div class="metric-label">Phases Run</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value" id="mCost">—</div>
+    <div class="metric-label">CPU Cost Estimate</div>
+  </div>
+</div>
+
+<div class="card" id="phasesCard" style="display:none">
+  <h2>Phase Breakdown</h2>
+  <table class="metrics-table" id="phasesTable">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>Status</th>
+        <th>Start</th>
+        <th>Duration</th>
+      </tr>
+    </thead>
+    <tbody id="phasesBody"></tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  async function loadMetrics() {
+    const res = await fetch('/api/metrics');
+    if (!res.ok) {
+      const d = await res.json();
+      document.getElementById('metricsError').textContent = d.error || 'No metrics available yet. Run the pipeline first.';
+      document.getElementById('metricsError').style.display = '';
+      return;
+    }
+    const m = await res.json();
+
+    document.getElementById('metricsSummary').style.display = '';
+    document.getElementById('phasesCard').style.display = '';
+
+    const statusEl = document.getElementById('mStatus');
+    statusEl.textContent = m.status;
+    statusEl.className = 'metric-value ' + (m.status === 'SUCCESS' ? 'text-success' : 'text-danger');
+
+    document.getElementById('mElapsed').textContent = formatDuration(m.total_elapsed_seconds);
+    document.getElementById('mPhases').textContent = (m.phases || []).length;
+    const cost = m.cost_estimate?.estimated_cpu_cost;
+    document.getElementById('mCost').textContent = cost != null ? '$' + cost.toFixed(4) : '—';
+
+    const body = document.getElementById('phasesBody');
+    body.innerHTML = (m.phases || []).map(p => `
+      <tr>
+        <td>${p.phase_name}</td>
+        <td class="${p.status === 'SUCCESS' ? 'text-success' : 'text-danger'}">${p.status}</td>
+        <td class="mono">${p.started_at ? p.started_at.replace('T', ' ').replace('+00:00','') : '—'}</td>
+        <td class="mono">${formatDuration(p.elapsed_seconds)}</td>
+      </tr>`).join('');
+  }
+
+  function formatDuration(sec) {
+    if (sec == null) return '—';
+    if (sec < 60) return sec.toFixed(1) + 's';
+    const m = Math.floor(sec / 60), s = Math.round(sec % 60);
+    if (m < 60) return m + 'm ' + s + 's';
+    const h = Math.floor(m / 60), rm = m % 60;
+    return h + 'h ' + rm + 'm';
+  }
+
+  loadMetrics();
+</script>
+{% endblock %}

@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}Pipeline — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Pipeline Control</h1>
+  <p class="page-subtitle">Configure and run the network forensics pipeline</p>
+</div>
+
+<div class="pipeline-grid">
+  <!-- Config panel -->
+  <div class="card" id="configCard">
+    <h2>Configuration</h2>
+
+    <div class="form-group">
+      <label>Phase Range</label>
+      <div class="phase-range-row">
+        <div class="form-sub">
+          <label class="label-sm">Start</label>
+          <select id="startPhase" class="input-select">
+            {% for i in range(1, 12) %}<option value="{{ i }}" {% if i==1 %}selected{% endif %}>Phase {{ i }}</option>{% endfor %}
+          </select>
+        </div>
+        <span class="phase-arrow">&#8594;</span>
+        <div class="form-sub">
+          <label class="label-sm">End</label>
+          <select id="endPhase" class="input-select">
+            {% for i in range(1, 12) %}<option value="{{ i }}" {% if i==9 %}selected{% endif %}>Phase {{ i }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Workers (Phase 5)</label>
+      <input type="number" id="workers" class="input-text" value="1" min="1" max="16" />
+      <span class="input-hint">Parallel extraction threads</span>
+    </div>
+
+    <div class="form-group toggle-row">
+      <label for="agenticToggle">Agentic Mode (LLM)</label>
+      <label class="toggle">
+        <input type="checkbox" id="agenticToggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div id="agenticOptions" style="display:none">
+      <div class="form-group">
+        <label>Ollama Model</label>
+        <input type="text" id="ollamaModel" class="input-text" value="llama3.1" placeholder="llama3.1" />
+      </div>
+    </div>
+
+    <div class="form-group toggle-row">
+      <label for="clearToggle">Clear Intermediate Tables</label>
+      <label class="toggle">
+        <input type="checkbox" id="clearToggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-success btn-lg" id="startBtn" onclick="startPipeline()">&#9654; Start Pipeline</button>
+      <button class="btn btn-danger btn-lg" id="stopBtn" onclick="stopPipeline()" style="display:none">&#9632; Stop</button>
+    </div>
+
+    <div id="statusBadge" class="status-badge status-idle">Idle</div>
+  </div>
+
+  <!-- Log panel -->
+  <div class="card log-card">
+    <div class="card-header-row">
+      <h2>Live Output</h2>
+      <div class="log-controls">
+        <label class="label-sm"><input type="checkbox" id="autoScroll" checked /> Auto-scroll</label>
+        <button class="btn btn-sm btn-ghost" onclick="clearLog()">Clear</button>
+      </div>
+    </div>
+    <pre id="logOutput" class="log-output">Waiting for pipeline to start…
+</pre>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const agenticToggle = document.getElementById('agenticToggle');
+  agenticToggle.addEventListener('change', () => {
+    document.getElementById('agenticOptions').style.display = agenticToggle.checked ? 'block' : 'none';
+  });
+
+  let eventSource = null;
+  let running = false;
+
+  function setRunning(isRunning) {
+    running = isRunning;
+    document.getElementById('startBtn').style.display = isRunning ? 'none' : '';
+    document.getElementById('stopBtn').style.display = isRunning ? '' : 'none';
+    document.getElementById('configCard').querySelectorAll('input, select, button:not(#stopBtn)').forEach(el => {
+      el.disabled = isRunning;
+    });
+    const badge = document.getElementById('statusBadge');
+    badge.className = 'status-badge ' + (isRunning ? 'status-running' : 'status-idle');
+    badge.textContent = isRunning ? 'Running…' : 'Idle';
+  }
+
+  function appendLog(line) {
+    const out = document.getElementById('logOutput');
+    out.textContent += line;
+    if (document.getElementById('autoScroll').checked) {
+      out.scrollTop = out.scrollHeight;
+    }
+  }
+
+  function clearLog() {
+    document.getElementById('logOutput').textContent = '';
+  }
+
+  function connectSSE() {
+    if (eventSource) eventSource.close();
+    clearLog();
+    eventSource = new EventSource('/api/pipeline/logs');
+    eventSource.onmessage = e => {
+      if (e.data === 'null') return; // heartbeat
+      const line = JSON.parse(e.data);
+      if (line === '__DONE__') {
+        eventSource.close();
+        checkStatus();
+        return;
+      }
+      appendLog(line);
+    };
+    eventSource.onerror = () => {
+      appendLog('\n[Connection lost]\n');
+    };
+  }
+
+  async function startPipeline() {
+    const payload = {
+      start_phase: parseInt(document.getElementById('startPhase').value),
+      end_phase:   parseInt(document.getElementById('endPhase').value),
+      workers:     parseInt(document.getElementById('workers').value),
+      agentic:     document.getElementById('agenticToggle').checked,
+      ollama_model: document.getElementById('ollamaModel').value,
+      clear:       document.getElementById('clearToggle').checked,
+    };
+    const res = await fetch('/api/pipeline/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      setRunning(true);
+      connectSSE();
+    } else {
+      alert('Could not start: ' + data.msg);
+    }
+  }
+
+  async function stopPipeline() {
+    await fetch('/api/pipeline/stop', { method: 'POST' });
+    setRunning(false);
+  }
+
+  async function checkStatus() {
+    const res = await fetch('/api/pipeline/status');
+    const s = await res.json();
+    setRunning(s.running);
+    const badge = document.getElementById('statusBadge');
+    if (!s.running && s.exit_code !== null) {
+      badge.className = 'status-badge ' + (s.exit_code === 0 ? 'status-success' : 'status-failed');
+      badge.textContent = s.exit_code === 0 ? 'Completed' : 'Failed (code ' + s.exit_code + ')';
+    }
+  }
+
+  // On load: check current state and connect SSE if already running
+  checkStatus().then(() => {
+    if (running) connectSSE();
+  });
+</script>
+{% endblock %}

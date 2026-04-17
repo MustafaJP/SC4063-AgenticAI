@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Upload PCAPs — NetForensic{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Upload PCAP Files</h1>
+  <p class="page-subtitle">Drag and drop or browse to add .pcap / .pcapng files for analysis</p>
+</div>
+
+<div class="card">
+  <div class="drop-zone" id="dropZone">
+    <div class="drop-zone-icon">&#128196;</div>
+    <p class="drop-zone-text">Drop PCAP files here</p>
+    <p class="drop-zone-sub">or</p>
+    <label class="btn btn-primary" for="fileInput">Browse Files</label>
+    <input type="file" id="fileInput" multiple accept=".pcap,.pcapng,.cap" style="display:none" />
+    <p class="drop-zone-hint">.pcap &bull; .pcapng &bull; .cap &bull; max 2 GB each</p>
+  </div>
+
+  <div id="uploadProgress" class="upload-progress" style="display:none">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <p id="progressText" class="progress-text">Uploading…</p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header-row">
+    <h2>Uploaded Files</h2>
+    <button class="btn btn-sm btn-ghost" id="refreshBtn" onclick="loadFiles()">&#8635; Refresh</button>
+  </div>
+
+  <div id="fileList">
+    {% if files %}
+    <table class="file-table">
+      <thead>
+        <tr><th>Filename</th><th>Size</th><th>Modified</th><th></th></tr>
+      </thead>
+      <tbody id="fileTableBody">
+        {% for f in files %}
+        <tr data-name="{{ f.name }}">
+          <td class="file-name">{{ f.name }}</td>
+          <td class="file-size">{{ f.size_mb }} MB</td>
+          <td class="file-date">{{ f.modified }}</td>
+          <td class="file-actions">
+            <button class="btn btn-sm btn-danger" onclick="deleteFile('{{ f.name }}')">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p id="emptyMsg" class="empty-state">No PCAP files uploaded yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const dropZone = document.getElementById('dropZone');
+  const fileInput = document.getElementById('fileInput');
+
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    uploadFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener('change', () => uploadFiles(fileInput.files));
+
+  async function uploadFiles(files) {
+    if (!files.length) return;
+    const form = new FormData();
+    for (const f of files) form.append('pcap_files', f);
+
+    const progress = document.getElementById('uploadProgress');
+    const bar = document.getElementById('progressBar');
+    const text = document.getElementById('progressText');
+    progress.style.display = 'block';
+    bar.style.width = '0%';
+    text.textContent = 'Uploading…';
+
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/upload');
+      xhr.upload.onprogress = e => {
+        if (e.lengthComputable) {
+          const pct = Math.round(e.loaded / e.total * 100);
+          bar.style.width = pct + '%';
+          text.textContent = `Uploading… ${pct}%`;
+        }
+      };
+      xhr.onload = () => {
+        const data = JSON.parse(xhr.responseText);
+        const ok = data.results.filter(r => r.ok);
+        const fail = data.results.filter(r => !r.ok);
+        bar.style.width = '100%';
+        text.textContent = `Done: ${ok.length} uploaded${fail.length ? ', ' + fail.length + ' failed' : ''}`;
+        setTimeout(() => { progress.style.display = 'none'; }, 2000);
+        loadFiles();
+      };
+      xhr.onerror = () => { text.textContent = 'Upload failed.'; };
+      xhr.send(form);
+    } catch (err) {
+      text.textContent = 'Upload error: ' + err.message;
+    }
+  }
+
+  async function loadFiles() {
+    const res = await fetch('/api/files');
+    const files = await res.json();
+    const tbody = document.getElementById('fileTableBody') || createTable();
+    const emptyMsg = document.getElementById('emptyMsg');
+
+    if (!files.length) {
+      if (emptyMsg) emptyMsg.style.display = '';
+      if (tbody) tbody.closest('table').style.display = 'none';
+      return;
+    }
+    if (emptyMsg) emptyMsg.style.display = 'none';
+
+    let table = document.querySelector('.file-table');
+    if (!table) {
+      document.getElementById('fileList').innerHTML = `
+        <table class="file-table">
+          <thead><tr><th>Filename</th><th>Size</th><th>Modified</th><th></th></tr></thead>
+          <tbody id="fileTableBody"></tbody>
+        </table>`;
+      table = document.querySelector('.file-table');
+    }
+    table.style.display = '';
+    const tb = document.getElementById('fileTableBody');
+    tb.innerHTML = files.map(f => `
+      <tr data-name="${f.name}">
+        <td class="file-name">${f.name}</td>
+        <td class="file-size">${f.size_mb} MB</td>
+        <td class="file-date">${f.modified}</td>
+        <td class="file-actions">
+          <button class="btn btn-sm btn-danger" onclick="deleteFile('${f.name}')">Delete</button>
+        </td>
+      </tr>`).join('');
+  }
+
+  async function deleteFile(name) {
+    if (!confirm(`Delete ${name}?`)) return;
+    const res = await fetch('/upload/delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename: name }),
+    });
+    const data = await res.json();
+    if (data.ok) loadFiles();
+    else alert('Delete failed: ' + data.msg);
+  }
+</script>
+{% endblock %}
