@@ -2,9 +2,41 @@
 {% block title %}Master Report — NetForensic{% endblock %}
 
 {% block content %}
+<style>
+  /* ── Hypothesis timeline ─────────────────────────────────── */
+  .hyp-timeline-wrap { overflow-x: auto; position: relative; }
+  #hypTimelineSvg { display: block; }
+  .hyp-point { cursor: pointer; transition: filter .15s; }
+  .hyp-point:hover { filter: brightness(1.4) drop-shadow(0 0 4px rgba(255,255,255,.5)); }
+  .hyp-point.selected { filter: brightness(1.5) drop-shadow(0 0 7px rgba(255,255,255,.8)); }
+
+  .timeline-legend {
+    display: flex; flex-wrap: wrap; gap: .6rem;
+    padding: .5rem 0; font-size: .78rem; align-items: center;
+  }
+  .legend-item { display: flex; align-items: center; gap: .3rem; }
+
+  /* ── Hypothesis detail panel ────────────────────────────── */
+  #hypDetailPanel { border-left: 3px solid var(--accent, #3b82f6); }
+  .hyp-evidence-item {
+    background: rgba(255,255,255,.04);
+    border-radius: 4px;
+    padding: .5rem .7rem;
+    margin-bottom: .4rem;
+    font-size: .8rem;
+    line-height: 1.5;
+  }
+  .hyp-evidence-item code { font-size: .78rem; }
+  .detail-meta { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin-bottom: .75rem; }
+  .detail-section { margin: .75rem 0; }
+  .detail-section strong { display: block; margin-bottom: .25rem; }
+  .detail-section ul { margin: 0 0 0 1.4rem; padding: 0; }
+  .detail-section ul li { margin-bottom: .15rem; }
+</style>
+
 <div class="page-header">
   <h1>Master Investigation Report</h1>
-  <p class="page-subtitle">Aggregated findings across all bundles</p>
+  <p class="page-subtitle">Hypotheses across all bundles</p>
 </div>
 
 <div id="masterError" class="alert alert-warn" style="display:none"></div>
@@ -36,6 +68,46 @@
   <p id="investWindow" class="text-muted"></p>
 </div>
 
+<!-- ══ Hypothesis Timeline (primary visualisation) ══════════════════ -->
+<div class="card" id="hypTimelineCard" style="display:none">
+  <div class="card-header-row">
+    <h2>Hypothesis Timeline</h2>
+    <div class="log-controls">
+      <span class="text-muted" id="hypTimelineSubtitle" style="font-size:.85rem"></span>
+    </div>
+  </div>
+  <div class="hyp-timeline-wrap">
+    <svg id="hypTimelineSvg"></svg>
+  </div>
+  <div class="timeline-legend" id="hypLegend"></div>
+  <p class="text-muted" style="font-size:.75rem;margin-top:.25rem">
+    Click any circle to view full hypothesis detail below.
+    Circle size reflects confidence. Faded = below reporting threshold.
+  </p>
+</div>
+
+<!-- Hypothesis detail panel (revealed on click) -->
+<div class="card" id="hypDetailPanel" style="display:none">
+  <div class="card-header-row">
+    <h2 id="hypDetailTitle" style="font-size:1.1rem"></h2>
+    <button class="btn btn-sm btn-ghost" onclick="closeHypDetail()">Close ✕</button>
+  </div>
+  <div id="hypDetailContent"></div>
+</div>
+
+<!-- Campaign findings -->
+<div class="card" id="campaignCard" style="display:none">
+  <h2>Campaign-Level Findings</h2>
+  <p class="text-muted" style="margin-bottom:1rem">Threats that persist across multiple bundles</p>
+  <div id="campaignFindingsList"></div>
+</div>
+
+<!-- Top findings -->
+<div class="card" id="topFindingsCard" style="display:none">
+  <h2>Top Findings</h2>
+  <div id="topFindingsList"></div>
+</div>
+
 <!-- Flowchart -->
 <div class="card" id="flowchartCard" style="display:none">
   <div class="card-header-row">
@@ -50,19 +122,6 @@
   <div id="flowchartWrap" class="flowchart-wrap">
     <div id="flowchart" class="mermaid"></div>
   </div>
-</div>
-
-<!-- Top findings -->
-<div class="card" id="topFindingsCard" style="display:none">
-  <h2>Top Findings</h2>
-  <div id="topFindingsList"></div>
-</div>
-
-<!-- Campaign findings -->
-<div class="card" id="campaignCard" style="display:none">
-  <h2>Campaign-Level Findings</h2>
-  <p class="text-muted" style="margin-bottom:1rem">Threats that persist across multiple bundles</p>
-  <div id="campaignFindingsList"></div>
 </div>
 
 <!-- Rankings grid -->
@@ -116,6 +175,234 @@
   let mdLoaded = false;
   let flowchartZoom = 1.0;
 
+  // ── Severity helpers ──────────────────────────────────────────────────
+  const SEV_COLORS = {
+    CRITICAL: '#a855f7',
+    HIGH:     '#ef4444',
+    MEDIUM:   '#f97316',
+    LOW:      '#22c55e',
+    UNKNOWN:  '#6b7280',
+  };
+
+  function sevClass(sev) {
+    switch ((sev || '').toUpperCase()) {
+      case 'CRITICAL': return 'critical';
+      case 'HIGH':     return 'high';
+      case 'MEDIUM':   return 'medium';
+      case 'LOW':      return 'low';
+      default:         return 'info';
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  // ── Hypothesis Timeline ───────────────────────────────────────────────
+  function renderHypothesisTimeline(events) {
+    if (!events || !events.length) return;
+
+    // Parse timestamps; drop entries with no valid date
+    const parsed = [];
+    events.forEach((ev, idx) => {
+      if (!ev.event_timestamp) return;
+      const d = new Date(ev.event_timestamp);
+      if (isNaN(d)) return;
+      parsed.push({ ...ev, _date: d, _idx: idx });
+    });
+    if (!parsed.length) return;
+
+    document.getElementById('hypTimelineCard').style.display = '';
+    window._hypTimelineEvents = parsed;
+
+    // ── Layout constants ──────────────────────────────────────────────
+    const PAD = { top: 16, right: 40, bottom: 52, left: 210 };
+    const ROW_H = 44;
+    const titles = [...new Set(parsed.map(e => e.title))];
+    const svgW = Math.max(920, (window.innerWidth || 1200) - 80);
+    const svgH = PAD.top + PAD.bottom + titles.length * ROW_H;
+    const chartW = svgW - PAD.left - PAD.right;
+
+    const minT = Math.min(...parsed.map(e => e._date));
+    const maxT = Math.max(...parsed.map(e => e._date));
+    const span = maxT - minT || 1;
+
+    function xOf(d)     { return PAD.left + ((d - minT) / span) * chartW; }
+    function yOf(title) { return PAD.top + titles.indexOf(title) * ROW_H + ROW_H / 2; }
+
+    // ── Build SVG ─────────────────────────────────────────────────────
+    let h = '';
+
+    // Row bands + Y labels
+    titles.forEach((title, i) => {
+      const ry = PAD.top + i * ROW_H;
+      const fill = i % 2 === 0 ? 'rgba(255,255,255,.025)' : 'transparent';
+      h += `<rect x="0" y="${ry}" width="${svgW}" height="${ROW_H}" fill="${fill}"/>`;
+      // Truncate long titles for display
+      const display = title.length > 28 ? title.slice(0, 26) + '…' : title;
+      h += `<text x="${PAD.left - 10}" y="${ry + ROW_H/2 + 4}" text-anchor="end"
+        font-size="11.5" fill="var(--text-muted, #9ca3af)"
+        style="font-family:inherit">${escapeHtml(display)}</text>`;
+      // grid line between rows
+      h += `<line x1="${PAD.left}" y1="${ry}" x2="${svgW - PAD.right}" y2="${ry}"
+        stroke="rgba(255,255,255,.04)" stroke-width="1"/>`;
+    });
+
+    // Bottom axis
+    const axisY = PAD.top + titles.length * ROW_H;
+    h += `<line x1="${PAD.left}" y1="${axisY}" x2="${svgW - PAD.right}" y2="${axisY}"
+      stroke="rgba(255,255,255,.2)" stroke-width="1"/>`;
+
+    // Date ticks
+    const ticks = Math.min(10, Math.max(4, Math.floor(chartW / 90)));
+    for (let i = 0; i <= ticks; i++) {
+      const frac = i / ticks;
+      const tx = PAD.left + frac * chartW;
+      const td = new Date(minT + frac * span);
+      const label = td.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+      h += `<line x1="${tx}" y1="${axisY}" x2="${tx}" y2="${axisY + 5}" stroke="rgba(255,255,255,.2)" stroke-width="1"/>`;
+      h += `<text x="${tx}" y="${axisY + 18}" text-anchor="middle" font-size="10" fill="var(--text-muted,#9ca3af)">${escapeHtml(label)}</text>`;
+    }
+
+    // Event circles
+    parsed.forEach(ev => {
+      const cx = xOf(ev._date);
+      const cy = yOf(ev.title);
+      const r  = Math.max(5, Math.min(13, 5 + ev.confidence * 8));
+      const fill   = SEV_COLORS[ev.severity] || SEV_COLORS.UNKNOWN;
+      const fOpacity = ev.is_finding ? '0.9' : '0.35';
+      const stroke   = ev.human_review_required ? '#fbbf24' : fill;
+      const sWidth   = ev.human_review_required ? '2.5' : '1.5';
+      const tip = `${ev.title} | ${ev.severity} ${(ev.confidence*100).toFixed(0)}% | ${ev.bundle_id}`;
+      h += `<circle class="hyp-point" data-idx="${ev._idx}"
+        cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}"
+        fill="${fill}" fill-opacity="${fOpacity}"
+        stroke="${stroke}" stroke-width="${sWidth}"
+        onclick="showHypDetail(${ev._idx})">
+        <title>${escapeHtml(tip)}</title>
+      </circle>`;
+    });
+
+    const svg = document.getElementById('hypTimelineSvg');
+    svg.setAttribute('width', svgW);
+    svg.setAttribute('height', svgH);
+    svg.innerHTML = h;
+
+    // Legend
+    const legendEl = document.getElementById('hypLegend');
+    legendEl.innerHTML =
+      Object.entries(SEV_COLORS).map(([sev, color]) =>
+        `<span class="legend-item">
+          <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="${color}"/></svg>
+          ${sev}
+        </span>`
+      ).join('') +
+      `<span class="legend-item">
+        <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#fbbf24" stroke-width="2.5"/></svg>
+        Human Review
+      </span>`;
+
+    // Subtitle
+    document.getElementById('hypTimelineSubtitle').textContent =
+      `${parsed.length} hypotheses · ${new Date(minT).toLocaleDateString()} – ${new Date(maxT).toLocaleDateString()}`;
+  }
+
+  function showHypDetail(idx) {
+    const ev = (window._hypTimelineEvents || []).find(e => e._idx === idx);
+    if (!ev) return;
+
+    document.getElementById('hypDetailTitle').textContent = ev.title;
+
+    const sc = sevClass(ev.severity);
+    const evidenceHtml = ev.evidence_context && ev.evidence_context.length
+      ? ev.evidence_context.map(e => `
+          <div class="hyp-evidence-item">
+            <div>
+              <span class="mitre-tag">${escapeHtml(e.source)}</span>
+              &rarr; <code>${escapeHtml(e.indicator)}</code>
+              &nbsp;·&nbsp; score ${(e.score * 100).toFixed(0)}%
+            </div>
+            ${e.value ? `<div><strong>Value:</strong> ${escapeHtml(e.value)}</div>` : ''}
+            ${e.src_ip !== undefined
+              ? `<div><strong>Network:</strong> ${escapeHtml(String(e.src_ip))}
+                  &rarr; ${escapeHtml(String(e.dst_ip || '?'))}${e.dst_port ? ':' + e.dst_port : ''}
+                  ${e.service ? ' <em>(' + escapeHtml(e.service) + ')</em>' : ''}
+                  ${e.connection_count !== undefined ? '· ' + e.connection_count + ' conn' : ''}
+                </div>`
+              : ''}
+            ${e.reasons
+              ? `<div><strong>Reasons:</strong> ${escapeHtml(Array.isArray(e.reasons) ? e.reasons.join(', ') : String(e.reasons))}</div>`
+              : ''}
+          </div>`).join('')
+      : '<p class="text-muted">No evidence detail available.</p>';
+
+    document.getElementById('hypDetailContent').innerHTML = `
+      <div class="detail-meta">
+        <span class="badge badge-${sc}">${ev.severity}</span>
+        <span class="finding-score">Confidence: ${(ev.confidence * 100).toFixed(0)}%</span>
+        ${ev.is_finding
+          ? '<span class="badge badge-high">Reported Finding</span>'
+          : '<span class="badge" style="background:rgba(255,255,255,.1);color:var(--text-muted)">Below Threshold</span>'}
+        ${ev.human_review_required ? '<span class="badge badge-medium">Human Review Required</span>' : ''}
+      </div>
+
+      <p>
+        <strong>Bundle:</strong>
+        <a href="/results/${encodeURIComponent(ev.bundle_id)}">${escapeHtml(ev.bundle_id)}</a>
+        &nbsp;·&nbsp; <strong>Observed:</strong> ${escapeHtml(ev.event_timestamp || 'N/A')}
+      </p>
+
+      ${ev.description ? `<p>${escapeHtml(ev.description)}</p>` : ''}
+
+      ${ev.mitre_techniques && ev.mitre_techniques.length
+        ? `<div style="margin:.4rem 0">${ev.mitre_techniques.map(t => `<span class="mitre-tag">${escapeHtml(t)}</span>`).join('')}</div>`
+        : ''}
+
+      ${ev.entities && ev.entities.length ? `
+        <div class="detail-section">
+          <strong>Affected Entities</strong>
+          <ul>${ev.entities.map(e => `<li>${escapeHtml(e)}</li>`).join('')}</ul>
+        </div>` : ''}
+
+      <div class="detail-section">
+        <strong>Evidence (what the analyzer found in this bundle)</strong>
+        ${evidenceHtml}
+      </div>
+
+      ${ev.guardrail_flags && ev.guardrail_flags.length
+        ? `<p><strong>Guardrail Flags:</strong> ${escapeHtml(ev.guardrail_flags.join(', '))}</p>`
+        : ''}
+
+      ${ev.false_positive_risks && ev.false_positive_risks.length ? `
+        <div class="detail-section">
+          <strong>False Positive Risks</strong>
+          <ul>${ev.false_positive_risks.map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
+        </div>` : ''}
+
+      ${ev.limitations && ev.limitations.length ? `
+        <div class="detail-section">
+          <strong>Limitations</strong>
+          <ul>${ev.limitations.map(l => `<li>${escapeHtml(l)}</li>`).join('')}</ul>
+        </div>` : ''}
+    `;
+
+    const panel = document.getElementById('hypDetailPanel');
+    panel.style.display = '';
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Highlight selected circle
+    document.querySelectorAll('.hyp-point').forEach(el => el.classList.remove('selected'));
+    document.querySelector(`.hyp-point[data-idx="${idx}"]`)?.classList.add('selected');
+  }
+
+  function closeHypDetail() {
+    document.getElementById('hypDetailPanel').style.display = 'none';
+    document.querySelectorAll('.hyp-point').forEach(el => el.classList.remove('selected'));
+  }
+
+  // ── Main loader ───────────────────────────────────────────────────────
   async function loadMaster() {
     const res = await fetch('/api/master');
     if (!res.ok) {
@@ -145,6 +432,9 @@
       }
     }
 
+    // Hypothesis timeline (primary view)
+    renderHypothesisTimeline(m.hypothesis_timeline || []);
+
     // Top findings
     const topFindings = m.top_findings || [];
     if (topFindings.length) {
@@ -157,10 +447,10 @@
             <span class="finding-score">conf: ${((f.confidence || 0) * 100).toFixed(0)}%</span>
           </div>
           <div class="finding-sub">
-            <a href="/results/${encodeURIComponent(f.bundle_id)}">${f.bundle_id}</a>
+            <a href="/results/${encodeURIComponent(f.bundle_id)}">${escapeHtml(f.bundle_id)}</a>
             ${f.human_review_required ? '<span class="badge badge-medium">Human Review</span>' : ''}
           </div>
-          ${(f.mitre_techniques || []).length ? `<div class="finding-mitre">${f.mitre_techniques.map(t => `<span class="mitre-tag">${t}</span>`).join('')}</div>` : ''}
+          ${(f.mitre_techniques || []).length ? `<div class="finding-mitre">${f.mitre_techniques.map(t => `<span class="mitre-tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
           ${(f.affected_entities || []).length ? `<p class="finding-desc"><strong>Entities:</strong> ${f.affected_entities.slice(0,5).map(escapeHtml).join(', ')}</p>` : ''}
           ${f.recommendation ? `<p class="finding-desc"><strong>Recommendation:</strong> ${escapeHtml(f.recommendation)}</p>` : ''}
         </div>`).join('');
@@ -266,22 +556,6 @@
     a.download = 'findings_flowchart.mmd';
     a.click();
     URL.revokeObjectURL(url);
-  }
-
-  function sevClass(sev) {
-    switch ((sev || '').toUpperCase()) {
-      case 'CRITICAL': return 'critical';
-      case 'HIGH':     return 'high';
-      case 'MEDIUM':   return 'medium';
-      case 'LOW':      return 'low';
-      default:         return 'info';
-    }
-  }
-
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   loadMaster();

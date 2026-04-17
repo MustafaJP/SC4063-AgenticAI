@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import urllib.request
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
@@ -65,6 +66,109 @@ def normalize_text(value: Any) -> str:
     if value is None:
         return ""
     return str(value).strip()
+
+
+def parse_evidence_timestamp(ts_str: str) -> str:
+    """Convert evidence timestamp to ISO 8601. Returns '' on failure."""
+    if not ts_str:
+        return ""
+    ts_str = ts_str.strip()
+    # Already ISO-like (starts with 4-digit year)
+    if re.match(r'^\d{4}-\d{2}-\d{2}', ts_str):
+        return ts_str
+    # "Nov 18, 2025 21:30:11.906844000 +08" – strip sub-microsecond, pad tz
+    m = re.match(
+        r'(\w{3})\s+(\d{1,2}),\s+(\d{4})\s+(\d{2}:\d{2}:\d{2})(?:\.\d+)?\s+([+-]\d{2})$',
+        ts_str,
+    )
+    if m:
+        mon, day, year, time_part, tz = m.groups()
+        tz_padded = tz + "00"  # "+08" → "+0800"
+        try:
+            dt = datetime.strptime(
+                f"{mon} {day} {year} {time_part} {tz_padded}",
+                "%b %d %Y %H:%M:%S %z",
+            )
+            return dt.isoformat()
+        except ValueError:
+            pass
+    return ""
+
+
+def build_hypothesis_timeline(bundle_reports: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Return one timeline entry per hypothesis, timestamped from actual network events."""
+    events: List[Dict[str, Any]] = []
+
+    for report in bundle_reports:
+        bundle_id = report.get("bundle_id", "unknown")
+
+        # Fallback date extracted from bundle_id like "bundle_2025-11-18_…"
+        bundle_date_iso = ""
+        bd_match = re.search(r"(\d{4}-\d{2}-\d{2})", bundle_id)
+        if bd_match:
+            bundle_date_iso = bd_match.group(1) + "T00:00:00+00:00"
+
+        for hyp in report.get("hypotheses", []):
+            evidence_list = hyp.get("evidence", []) or []
+
+            # Earliest real network timestamp from evidence details
+            event_ts = ""
+            for ev in evidence_list:
+                details = ev.get("details", {}) or {}
+                raw = normalize_text(details.get("event_timestamp", ""))
+                if raw:
+                    parsed = parse_evidence_timestamp(raw)
+                    if parsed and (not event_ts or parsed < event_ts):
+                        event_ts = parsed
+
+            if not event_ts:
+                event_ts = bundle_date_iso
+
+            # Condensed evidence context (what the analyzer saw + where)
+            ev_context = []
+            for ev in evidence_list[:8]:
+                details = ev.get("details", {}) or {}
+                ctx: Dict[str, Any] = {
+                    "source": normalize_text(ev.get("source", "")),
+                    "indicator": normalize_text(ev.get("indicator", "")),
+                    "value": normalize_text(ev.get("value", "")),
+                    "score": safe_float(ev.get("score", 0)),
+                }
+                for field in ("src_ip", "dst_ip", "dst_port", "service",
+                              "reasons", "connection_count"):
+                    val = details.get(field)
+                    if val is not None:
+                        ctx[field] = val
+                ev_context.append(ctx)
+
+            events.append({
+                "bundle_id": bundle_id,
+                "hypothesis_id": normalize_text(hyp.get("hypothesis_id", "")),
+                "title": normalize_text(hyp.get("title", "")) or "Unknown",
+                "description": normalize_text(hyp.get("description", "")),
+                "severity": normalize_text(hyp.get("severity", "")) or "UNKNOWN",
+                "confidence": safe_float(hyp.get("confidence", 0.0)),
+                "event_timestamp": event_ts,
+                "entities": [
+                    normalize_text(e)
+                    for e in (hyp.get("entities") or [])
+                    if normalize_text(e)
+                ],
+                "mitre_techniques": sorted({
+                    normalize_text(t)
+                    for t in (hyp.get("mitre_techniques") or [])
+                    if normalize_text(t)
+                }),
+                "guardrail_flags": hyp.get("guardrail_flags") or [],
+                "human_review_required": bool(hyp.get("human_review_required", False)),
+                "false_positive_risks": hyp.get("false_positive_risks") or [],
+                "limitations": hyp.get("limitations") or [],
+                "is_finding": safe_float(hyp.get("confidence", 0.0)) >= 0.6,
+                "evidence_context": ev_context,
+            })
+
+    events.sort(key=lambda x: x.get("event_timestamp") or "")
+    return events
 
 
 def aggregate_master_data(
@@ -231,6 +335,7 @@ def aggregate_master_data(
             "first_seen": first_seen,
             "last_seen": last_seen,
         },
+        "hypothesis_timeline": build_hypothesis_timeline(bundle_reports),
     }
 
 
